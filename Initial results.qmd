@@ -1,0 +1,50 @@
+---
+title: "Initial results"
+format: html
+editor: visual
+---
+
+```{r setup}
+library(tidyverse)
+library(kableExtra)
+
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+load(file="privacy.RData")
+```
+
+
+## Demographics
+
+## Knowledge questions
+
+## Personality questions
+
+## Government performance
+
+```{r gp}
+table(privacy$gp1)
+```
+
+## Media attention
+
+## Government monitoring
+
+## Miscellaneous
+
+## Tech savvy
+
+## Tracking 
+
+## Experiment results
+
+## List experiment results
+
+### List experiment 1: police trust
+
+### List experiment 2: central government trust
+
+### List experiment 3: local government trust

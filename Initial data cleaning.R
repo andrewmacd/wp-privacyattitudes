@@ -15,41 +15,29 @@ likert.important.labels <- c("Least important (1)",
                              "(5)",
                              "(6)",
                              "Most important (7)")
-likert.comfortable.labels <- c()
-likert.closely.labels <- c()
+likert.skilled.labels <- c("No skill level (1)",
+                           "(2)",
+                           "(3)",
+                           "(4)",
+                           "(5)",
+                           "(6)",
+                           "Very skilled (7)")
+likert.comfortable.labels <- c("Very uncomfortable (1)",
+                               "(2)",
+                               "(3)",
+                               "(4)",
+                               "(5)",
+                               "(6)",
+                               "Very comfortable (7)")
+likert.closely.labels <- c("Not closely at all (1)",
+                           "(2)",
+                           "(3)",
+                           "(4)",
+                           "(5)",
+                           "(6)",
+                           "Very closely (7)")
 
 privacy.original <- read.csv("Original data/results.csv")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Make the column names more interpretable
 privacy <- privacy.original %>% 
@@ -241,19 +229,92 @@ privacy <- privacy %>%
     
 # Recode substantive variables  
 privacy <- privacy %>%   
-  mutate(across(c(k1, k4, k5, k6), ~factor(., levels=c(1, 2, 3, 4, 5, 6, 7), 
-                                           labels=c("Strongly agree (1)",
-                                                    "(2)",
-                                                    "(3)",
-                                                    "(4)",
-                                                    "(5)",
-                                                    "(6)",
-                                                    "Strongly disagree (7)")))) %>% 
+  mutate(across(c(k1, k4, k5, k6), ~factor(., 
+                                           levels=c(1:7), 
+                                           labels=likert.agree.labels))) %>% 
   mutate(k7 = factor(k7, 
-                     levels=c(1, 2, 3, 4),
+                     levels=c(1:4),
                      labels=c("Yes, heard the specific details of it",
                               "Yes heard general information about it but not specific details",
                               "Yes, heard the term but not any information about it",
-                              "No, have not heard of it"))) 
+                              "No, have not heard of it"))) %>% 
+  mutate(across(c(p.pd1, p.pd2, p.ic1, p.ic2, p.mf1, p.mf2, p.ua1, p.ua2), 
+                ~factor(., 
+                       levels=c(1:7), 
+                       labels=likert.agree.labels))) %>%
+  mutate(across(c(p.lo1, p.lo2), ~factor(.,
+                                         levels=c(1:7),
+                                         labels=likert.important.labels))) %>% 
+  mutate(across(c(gp1, gp2, gp3), ~factor(.,
+                                          levels=c(1:7),
+                                          labels=likert.agree.labels))) %>%
+  mutate(ma1 = factor(ma1, 
+                      levels=c(1:5),
+                      labels=c("Many times per day",
+                               "Several times per day",
+                               "Once per day",
+                               "Less than once per day",
+                               "I don’t follow the news"))) %>% 
+  mutate(ma2 = factor(ma2, 
+                      levels=c(1:7),
+                      labels=c("Newspaper",
+                               "WeChat",
+                               "Website portal",
+                               "TV",
+                               "Weibo",
+                               "Overseas sources",
+                               "Other"))) %>%
+  mutate(ma2.other = ifelse(ma2.other=="", NA, ma2.other)) %>% 
+  mutate(across(c(gm1, gm2, gm3, gm4, gm5), ~factor(.,
+                                                    levels=c(1:7),
+                                                    labels=likert.agree.labels))) %>%
+  mutate(across(c(misc1, misc2, misc3, misc4, misc5, misc6), 
+                ~factor(.,
+                        levels=c(1:7),
+                        labels=likert.agree.labels))) %>%
+  mutate(across(c(ts1, ts2, ts3), ~factor(.,
+                                          levels=c(1:7),
+                                          labels=likert.skilled.labels))) %>%
+  mutate(ts4 = factor(ts4, 
+                      levels=c(1:5),
+                      labels=c("Very widely - used in most public places",
+                               "Widely - used in major public places",
+                               "Moderate - deployment is mixed",
+                               "Limited use - used only in a few places",
+                               "Not used - only used as a trial or not used at all"))) %>%
+  mutate(across(c(track1, track2, track3), ~factor(.,
+                                                   levels=c(1:7),
+                                                   labels=likert.closely.labels))) %>%
+  mutate(across(c(track4, track5, track6), ~factor(.,
+                                                   levels=c(1:7),
+                                                   labels=likert.comfortable.labels)))
+
+# Recode experiment variables
+privacy <- privacy %>%   
+  mutate(exp.group = factor(exp.group,
+                            levels=c(1:2),
+                            labels=c("Control group",
+                                     "Treatment group"))) %>% 
+  mutate(across(c(etr1, etr2, etr3, etr4, etr5), 
+                ~factor(.,
+                        levels=c(1:7),
+                        labels=likert.agree.labels))) %>%
+  mutate(across(c(etr6.mc.1, etr6.mc.2, etr6.mc.3, etr6.mc.4, etr6.mc.5), 
+                ~ifelse(is.na(.x), ifelse(exp.group=="Treatment group",
+                                          0,
+                                          NA),
+                                   .))) %>% 
+  mutate(le.group = factor(le.group,
+                           levels=c(1:3),
+                           labels=c("Group 1: Entities you would trust - police",
+                                    "Group 2: Entities you would trust - central goverment",
+                                    "Group 3: Entities you would trust - local government"))) %>% 
+  mutate(le.5th.shown = factor(le.5th.shown,
+                               levels=c(0:1),
+                               labels=c("Sensitive list item not shown",
+                                        "Sensitive list item shown")))
   
- 
+# Write the output
+save(privacy, file="privacy.RData")
+
+  
