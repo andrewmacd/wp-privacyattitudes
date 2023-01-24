@@ -1,6 +1,55 @@
 library(tidyverse)
 
+# Set up default Likert labels
+likert.agree.labels <- c("Strongly disagree (1)",
+                         "(2)",
+                         "(3)",
+                         "(4)",
+                         "(5)",
+                         "(6)",
+                         "Strongly agree (7)")
+likert.important.labels <- c("Least important (1)",
+                             "(2)",
+                             "(3)",
+                             "(4)",
+                             "(5)",
+                             "(6)",
+                             "Most important (7)")
+likert.comfortable.labels <- c()
+likert.closely.labels <- c()
+
 privacy.original <- read.csv("Original data/results.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Make the column names more interpretable
 privacy <- privacy.original %>% 
@@ -135,7 +184,57 @@ privacy <- privacy %>%
   mutate(sex = factor(sex,
                       levels=c(1:2),
                       labels=c("Female",
-                               "Male")))
+                               "Male"))) %>% 
+  mutate(marriage.status = factor(marriage.status,
+                                  levels=c(1:4),
+                                  labels=c("Single",
+                                           "In a relationship",
+                                           "Married",
+                                           "Divorced"))) %>% 
+  mutate(job.type = factor(job.type,
+                           levels=c(1:7),
+                           labels=c("White collar worker",
+                                    "Laborer",
+                                    "Self-employed",
+                                    "Agricultural worker",
+                                    "Unemployed",
+                                    "Retired",
+                                    "Student"))) %>% 
+  mutate(job.company.type = factor(job.company.type,
+                                   levels=c(1:7),
+                                   labels=c("State owned enterprise",
+                                            "Government (local or central)",
+                                            "Public institution employee",
+                                            "Domestic private enterprise",
+                                            "International private enterprise operating in China",
+                                            "Self-employed small enterprise",
+                                            "Agriculture"))) %>% 
+  mutate(party.member.status = factor(party.member.status,
+                                      levels=c(1:2),
+                                      labels=c("Yes",
+                                               "No"))) %>% 
+  mutate(cyl.status = factor(cyl.status,
+                             levels=c(1:2),
+                             labels=c("Yes",
+                                      "No"))) %>% 
+  mutate(income = factor(income,
+                         levels=c(1:7),
+                         labels=c("0-2,999",
+                                  "3,000-5,999",
+                                  "6,000-9,999",
+                                  "10,000-19,999",
+                                  "20,000-49,999",
+                                  "50,000-99,999",
+                                  "More than 100,000"))) %>% 
+  mutate(hukou.status = factor(hukou.status,
+                               levels=c(1:6),
+                               labels=c("Urban with Urban Hukou",
+                                        "Urban with Rural Hukou",
+                                        "Rural with Rural Hukou",
+                                        "Rural with Urban Hukou",
+                                        "Overseas Chinese (including Hong Kong and Macao)",
+                                        "Other"))) %>% 
+  mutate(hukou.status.other = ifelse(hukou.status.other=="", NA, hukou.status.other))
 
   
 # Make index variables
