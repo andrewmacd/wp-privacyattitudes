@@ -1,12 +1,15 @@
 ---
-title: "Initial results"
-format: html
-editor: visual
+title: "China privacy study: initial results"
+format:
+  html:
+    toc: true
+    toc-location: left
 ---
 
-```{r setup}
+```{r setup, message=FALSE, warning=FALSE, echo=FALSE, error=FALSE}
 library(tidyverse)
 library(kableExtra)
+library(modelsummary)
 
 knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
@@ -14,19 +17,145 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(error = FALSE)
 
 load(file="privacy.RData")
-```
 
+Ones <- function(x) table(x)[1]
+Twos <- function(x) table(x)[2]
+Threes <- function(x) table(x)[3]
+Fours <- function(x) table(x)[4]
+Fives <- function(x) table(x)[5]
+Sixes <- function(x) table(x)[6]
+Sevens <- function(x) table(x)[7]
+```
 
 ## Demographics
 
+```{r demoqs}
+#| label: tbl-demo.q.text
+#| tbl-cap: Demographic questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Which of these best describes the place in which you live?")
+table.text[[2]] <- c("Q2", "What province do you live in?")
+table.text[[3]] <- c("Q3", "How old are you?")
+table.text[[4]] <- c("Q4", "What is the highest level of education that you have obtained?")
+table.text[[5]] <- c("Q5", "Gender")
+table.text[[6]] <- c("Q6", "Marital Status")
+table.text[[7]] <- c("Q7", "Which of the following best describes the type of job you have?")
+table.text[[8]] <- c("Q8", "Which of the following best describes the type of company or work unit you work for?")
+table.text[[9]] <- c("Q9", "Are you a member or probationary member of the CCP?")
+table.text[[10]] <- c("Q10", "Are you a member of the Communist Youth League?")
+table.text[[11]] <- c("Q11", "Here is a table showing the range of monthly incomes that people have. Which of the letters on this table best represents the total monthly income of your household (after tax)?")
+table.text[[12]] <- c("Q12", "What is your residency status?")
+
+demo.text <- data.frame()
+
+for(line in table.text) {
+  demo.text <- rbind(demo.text, line)
+}
+
+kbl(demo.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r demosummary}
+#| label: tbl-demo.summary.data
+#| tbl-cap: Demographic summary data
+
+demo.qs <- privacy %>% 
+  select(`Location` = location,
+         `Province` = province,
+         `Age` = age,
+         `Education` = education,
+         `Gender` = sex,
+         `Marriage status` = marriage.status,
+         `Job type` = job.type,
+         `Company type` = job.company.type,
+         `Party member status` = party.member.status,
+         `Communist Youth League status` = cyl.status,
+         `Income` = income,
+         `Hukou status` = hukou.status) 
+
+datasummary_balance( ~ 1, data=demo.qs)
+```
+
 ## Knowledge questions
+
+```{r kwqs}
+#| label: tbl-kw.q.text
+#| tbl-cap: Privacy knowledge questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "I am very concerned about my privacy online")
+table.text[[2]] <- c("Q2", "Please take your time in answering the next two question. When I hear the word online privacy, what types of personal information do you think are related to online privacy?")
+table.text[[3]] <- c("Q3", "Please list a few situations in which you felt worried about your online privacy and what you thought might be the consequences of your privacy not being protected
+(example: paying for something online – worried that a criminal might steal my payment information)
+")
+table.text[[4]] <- c("Q4", "I spend a lot of time reading about technology related privacy issues")
+table.text[[5]] <- c("Q5", "In the last year, I have had discussions with my friends about online privacy issues")
+table.text[[6]] <- c("Q6", "I feel like I know exactly how much privacy I have online")
+table.text[[7]] <- c("Q7", "Have you heard of the social credit system (official terminology)?")
+table.text[[8]] <- c("Q8", "Based on your knowledge of the social credit system please list some actions that you believe would lower your social credit")
+table.text[[9]] <- c("Q9", "Based on your knowledge of the social credit system, please list some actions that you believe would be more difficult or prohibited if you have a low social credit score")
+table.text[[10]] <- c("Q10", "Privacy knowledge index of Q1 + Q4 + Q5 + Q6 + Q7")
+
+kw.text <- data.frame()
+
+for(line in table.text) {
+  kw.text <- rbind(kw.text, line)
+}
+
+kbl(kw.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r kwsummary}
+#| label: tbl-kw.summary.data
+#| tbl-cap: Privacy knowledge summary data
+
+```
 
 ## Personality questions
 
 ## Government performance
 
-```{r gp}
-table(privacy$gp1)
+```{r gpqs}
+#| label: tbl-gp.q.text
+#| tbl-cap: Government performance questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
+table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
+table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.")
+
+gp.text <- data.frame()
+
+for(line in table.text) {
+  gp.text <- rbind(gp.text, line)
+}
+
+kbl(gp.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r gpsummary}
+#| label: tbl-gp.summary.data
+#| tbl-cap: Government performance summary data
+
+gp.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gp3 = as.numeric(gp3)) %>% 
+  select(`Central government performance` = gp1,
+         `Local government performance` = gp2,
+         `Government performance Q3` = gp3) 
+
+datasummary(All(gp.qs) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 ```
 
 ## Media attention
@@ -37,7 +166,7 @@ table(privacy$gp1)
 
 ## Tech savvy
 
-## Tracking 
+## Tracking
 
 ## Experiment results
 
