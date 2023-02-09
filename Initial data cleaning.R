@@ -1,4 +1,5 @@
 library(tidyverse)
+library(scales)
 
 # Set up default Likert labels
 likert.agree.labels <- c("Strongly disagree (1)",
@@ -228,7 +229,8 @@ privacy <- privacy %>%
 # Make index variables
     
 # Recode substantive variables  
-privacy <- privacy %>%   
+privacy <- privacy %>%
+  mutate(k.index = (rescale((k1 + k4 + k5 + k6) / 4) * .8) + (rescale(k7) * .2)) %>% 
   mutate(across(c(k1, k4, k5, k6), ~factor(., 
                                            levels=c(1:7), 
                                            labels=likert.agree.labels))) %>% 
@@ -238,13 +240,19 @@ privacy <- privacy %>%
                               "Yes heard general information about it but not specific details",
                               "Yes, heard the term but not any information about it",
                               "No, have not heard of it"))) %>% 
+  mutate(p.pd.index = rescale((p.pd1 + (8-p.pd2)) / 2)) %>% 
+  mutate(p.ic.index = rescale((p.ic1 + (8-p.ic2)) / 2)) %>%
+  mutate(p.mf.index = rescale((p.mf1 + (8-p.mf2)) / 2)) %>%
+  mutate(p.ua.index = rescale((p.ua1 + p.ua2) / 2)) %>%
+  mutate(p.lo.index = rescale((p.lo1 + p.lo2) / 2)) %>%
   mutate(across(c(p.pd1, p.pd2, p.ic1, p.ic2, p.mf1, p.mf2, p.ua1, p.ua2), 
                 ~factor(., 
                        levels=c(1:7), 
                        labels=likert.agree.labels))) %>%
   mutate(across(c(p.lo1, p.lo2), ~factor(.,
                                          levels=c(1:7),
-                                         labels=likert.important.labels))) %>% 
+                                         labels=likert.important.labels))) %>%
+  mutate(gp.index = rescale((gp1 + gp2 + gp3) / 3)) %>% 
   mutate(across(c(gp1, gp2, gp3), ~factor(.,
                                           levels=c(1:7),
                                           labels=likert.agree.labels))) %>%
@@ -265,6 +273,9 @@ privacy <- privacy %>%
                                "Overseas sources",
                                "Other"))) %>%
   mutate(ma2.other = ifelse(ma2.other=="", NA, ma2.other)) %>% 
+  mutate(gm.index.gov = rescale((gm1 + gm2 + gm4) / 3)) %>% 
+  mutate(gm.index.priv = rescale((gm3 + gm5) / 2)) %>% 
+  mutate(gm.index.total = rescale((gm1 + gm2 + gm3 + gm4 + gm5) / 5)) %>% 
   mutate(across(c(gm1, gm2, gm3, gm4, gm5), ~factor(.,
                                                     levels=c(1:7),
                                                     labels=likert.agree.labels))) %>%
@@ -272,6 +283,7 @@ privacy <- privacy %>%
                 ~factor(.,
                         levels=c(1:7),
                         labels=likert.agree.labels))) %>%
+  mutate(ts.index = rescale((ts1 + ts2 + ts3) / 3)) %>% 
   mutate(across(c(ts1, ts2, ts3), ~factor(.,
                                           levels=c(1:7),
                                           labels=likert.skilled.labels))) %>%
