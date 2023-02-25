@@ -168,12 +168,167 @@ datasummary(All(gp.qs) ~
 
 ## Tracking
 
+```{r trackqs}
+#| label: tbl-track.q.text
+#| tbl-cap: Attitudes regarding tracking questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "How closely do you think the central government tracks your online activity?")
+table.text[[2]] <- c("Q2", "How closely do you think the local government tracks your online activity?")
+table.text[[3]] <- c("Q3", "How closely do you think private companies track your online activity?")
+table.text[[4]] <- c("Q4", "How comfortable are you with the central government knowing personal details about your activity online?")
+table.text[[5]] <- c("Q5", "How comfortable are you with the local government knowing personal details about your activity online?")
+table.text[[6]] <- c("Q6", "How comfortable are you with private companies knowing personal details about your activity online?")
+
+
+track.text <- data.frame()
+
+for(line in table.text) {
+  track.text <- rbind(track.text, line)
+}
+
+kbl(track.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r tracksummary}
+#| label: tbl-track.summary.data
+#| tbl-cap: Attitudes regarding tracking summary data
+
+track.qs <- privacy %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>%
+  mutate(track6 = as.numeric(track6)) %>% 
+  select(`Central government tracking - prevalence` = track1,
+         `Local government tracking - prevalence` = track2,
+         `Private company tracking - prevalence` = track3,
+         `Central government tracking - comfort` = track4,
+         `Local govenrment tracking - comfort` = track5,
+         `Private company tracking - comfort` = track6) 
+
+datasummary(All(track.qs) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=track.qs,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
+
 ## Experiment results
+
+```{r expqs}
+#| label: tbl-exp.q.text
+#| tbl-cap: Experiment questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Prompt", "China's Social Credit is a new system for the Chinese government to monitor, assess and manage the behavior of all individuals, companies and non-governmental organizations in China. This large project is a response to the low levels of trust among members of society and a desire by the government to improve the behavior and law-following of all citizens. 
+
+Right now the social credit system is being tested by many municipalities and companies -- the social credit system is slated for a nationwide roll-out in the near future. All citizens will receive a social credit identifier number and, via app technology, will be able to see their social credit score in real time as well as the reasons for having a high or low score.")
+
+table.text[[2]] <- c("Treatment", "The social credit system will increase monitoring of people’s online behavior. The government plans to track what videos and websites a user browses and what kind of purchases a user makes, including whether they do things such as buy too many video games or other purchases the government wants to discourage. Other things tracked may include users’ search history and WeChat postings.
+
+Right now citizens have no way of knowing which government officials or companies have access to the social credit system data. Moreover, there are no regulations on how the system can be used to limit the freedoms of individual citizens - currently low social credit scores have prevented people from buying plane and train tickets and other, more severe punishments are being considered for those with low scores.")
+
+table.text[[3]] <- c("Q1", "I don’t believe there are any serious privacy concerns related to the social credit system.")
+table.text[[4]] <- c("Q2", "I don’t think the social credit system will affect me personally.")
+table.text[[5]] <- c("Q3", "I am not too worried about my private information being shared on the internet.")
+table.text[[6]] <- c("Q4", "I believe companies will generally not misuse my private information.")
+table.text[[7]] <- c("Q5", "I believe the government will generally not misuse my private information.")
+
+exp.text <- data.frame()
+
+for(line in table.text) {
+  exp.text <- rbind(exp.text, line)
+}
+
+kbl(exp.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r expsummary}
+#| label: tbl-exp.summary.data
+#| tbl-cap: Experiment summary data
+
+exp.qs <- privacy %>% 
+  mutate(track1 = as.numeric(etr1)) %>% 
+  mutate(track2 = as.numeric(etr2)) %>% 
+  mutate(track3 = as.numeric(etr3)) %>% 
+  mutate(track4 = as.numeric(etr4)) %>% 
+  mutate(track5 = as.numeric(etr5)) %>%
+  select(`Social credit concerns` = etr1,
+         `Social credit - personally affect` = etr2,
+         `General privacy concerns` = etr3,
+         `Private company concerns` = etr4,
+         `Government concerns` = etr5) 
+
+datasummary(All(exp.qs) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=exp.qs,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
 
 ## List experiment results
 
-### List experiment 1: police trust
+```{r listexpqs}
+#| label: tbl-exp.q.text
+#| tbl-cap: Experiment questions
 
-### List experiment 2: central government trust
+table.text <- list()
 
-### List experiment 3: local government trust
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
+
+•	Alibaba
+•	Tencent
+•	Foreign internet companies (such as Microsoft)
+•	Your family
+----------- LIST QUESTION BEGINS HERE ------------
+•	The police")
+
+table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
+
+•	Alibaba
+•	Tencent
+•	Foreign internet companies (such as Microsoft)
+•	Your family
+----------- LIST QUESTION BEGINS HERE ------------
+•	The central government")
+
+table.text[[3]] <- c("Q3", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
+
+•	Alibaba
+•	Tencent
+•	Foreign internet companies (such as Microsoft)
+•	Your family
+----------- LIST QUESTION BEGINS HERE ------------
+•	The local government")
+
+listexp.text <- data.frame()
+
+for(line in table.text) {
+  listexp.text <- rbind(listexp.text, line)
+}
+
+kbl(listexp.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r expsummary}
+#| label: tbl-exp.summary.data
+#| tbl-cap: Experiment summary data
+
+listexp.qs <- privacy %>% 
+  mutate(track1 = as.numeric(etr1)) %>% 
+  mutate(track2 = as.numeric(etr2)) %>% 
+  mutate(track3 = as.numeric(etr3)) %>% 
+  select(`Police list experiment` = etr1,
+         `Central government list experiment` = etr2,
+         `Local government list experiment` = ) 
+
+datasummary(All(listexp.qs) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=listexp.qs,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
