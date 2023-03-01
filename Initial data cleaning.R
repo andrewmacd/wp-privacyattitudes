@@ -251,6 +251,8 @@ privacy <- privacy %>%
                        labels=likert.agree.labels))) %>%
   mutate(across(c(p.lo1, p.lo2), ~factor(.,
                                          levels=c(1:7),
+                                         labels=likert.important.labels))) %>%
+  mutate(gp.index = rescale((gp1 + gp2 + gp3) / 3)) %>% 
   mutate(across(c(gp1, gp2, gp3), ~factor(.,
                                           levels=c(1:7),
                                           labels=likert.agree.labels))) %>%

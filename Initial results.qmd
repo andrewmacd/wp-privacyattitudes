@@ -88,14 +88,16 @@ datasummary_balance( ~ 1, data=demo.qs)
 table.text <- list()
 
 table.text[[1]] <- c("Q1", "I am very concerned about my privacy online")
+table.text[[2]] <- c("Q2", "Free response: Please take your time in answering the next two question. When I hear the word online privacy, what types of personal information do you think are related to online privacy?")
+table.text[[3]] <- c("Q3", "Free response: Please list a few situations in which you felt worried about your online privacy and what you thought might be the consequences of your privacy not being protected
 (example: paying for something online – worried that a criminal might steal my payment information)
 ")
 table.text[[4]] <- c("Q4", "I spend a lot of time reading about technology related privacy issues")
 table.text[[5]] <- c("Q5", "In the last year, I have had discussions with my friends about online privacy issues")
 table.text[[6]] <- c("Q6", "I feel like I know exactly how much privacy I have online")
 table.text[[7]] <- c("Q7", "Have you heard of the social credit system (official terminology)?")
-table.text[[8]] <- c("Q8", "Based on your knowledge of the social credit system please list some actions that you believe would lower your social credit")
-table.text[[9]] <- c("Q9", "Based on your knowledge of the social credit system, please list some actions that you believe would be more difficult or prohibited if you have a low social credit score")
+table.text[[8]] <- c("Q8", "Free response: Based on your knowledge of the social credit system please list some actions that you believe would lower your social credit")
+table.text[[9]] <- c("Q9", "Free response: Based on your knowledge of the social credit system, please list some actions that you believe would be more difficult or prohibited if you have a low social credit score")
 table.text[[10]] <- c("Q10", "Privacy knowledge index of Q1 + Q4 + Q5 + Q6 + Q7")
 
 kw.text <- data.frame()
