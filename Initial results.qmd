@@ -10,6 +10,7 @@ format:
 library(tidyverse)
 library(kableExtra)
 library(modelsummary)
+library(estimatr)
 
 knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
@@ -404,7 +405,7 @@ datasummary(All(ts.index.q) ~ Mean + SD + Histogram, data=ts.index.q)
 
 ## Tracking
 
-<<<<<<< HEAD
+
 ```{r trackqs}
 #| label: tbl-track.q.text
 #| tbl-cap: Attitudes regarding tracking questions
@@ -452,9 +453,56 @@ datasummary(All(track.qs) ~
             data=track.qs,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 ```
-=======
+
 ## Miscellaneous
->>>>>>> 73c613b8a48aede63e08970ea7cd10489764b961
+
+```{r miscqs}
+#| label: tbl-misc.q.text
+#| tbl-cap: Attitudes on miscellaneous questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, the social credit system is a benefit for the public.")
+table.text[[2]] <- c("Q2", "I’ve changed my behavior in the last year due to worries about my social credit score.")
+table.text[[3]] <- c("Q3", "I don’t notice government use of technology to monitor my behavior in my daily life.")
+table.text[[4]] <- c("Q4", "The government is likely to securely store my online personal data and information better than private companies.")
+table.text[[5]] <- c("Q5", "It doesn’t bother me if private companies sell my user data to 3rd parties if it will allow me to use their applications for free.")
+table.text[[6]] <- c("Q6", "I’m worried that my payment information might be stolen or compromised.")
+
+
+misc.text <- data.frame()
+
+for(line in table.text) {
+  misc.text <- rbind(misc.text, line)
+}
+
+kbl(misc.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r miscsummary}
+#| label: tbl-misc.summary.data
+#| tbl-cap: Miscellaneous questions summary data
+
+misc.qs <- privacy %>% 
+  mutate(misc1 = as.numeric(misc1)) %>% 
+  mutate(misc2 = as.numeric(misc2)) %>% 
+  mutate(misc3 = as.numeric(misc3)) %>% 
+  mutate(misc4 = as.numeric(misc4)) %>% 
+  mutate(misc5 = as.numeric(misc5)) %>%
+  mutate(misc6 = as.numeric(misc6)) %>% 
+  select(`Social credit system - overall benefit` = misc1,
+         `Changed behavior due to s.c. score fears` = misc2,
+         `Do not notice government tracking` = misc3,
+         `Government secures data better than private` = misc4,
+         `OK if apps sell my data so can use for free` = misc5,
+         `Payment data stolen worries` = misc6) 
+
+datasummary(All(misc.qs) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=misc.qs,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
 
 ## Experiment results
 
@@ -493,56 +541,55 @@ kbl(exp.text, col.names = NULL) %>%
 #| tbl-cap: Experiment summary data
 
 exp.qs <- privacy %>% 
-  mutate(track1 = as.numeric(etr1)) %>% 
-  mutate(track2 = as.numeric(etr2)) %>% 
-  mutate(track3 = as.numeric(etr3)) %>% 
-  mutate(track4 = as.numeric(etr4)) %>% 
-  mutate(track5 = as.numeric(etr5)) %>%
+  mutate(etr1 = as.numeric(etr1)) %>% 
+  mutate(etr2 = as.numeric(etr2)) %>% 
+  mutate(etr3 = as.numeric(etr3)) %>% 
+  mutate(etr4 = as.numeric(etr4)) %>% 
+  mutate(etr5 = as.numeric(etr5)) %>%
   select(`Social credit concerns` = etr1,
          `Social credit - personally affect` = etr2,
          `General privacy concerns` = etr3,
          `Private company concerns` = etr4,
-         `Government concerns` = etr5) 
+         `Government concerns` = etr5,
+         `Treatment` = exp.group) 
 
-datasummary(All(exp.qs) ~ 
-              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=exp.qs,
-            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+datasummary_balance( ~ Treatment,
+                    data=exp.qs)
 ```
 
 ## List experiment results
 
 ```{r listexpqs}
-#| label: tbl-exp.q.text
-#| tbl-cap: Experiment questions
+#| label: tbl-listexp.q.text
+#| tbl-cap: List experiment questions
 
 table.text <- list()
 
-table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
-
-•	Alibaba
-•	Tencent
-•	Foreign internet companies (such as Microsoft)
-•	Your family
------------ LIST QUESTION BEGINS HERE ------------
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
 •	The police")
 
-table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
-
-•	Alibaba
-•	Tencent
-•	Foreign internet companies (such as Microsoft)
-•	Your family
------------ LIST QUESTION BEGINS HERE ------------
+table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
 •	The central government")
 
-table.text[[3]] <- c("Q3", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
-
-•	Alibaba
-•	Tencent
-•	Foreign internet companies (such as Microsoft)
-•	Your family
------------ LIST QUESTION BEGINS HERE ------------
+table.text[[3]] <- c("Q3", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
 •	The local government")
 
 listexp.text <- data.frame()
@@ -551,24 +598,50 @@ for(line in table.text) {
   listexp.text <- rbind(listexp.text, line)
 }
 
-kbl(listexp.text, col.names = NULL) %>% 
+kbl(listexp.text, col.names = NULL, escape=FALSE) %>% 
   kable_styling()
 ```
 
 ```{r expsummary}
-#| label: tbl-exp.summary.data
-#| tbl-cap: Experiment summary data
+#| label: tbl-listexp.summary.data
+#| tbl-cap: List experiment summary data
 
 listexp.qs <- privacy %>% 
-  mutate(track1 = as.numeric(etr1)) %>% 
-  mutate(track2 = as.numeric(etr2)) %>% 
-  mutate(track3 = as.numeric(etr3)) %>% 
-  select(`Police list experiment` = etr1,
-         `Central government list experiment` = etr2,
-         `Local government list experiment` = ) 
+  mutate(le.num = as.numeric(le.num)) %>% 
+  select(`Number of items selected` = le.num,
+         `Group` = le.group,
+         `Shown` = le.5th.shown) 
 
-datasummary(All(listexp.qs) ~ 
-              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=listexp.qs,
-            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+police.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 1) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`))
+
+datasummary_balance(`Number of items selected` ~ Shown,
+                    data=police.qs,
+                    title="Police trust list experiment")
+
+centralgov.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 2) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`))
+
+datasummary_balance(`Number of items selected` ~ Shown,
+                    data=centralgov.qs,
+                    title="Central government trust list experiment")
+
+localgov.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 3) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`))
+
+datasummary_balance(`Number of items selected` ~ Shown,
+                    data=localgov.qs,
+                    title="Local government trust list experiment")
+
+#
+#datasummary(All(listexp.qs) ~ 
+#              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+#            data=listexp.qs,
+#            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 ```
