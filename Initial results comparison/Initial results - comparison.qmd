@@ -1,12 +1,15 @@
 ---
-title: "China privacy study: initial results"
+title: "China privacy study: results across time"
 format:
   html:
     toc: true
     toc-location: left
 ---
 
-```{r setup, message=FALSE, warning=FALSE, echo=FALSE, error=FALSE}
+```{r}
+#| label: setup
+#| include: FALSE
+
 library(tidyverse)
 library(kableExtra)
 library(modelsummary)
@@ -17,7 +20,7 @@ knitr::opts_chunk$set(warning = FALSE)
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(error = FALSE)
 
-load(file="privacy.RData")
+load(file="../privacy.attitudes.RData")
 
 Ones <- function(x) table(x)[1]
 Twos <- function(x) table(x)[2]
@@ -30,7 +33,7 @@ Sevens <- function(x) table(x)[7]
 
 ## Demographics
 
-```{r demoqs}
+```{r}
 #| label: tbl-demo.q.text
 #| tbl-cap: Demographic questions
 
@@ -59,7 +62,7 @@ kbl(demo.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r demosummary}
+```{r}
 #| label: tbl-demo.summary.data
 #| tbl-cap: Demographic summary data
 
@@ -75,14 +78,15 @@ demo.qs <- privacy %>%
          `Party member status` = party.member.status,
          `Communist Youth League status` = cyl.status,
          `Income` = income,
-         `Hukou status` = hukou.status) 
+         `Hukou status` = hukou.status,
+         `Year` = year) 
 
-datasummary_balance( ~ 1, data=demo.qs)
+datasummary_balance( ~ Year, data=demo.qs)
 ```
 
 ## Knowledge questions
 
-```{r kwqs}
+```{r}
 #| label: tbl-kw.q.text
 #| tbl-cap: Privacy knowledge questions
 
@@ -111,12 +115,9 @@ kbl(kw.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r kwsummary}
+```{r}
 #| label: tbl-kw.summary.data
 #| tbl-cap: Privacy knowledge summary data
-
-#| label: tbl-gp.summary.data
-#| tbl-cap: Government performance summary data
 
 k.qs <- privacy %>% 
   mutate(k1 = as.numeric(k1)) %>% 
@@ -143,7 +144,7 @@ datasummary(All(k.index.q) ~ Mean + SD + Histogram, data=k.index.q)
 
 ## Personality questions
 
-```{r pqs}
+```{r}
 #| label: tbl-p.q.text
 #| tbl-cap: Personality questions
 
@@ -175,7 +176,7 @@ kbl(p.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r psummary}
+```{r}
 #| label: tbl-p.summary.data
 #| tbl-cap: Personality summary data
 
@@ -219,7 +220,7 @@ datasummary(All(p.index.q) ~ Mean + SD + Histogram, data=p.index.q)
 
 ## Government performance
 
-```{r gpqs}
+```{r}
 #| label: tbl-gp.q.text
 #| tbl-cap: Government performance questions
 
@@ -240,9 +241,15 @@ kbl(gp.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r gpsummary}
+```{r}
 #| label: tbl-gp.summary.data
 #| tbl-cap: Government performance summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
+#| layout-ncol: 1   
 
 gp.qs <- privacy %>% 
   mutate(gp1 = as.numeric(gp1)) %>% 
@@ -250,22 +257,47 @@ gp.qs <- privacy %>%
   mutate(gp3 = as.numeric(gp3)) %>% 
   select(`Central government performance` = gp1,
          `Local government performance` = gp2,
-         `Government performance Q3` = gp3) 
+         `Government performance Q3` = gp3,
+         `Year` = year) 
 
-datasummary(All(gp.qs) ~ 
+gp.qs.2021 <- gp.qs %>% 
+  filter(Year == 2021) %>% 
+  select(-Year)
+
+gp.qs.2023 <- gp.qs %>% 
+  filter(Year == 2023) %>% 
+  select(-Year)
+
+datasummary(All(gp.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=gp.qs,
+            data=gp.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(gp.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs.2023,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 gp.index.q <- privacy %>% 
-  select(`Government performance index` = gp.index) 
+  select(`Government performance index` = gp.index,
+         `Year` = year) 
 
-datasummary(All(gp.index.q) ~ Mean + SD + Histogram, data=gp.index.q)
+gp.index.q.2021 <- gp.index.q %>% 
+  filter(Year == 2021) %>% 
+  select(-Year)
+
+gp.index.q.2023 <- gp.index.q %>% 
+  filter(Year == 2023) %>% 
+  select(-Year)
+
+datasummary(All(gp.index.q.2021) ~ Mean + SD + Histogram, data=gp.index.q.2021)
+
+datasummary(All(gp.index.q.2023) ~ Mean + SD + Histogram, data=gp.index.q.2023)
 ```
 
 ## Media attention
 
-```{r mas}
+```{r}
 #| label: tbl-ma.q.text
 #| tbl-cap: Media attention questions
 
@@ -284,20 +316,21 @@ kbl(ma.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r masummary}
+```{r}
 #| label: tbl-ma.summary.data
 #| tbl-cap: Media attention summary data
 
 ma.qs <- privacy %>% 
   select(`Read news frequency` = ma1,
-         `News primary source` = ma2) 
+         `News primary source` = ma2,
+         `Year` = year) 
 
-datasummary_balance( ~ 1, data=ma.qs)
+datasummary_balance( ~ Year, data=ma.qs)
 ```
 
 ## Government and private monitoring
 
-```{r mas}
+```{r}
 #| label: tbl-gm.q.text
 #| tbl-cap: Government and private monitoring questions
 
@@ -322,9 +355,15 @@ kbl(gm.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r masummary}
+```{r}
 #| label: tbl-gm.summary.data
 #| tbl-cap: Government and private monitoring summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
+#| layout-ncol: 1   
 
 gm.qs <- privacy %>% 
   mutate(gm1 = as.numeric(gm1)) %>% 
@@ -336,24 +375,49 @@ gm.qs <- privacy %>%
          `Local government monitoring` = gm2,
          `Private company monitoring` = gm3,
          `Government biometric monitoring` = gm4,
-         `Private biometric monitoring` = gm5) 
+         `Private biometric monitoring` = gm5,
+         `Year` = year) 
 
-datasummary(All(gm.qs) ~ 
+gm.qs.2021 <- gm.qs %>% 
+  filter(Year == 2021) %>% 
+  select(-Year)
+
+gm.qs.2023 <- gm.qs %>% 
+  filter(Year == 2023) %>% 
+  select(-Year)
+
+datasummary(All(gm.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=gm.qs,
+            data=gm.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(gm.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gm.qs.2023,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 gm.index.q <- privacy %>% 
   select(`Government monitoring index` = gm.index.gov,
          `Private monitoring index` = gm.index.priv,
-         `Total monitoring index` = gm.index.total) 
+         `Total monitoring index` = gm.index.total,
+         `Year` = year) 
 
-datasummary(All(gm.index.q) ~ Mean + SD + Histogram, data=gm.index.q)
+gm.index.q.2021 <- gm.index.q %>% 
+  filter(Year == 2021) %>% 
+  select(-Year)
+
+gm.index.q.2023 <- gm.index.q %>% 
+  filter(Year == 2023) %>% 
+  select(-Year)
+
+datasummary(All(gm.index.q.2021) ~ Mean + SD + Histogram, data=gm.index.q.2021)
+
+datasummary(All(gm.index.q.2023) ~ Mean + SD + Histogram, data=gm.index.q.2023)
 ```
 
 ## Tech savvy
 
-```{r gpqs}
+```{r}
 #| label: tbl-ts.q.text
 #| tbl-cap: Tech savvy questions
 
@@ -375,7 +439,7 @@ kbl(ts.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r tssummary}
+```{r}
 #| label: tbl-ts.summary.data
 #| tbl-cap: Tech savvy summary data
 
@@ -406,7 +470,7 @@ datasummary(All(ts.index.q) ~ Mean + SD + Histogram, data=ts.index.q)
 ## Tracking
 
 
-```{r trackqs}
+```{r}
 #| label: tbl-track.q.text
 #| tbl-cap: Attitudes regarding tracking questions
 
@@ -419,7 +483,6 @@ table.text[[4]] <- c("Q4", "How comfortable are you with the central government 
 table.text[[5]] <- c("Q5", "How comfortable are you with the local government knowing personal details about your activity online?")
 table.text[[6]] <- c("Q6", "How comfortable are you with private companies knowing personal details about your activity online?")
 
-
 track.text <- data.frame()
 
 for(line in table.text) {
@@ -430,7 +493,7 @@ kbl(track.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r tracksummary}
+```{r}
 #| label: tbl-track.summary.data
 #| tbl-cap: Attitudes regarding tracking summary data
 
@@ -456,7 +519,7 @@ datasummary(All(track.qs) ~
 
 ## Miscellaneous
 
-```{r miscqs}
+```{r}
 #| label: tbl-misc.q.text
 #| tbl-cap: Attitudes on miscellaneous questions
 
@@ -480,7 +543,7 @@ kbl(misc.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r miscsummary}
+```{r}
 #| label: tbl-misc.summary.data
 #| tbl-cap: Miscellaneous questions summary data
 
@@ -506,7 +569,7 @@ datasummary(All(misc.qs) ~
 
 ## Experiment results
 
-```{r expqs}
+```{r}
 #| label: tbl-exp.q.text
 #| tbl-cap: Experiment questions
 
@@ -536,9 +599,13 @@ kbl(exp.text, col.names = NULL) %>%
   kable_styling()
 ```
 
-```{r expsummary}
+```{r}
 #| label: tbl-exp.summary.data
 #| tbl-cap: Experiment summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#| layout-ncol: 1    
 
 exp.qs <- privacy %>% 
   mutate(etr1 = as.numeric(etr1)) %>% 
@@ -551,15 +618,29 @@ exp.qs <- privacy %>%
          `General privacy concerns` = etr3,
          `Private company concerns` = etr4,
          `Government concerns` = etr5,
-         `Treatment` = exp.group) 
+         `Treatment` = exp.group,
+         `Year` = year) 
+
+exp.qs.2021 <- exp.qs %>% 
+  filter(Year==2021) %>% 
+  select(-Year)
+
+exp.qs.2023 <- exp.qs %>% 
+  filter(Year==2023) %>% 
+  select(-Year)
+
+
 
 datasummary_balance( ~ Treatment,
-                    data=exp.qs)
+                    data=exp.qs.2021)
+
+datasummary_balance( ~ Treatment,
+                    data=exp.qs.2023)
 ```
 
 ## List experiment results
 
-```{r listexpqs}
+```{r}
 #| label: tbl-listexp.q.text
 #| tbl-cap: List experiment questions
 
@@ -602,7 +683,7 @@ kbl(listexp.text, col.names = NULL, escape=FALSE) %>%
   kable_styling()
 ```
 
-```{r expsummary}
+```{r}
 #| label: tbl-listexp.summary.data
 #| tbl-cap: List experiment summary data
 
