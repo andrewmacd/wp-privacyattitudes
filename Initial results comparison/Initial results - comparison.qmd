@@ -4,6 +4,7 @@ format:
   html:
     toc: true
     toc-location: left
+    embed-resources: true
 ---
 
 ```{r}
@@ -118,6 +119,11 @@ kbl(kw.text, col.names = NULL) %>%
 ```{r}
 #| label: tbl-kw.summary.data
 #| tbl-cap: Privacy knowledge summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
 
 k.qs <- privacy %>% 
   mutate(k1 = as.numeric(k1)) %>% 
@@ -129,17 +135,42 @@ k.qs <- privacy %>%
          `Reading about privacy` = k4,
          `Discuss privacy with friends` = k5,
          `Privacy feeling online` = k6,
-         `Heard of social credit?` = k7) 
+         `Heard of social credit?` = k7,
+         `Year` = year) 
 
-datasummary(All(k.qs) ~ 
+k.qs.2021 <- k.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+k.qs.2023 <- k.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(k.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=k.qs,
+            data=k.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(k.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=k.qs.2023,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 k.index.q <- privacy %>% 
-  select(`Privacy index` = k.index) 
+  select(`Privacy index` = k.index,
+         `Year` = year) 
 
-datasummary(All(k.index.q) ~ Mean + SD + Histogram, data=k.index.q)
+k.index.q.2021 <- k.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+k.index.q.2023 <- k.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(k.index.q.2021) ~ Mean + SD + Histogram, data=k.index.q.2021)
+
+datasummary(All(k.index.q.2023) ~ Mean + SD + Histogram, data=k.index.q.2023)
 ```
 
 ## Personality questions
@@ -179,6 +210,11 @@ kbl(p.text, col.names = NULL) %>%
 ```{r}
 #| label: tbl-p.summary.data
 #| tbl-cap: Personality summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
 
 p.qs <- privacy %>% 
   mutate(p.pd1 = as.numeric(p.pd1)) %>% 
@@ -200,11 +236,25 @@ p.qs <- privacy %>%
          `Uncertainty Avoidance Q1` = p.ua1,
          `Uncertainty Avoidance Q2` = p.ua2,
          `Long-term Orientation Q1` = p.lo1,
-         `Long-term Orientation Q2` = p.lo2) 
+         `Long-term Orientation Q2` = p.lo2,
+         `Year` = year) 
 
-datasummary(All(p.qs) ~ 
+p.qs.2021 <- p.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+p.qs.2023 <- p.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(p.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=p.qs,
+            data=p.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(p.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=p.qs.2023,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 p.index.q <- privacy %>% 
@@ -212,9 +262,20 @@ p.index.q <- privacy %>%
          `Individualism index` = p.ic.index,
          `Masculinity index` = p.mf.index,
          `Uncertainty Avoidance index` = p.ua.index,
-         `Long-term Orientation index` = p.lo.index,) 
+         `Long-term Orientation index` = p.lo.index,
+         `Year` = year) 
 
-datasummary(All(p.index.q) ~ Mean + SD + Histogram, data=p.index.q)
+p.index.q.2021 <- p.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+p.index.q.2023 <- p.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(p.index.q.2021) ~ Mean + SD + Histogram, data=p.index.q.2021)
+
+datasummary(All(p.index.q.2023) ~ Mean + SD + Histogram, data=p.index.q.2023)
 ```
 
 
@@ -261,11 +322,11 @@ gp.qs <- privacy %>%
          `Year` = year) 
 
 gp.qs.2021 <- gp.qs %>% 
-  filter(Year == 2021) %>% 
+  filter(Year == "2021") %>% 
   select(-Year)
 
 gp.qs.2023 <- gp.qs %>% 
-  filter(Year == 2023) %>% 
+  filter(Year == "2023") %>% 
   select(-Year)
 
 datasummary(All(gp.qs.2021) ~ 
@@ -283,17 +344,57 @@ gp.index.q <- privacy %>%
          `Year` = year) 
 
 gp.index.q.2021 <- gp.index.q %>% 
-  filter(Year == 2021) %>% 
+  filter(Year == "2021") %>% 
   select(-Year)
 
 gp.index.q.2023 <- gp.index.q %>% 
-  filter(Year == 2023) %>% 
+  filter(Year == "2023") %>% 
   select(-Year)
 
 datasummary(All(gp.index.q.2021) ~ Mean + SD + Histogram, data=gp.index.q.2021)
 
 datasummary(All(gp.index.q.2023) ~ Mean + SD + Histogram, data=gp.index.q.2023)
 ```
+
+```{r}
+#| label: tbl-gp.detailed.data
+#| tbl-cap: Government performance by demographic category
+#| tbl-subcap: 
+#|    - "By age"
+#|    - "If lives in Shanghai or Wuhan"
+#| layout-ncol: 1   
+
+gp.detail.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gp3 = as.numeric(gp3)) %>% 
+  mutate(age = factor(case_when(age <= 25 ~ "18-25",
+                                age > 25 & age <= 40 ~ "26-40",
+                                age > 40 & age <= 60 ~ "41-60",
+                                age > 61 ~ "61+"))) %>%
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 TRUE ~ "Other cities"))) %>% 
+  select(`Central government performance` = gp1,
+         `Local government performance` = gp2,
+         `Government performance Q3` = gp3,
+         `City` = city,
+         `Age` = age,
+         `Year` = year) 
+
+datasummary(`Central government performance` + 
+              `Local government performance` + 
+              `Government performance Q3` 
+            ~ mean * Age * Year,
+            data = gp.detail.qs)
+
+datasummary(`Central government performance` + 
+              `Local government performance` + 
+              `Government performance Q3` 
+            ~ mean * City * Year,
+            data = gp.detail.qs)
+```
+
 
 ## Media attention
 
@@ -379,11 +480,11 @@ gm.qs <- privacy %>%
          `Year` = year) 
 
 gm.qs.2021 <- gm.qs %>% 
-  filter(Year == 2021) %>% 
+  filter(Year == "2021") %>% 
   select(-Year)
 
 gm.qs.2023 <- gm.qs %>% 
-  filter(Year == 2023) %>% 
+  filter(Year == "2023") %>% 
   select(-Year)
 
 datasummary(All(gm.qs.2021) ~ 
@@ -403,16 +504,63 @@ gm.index.q <- privacy %>%
          `Year` = year) 
 
 gm.index.q.2021 <- gm.index.q %>% 
-  filter(Year == 2021) %>% 
+  filter(Year == "2021") %>% 
   select(-Year)
 
 gm.index.q.2023 <- gm.index.q %>% 
-  filter(Year == 2023) %>% 
+  filter(Year == "2023") %>% 
   select(-Year)
 
 datasummary(All(gm.index.q.2021) ~ Mean + SD + Histogram, data=gm.index.q.2021)
 
 datasummary(All(gm.index.q.2023) ~ Mean + SD + Histogram, data=gm.index.q.2023)
+```
+
+```{r}
+#| label: tbl-gm.detailed.data
+#| tbl-cap: Government monitoring by demographic category
+#| tbl-subcap: 
+#|    - "By age"
+#|    - "If lives in Shanghai or Wuhan"
+#| layout-ncol: 1   
+
+gm.detail.qs <- privacy %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>%
+  mutate(gm4 = as.numeric(gm4)) %>%
+  mutate(gm5 = as.numeric(gm5)) %>%
+  mutate(age = factor(case_when(age <= 25 ~ "18-25",
+                                age > 25 & age <= 40 ~ "26-40",
+                                age > 40 & age <= 60 ~ "41-60",
+                                age > 61 ~ "61+"))) %>%
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 TRUE ~ "Other cities"))) %>% 
+  select(`Central government monitoring` = gm1,
+         `Local government monitoring` = gm2,
+         `Private company monitoring` = gm3,
+         `Government biometric monitoring` = gm4,
+         `Private biometric monitoring` = gm5,
+         `City` = city,
+         `Age` = age,
+         `Year` = year) 
+
+datasummary(`Central government monitoring` +
+              `Local government monitoring` +
+              `Private company monitoring` + 
+              `Government biometric monitoring` + 
+              `Private biometric monitoring`
+            ~ mean * Age * Year,
+            data = gm.detail.qs)
+
+datasummary(`Central government monitoring` +
+              `Local government monitoring` +
+              `Private company monitoring` + 
+              `Government biometric monitoring` + 
+              `Private biometric monitoring`
+            ~ mean * City * Year,
+            data = gm.detail.qs)
 ```
 
 ## Tech savvy
@@ -442,6 +590,13 @@ kbl(ts.text, col.names = NULL) %>%
 ```{r}
 #| label: tbl-ts.summary.data
 #| tbl-cap: Tech savvy summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
 
 ts.qs <- privacy %>% 
   mutate(ts1 = as.numeric(ts1)) %>% 
@@ -449,22 +604,58 @@ ts.qs <- privacy %>%
   mutate(ts3 = as.numeric(ts3)) %>% 
   select(`Use computer skill` = ts1,
          `Fix computer skill` = ts2,
-         `Program computer skill` = ts3) 
+         `Program computer skill` = ts3,
+         `Year` = year) 
 
-datasummary(All(ts.qs) ~ 
+ts.qs.2021 <- ts.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+ts.qs.2023 <- ts.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(ts.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=ts.qs,
+            data=ts.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(ts.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=ts.qs.2023,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 ts.other.q <- privacy %>% 
-  select(`Facial recognition commonness` = ts4) 
+  select(`Facial recognition commonness` = ts4,
+         `Year` = year) 
 
-datasummary_skim(ts.other.q, type="categorical")
+ts.other.q.2021 <- ts.other.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+ts.other.q.2023 <- ts.other.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary_skim(ts.other.q.2021, type="categorical")
+
+datasummary_skim(ts.other.q.2023, type="categorical")
 
 ts.index.q <- privacy %>% 
-  select(`Tech savvy index` = ts.index) 
+  select(`Tech savvy index` = ts.index,
+         `Year` = year) 
 
-datasummary(All(ts.index.q) ~ Mean + SD + Histogram, data=ts.index.q)
+ts.index.q.2021 <- ts.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+ts.index.q.2023 <- ts.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(ts.index.q.2021) ~ Mean + SD + Histogram, data=ts.index.q.2021)
+
+datasummary(All(ts.index.q.2023) ~ Mean + SD + Histogram, data=ts.index.q.2023)
 ```
 
 ## Tracking
@@ -473,6 +664,9 @@ datasummary(All(ts.index.q) ~ Mean + SD + Histogram, data=ts.index.q)
 ```{r}
 #| label: tbl-track.q.text
 #| tbl-cap: Attitudes regarding tracking questions
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
 
 table.text <- list()
 
@@ -496,6 +690,9 @@ kbl(track.text, col.names = NULL) %>%
 ```{r}
 #| label: tbl-track.summary.data
 #| tbl-cap: Attitudes regarding tracking summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
 
 track.qs <- privacy %>% 
   mutate(track1 = as.numeric(track1)) %>% 
@@ -509,12 +706,75 @@ track.qs <- privacy %>%
          `Private company tracking - prevalence` = track3,
          `Central government tracking - comfort` = track4,
          `Local govenrment tracking - comfort` = track5,
-         `Private company tracking - comfort` = track6) 
+         `Private company tracking - comfort` = track6,
+         `Year` = year) 
 
-datasummary(All(track.qs) ~ 
+track.qs.2021 <- track.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+track.qs.2023 <- track.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(track.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=track.qs,
+            data=track.qs.2021,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(track.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=track.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
+
+```{r}
+#| label: tbl-track.detailed.data
+#| tbl-cap: Attitudes regarding tracking by demographic category
+#| tbl-subcap: 
+#|    - "By age"
+#|    - "If lives in Shanghai or Wuhan"
+#| layout-ncol: 1   
+
+track.detail.qs <- privacy %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>%
+  mutate(track6 = as.numeric(track6)) %>% 
+  mutate(age = factor(case_when(age <= 25 ~ "18-25",
+                                age > 25 & age <= 40 ~ "26-40",
+                                age > 40 & age <= 60 ~ "41-60",
+                                age > 61 ~ "61+"))) %>%
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 TRUE ~ "Other cities"))) %>% 
+  select(`Central government tracking - prevalence` = track1,
+         `Local government tracking - prevalence` = track2,
+         `Private company tracking - prevalence` = track3,
+         `Central government tracking - comfort` = track4,
+         `Local govenrment tracking - comfort` = track5,
+         `Private company tracking - comfort` = track6,
+         `City` = city,
+         `Age` = age,
+         `Year` = year) 
+
+datasummary(`Central government tracking - prevalence` +
+             `Local government tracking - prevalence` +
+             `Private company tracking - prevalence` + 
+             `Central government tracking - comfort` + 
+             `Private company tracking - comfort`
+            ~ mean * Age * Year,
+            data = track.detail.qs)
+
+datasummary(`Central government tracking - prevalence` +
+             `Local government tracking - prevalence` +
+             `Private company tracking - prevalence` + 
+             `Central government tracking - comfort` + 
+             `Private company tracking - comfort`
+            ~ mean * City * Year,
+            data = track.detail.qs)
 ```
 
 ## Miscellaneous
@@ -546,6 +806,9 @@ kbl(misc.text, col.names = NULL) %>%
 ```{r}
 #| label: tbl-misc.summary.data
 #| tbl-cap: Miscellaneous questions summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
 
 misc.qs <- privacy %>% 
   mutate(misc1 = as.numeric(misc1)) %>% 
@@ -559,12 +822,77 @@ misc.qs <- privacy %>%
          `Do not notice government tracking` = misc3,
          `Government secures data better than private` = misc4,
          `OK if apps sell my data so can use for free` = misc5,
-         `Payment data stolen worries` = misc6) 
+         `Payment data stolen worries` = misc6,
+         `Year` = year) 
 
-datasummary(All(misc.qs) ~ 
+misc.qs.2021 <- misc.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+misc.qs.2023 <- misc.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(misc.qs.2021) ~ 
               Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=misc.qs,
+            data=misc.qs.2021,
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(misc.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=misc.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
+
+```{r}
+#| label: tbl-misc.detailed.data
+#| tbl-cap: Miscellaneous questions by demographic category
+#| tbl-subcap: 
+#|    - "By age"
+#|    - "If lives in Shanghai or Wuhan"
+#| layout-ncol: 1   
+
+misc.detail.qs <- privacy %>% 
+  mutate(misc1 = as.numeric(misc1)) %>% 
+  mutate(misc2 = as.numeric(misc2)) %>% 
+  mutate(misc3 = as.numeric(misc3)) %>% 
+  mutate(misc4 = as.numeric(misc4)) %>% 
+  mutate(misc5 = as.numeric(misc5)) %>%
+  mutate(misc6 = as.numeric(misc6)) %>% 
+  mutate(age = factor(case_when(age <= 25 ~ "18-25",
+                                age > 25 & age <= 40 ~ "26-40",
+                                age > 40 & age <= 60 ~ "41-60",
+                                age > 61 ~ "61+"))) %>%
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 TRUE ~ "Other cities"))) %>% 
+  select(`Social credit system - overall benefit` = misc1,
+         `Changed behavior due to s.c. score fears` = misc2,
+         `Do not notice government tracking` = misc3,
+         `Government secures data better than private` = misc4,
+         `OK if apps sell my data so can use for free` = misc5,
+         `Payment data stolen worries` = misc6,
+         `City` = city,
+         `Age` = age,
+         `Year` = year) 
+
+datasummary(`Social credit system - overall benefit` +
+             `Changed behavior due to s.c. score fears` +
+             `Do not notice government tracking` + 
+             `Government secures data better than private` + 
+             `OK if apps sell my data so can use for free` +
+             `Payment data stolen worries` 
+            ~ mean * Age * Year,
+            data = misc.detail.qs)
+
+datasummary(`Social credit system - overall benefit` +
+             `Changed behavior due to s.c. score fears` +
+             `Do not notice government tracking` + 
+             `Government secures data better than private` + 
+             `OK if apps sell my data so can use for free` +
+             `Payment data stolen worries`
+            ~ mean * City * Year,
+            data = misc.detail.qs)
 ```
 
 ## Experiment results
@@ -622,14 +950,12 @@ exp.qs <- privacy %>%
          `Year` = year) 
 
 exp.qs.2021 <- exp.qs %>% 
-  filter(Year==2021) %>% 
+  filter(Year=="2021") %>% 
   select(-Year)
 
 exp.qs.2023 <- exp.qs %>% 
-  filter(Year==2023) %>% 
+  filter(Year=="2023") %>% 
   select(-Year)
-
-
 
 datasummary_balance( ~ Treatment,
                     data=exp.qs.2021)
@@ -691,38 +1017,36 @@ listexp.qs <- privacy %>%
   mutate(le.num = as.numeric(le.num)) %>% 
   select(`Number of items selected` = le.num,
          `Group` = le.group,
-         `Shown` = le.5th.shown) 
+         `Shown` = le.5th.shown,
+         `Year` = year) 
 
 police.qs <- listexp.qs %>% 
   filter(as.numeric(Group) == 1) %>% 
   select(c(`Number of items selected`, 
-           `Shown`))
+           `Shown`,
+           `Year`))
 
-datasummary_balance(`Number of items selected` ~ Shown,
+datasummary(`Number of items selected` ~ mean * Year * Shown,
                     data=police.qs,
                     title="Police trust list experiment")
 
 centralgov.qs <- listexp.qs %>% 
   filter(as.numeric(Group) == 2) %>% 
   select(c(`Number of items selected`, 
-           `Shown`))
+           `Shown`,
+           `Year`))
 
-datasummary_balance(`Number of items selected` ~ Shown,
+datasummary(`Number of items selected` ~ mean * Year * Shown,
                     data=centralgov.qs,
-                    title="Central government trust list experiment")
+                    title="Central government list experiment")
 
 localgov.qs <- listexp.qs %>% 
   filter(as.numeric(Group) == 3) %>% 
   select(c(`Number of items selected`, 
-           `Shown`))
+           `Shown`,
+           `Year`))
 
-datasummary_balance(`Number of items selected` ~ Shown,
+datasummary(`Number of items selected` ~ mean * Year * Shown,
                     data=localgov.qs,
-                    title="Local government trust list experiment")
-
-#
-#datasummary(All(listexp.qs) ~ 
-#              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-#            data=listexp.qs,
-#            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+                    title="Local government list experiment")
 ```

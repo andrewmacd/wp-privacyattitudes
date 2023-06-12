@@ -135,6 +135,9 @@ privacy.23 <- privacy.23 %>%
 
 privacy <- bind_rows(privacy.21, privacy.23)
 
+privacy <- privacy %>% 
+  mutate(year = factor(year))
+
 # Recode demographic variables
 privacy <- privacy %>% 
   mutate(location = factor(location, 
@@ -177,6 +180,7 @@ privacy <- privacy %>%
                                     "Ningxia",
                                     "Xinjiang",
                                     "Other"))) %>%
+  mutate(city = factor(city)) %>% 
   mutate(education = factor(education,
                             levels=c(1:6),
                             labels=c("No formal education",
