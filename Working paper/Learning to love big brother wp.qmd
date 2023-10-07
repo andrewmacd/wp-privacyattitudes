@@ -1,0 +1,148 @@
+---
+title: "Learning to love big brother: Chinese attitudes toward online privacy after the pandemic"
+author: "Andrew MacDonald"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+format: pdf
+editor: visual
+abstract: "The results of the survey strongly suggest that, despite all of the invasive government monitoring used to attempt to control the spread of Covid, respondents were generally supportive of government invasions of their privacy. These findings cast doubt on the long-term impact of the White Paper movement protests and connect to a larger body of literature on why surveys of Chinese citizens indicate high levels of trust in their government."
+keywords: 
+  - Digital Privacy
+  - Covid-19
+  - Authoriatrian Regimes
+  - Government Trust
+  - China
+execute: 
+  echo: false
+  warning: false
+keep-tex: true
+bibliography: references.bib
+csl: sage-harvard.csl
+---
+
+```{r}
+#| label: setup
+#| include: FALSE
+
+library(tidyverse)
+library(kableExtra)
+library(modelsummary)
+library(estimatr)
+
+load(file="../privacy.attitudes.RData")
+```
+
+## Introduction
+
+## Literature review
+
+## Data and summary statistics
+
+The data for this project was collected via a commercial survey firm in two waves, February of 2021 and March of 2023. In both the first and second waves, Wuhan was oversampled, with residents of the city set to be 10% of respondents. The 2021 survey had an n=1500 and the second had an n=2000. Questions on the two surveys were identical other than a minor change to a question that referenced a specific date. The timing of the two surveys came at two very different points in time of China's Covid-19 experience. The first survey was conducted approximately seven months after the last round of restrictions were lifted on the city of Wuhan. China, at the time, was essentially closed to foreign travel but otherwise had little in the way of day to day public health restrictions. Nationwide, daily Covid cases hovered around the single digits [@wuhanlo2021]. China was at a very different point in its journey in March of 2023. The year of 2022 saw widespread, intrusive digital monitoring introduced. Many major cities, such as Shanghai, Xi'an, and Shenzhen, underwent long and painful city-wide lockdown procedures. At the end of 2023, under the weight of a spiraling number of cases and widespread protests (termed the White Paper Revolution), China finally abandoned its zero Covid policy [@mao2022]. The two waves of these surveys aim to compare attitudes before and after this widespread and highly visible change in digital monitoring strategies.
+
+The demographics of the 2021 and 2023 surveys are presented in @tbl-demographics.
+
+```{r}
+#| label: tbl-demographics
+#| tbl-cap: Survey demographics
+
+demo.qs <- privacy %>% 
+  select(`Age` = age,
+         `Location` = location,
+         `Province` = province,
+         `Education` = education,
+         `Gender` = sex,
+         `Marriage status` = marriage.status,
+         `Job type` = job.type,
+         `Company type` = job.company.type,
+         `Party member status` = party.member.status,
+         `Communist Youth League status` = cyl.status,
+         `Income` = income,
+         `Hukou status` = hukou.status,
+         `Year` = year) 
+
+datasummary( ~ Year, data=demo.qs, longtable=TRUE) %>% 
+  kable_styling() 
+```
+
+As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban hukou. This demographic profile already suggests that while the large-scale lockdowns that occured in a few of the big cities generated a lot of press, they may not be the modal or average citizen's experience with zero Covid policies.
+
+Taking a wide-angle view on general government performance, as in @tbl-gp.summary.data
+
+```{r}
+#| label: tbl-gp.q.text
+#| tbl-cap: Government performance questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
+table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
+table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.")
+table.text[[4]] <- c("Q4", "Government performance index")
+
+gp.text <- data.frame()
+
+for(line in table.text) {
+  gp.text <- rbind(gp.text, line)
+}
+
+kbl(gp.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-gp.summary.data
+#| tbl-cap: Government performance summary data
+#| tbl-subcap: 
+#|    - "2021"
+#|    - "2023"
+#|    - "2021"
+#|    - "2023"
+#| layout-ncol: 1   
+
+gp.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gp3 = as.numeric(gp3)) %>% 
+  select(`Central government performance` = gp1,
+         `Local government performance` = gp2,
+         `Government performance Q3` = gp3,
+         `Year` = year) 
+
+gp.qs.2021 <- gp.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gp.qs.2023 <- gp.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gp.qs.2021) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(gp.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+gp.index.q <- privacy %>% 
+  select(`Government performance index` = gp.index,
+         `Year` = year) 
+
+gp.index.q.2021 <- gp.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gp.index.q.2023 <- gp.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gp.index.q.2021) ~ Mean + SD + Histogram, data=gp.index.q.2021)
+
+datasummary(All(gp.index.q.2023) ~ Mean + SD + Histogram, data=gp.index.q.2023)
+```
+
+## Regression Analysis {#sec-analysis}
+
+## Conclusion
