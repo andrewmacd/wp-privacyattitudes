@@ -213,7 +213,7 @@ White Paper movement protests and connect to a larger body of literature
 on why surveys of Chinese citizens indicate high levels of trust in
 their government.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, breakable, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, frame hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \subsection{Introduction}\label{introduction}}
@@ -228,7 +228,7 @@ statistics}\label{data-and-summary-statistics}}
 The data for this project was collected via a commercial survey firm in
 two waves, February of 2021 and March of 2023. In both the first and
 second waves, Wuhan was oversampled, with residents of the city set to
-be 10\% of respondents. The 2021 survey had an n=1600 and the second had
+be 10\% of respondents. The 2021 survey had an n=1500 and the second had
 an n=2000. Questions on the two surveys were identical other than a
 minor change to a question that referenced a specific date. The timing
 of the two surveys came at two very different points in time of China's
@@ -243,9 +243,9 @@ digital monitoring introduced. Many major cities, such as Shanghai,
 Xi'an, and Shenzhen, underwent long and painful city-wide lockdown
 procedures. At the end of 2023, under the weight of a spiraling number
 of cases and widespread protests (termed the White Paper Revolution),
-China finally abandoned its zero Covid policy. The two waves of these
-surveys aim to compare attitudes before and after this widespread and
-highly visible change in digital monitoring strategies.
+China finally abandoned its zero Covid policy (Mao, 2022). The two waves
+of these surveys aim to compare attitudes before and after this
+widespread and highly visible change in digital monitoring strategies.
 
 The demographics of the 2021 and 2023 surveys are presented in
 Table~\ref{tbl-demographics}.
@@ -262,12 +262,67 @@ Table~\ref{tbl-demographics}.
 \end{longtable}
 
 As is typical of online surveys in China, the sample respondents skew
-somewhat younger and more educated, though there is not a significant
-difference between the two sample demographics. Focusing on the 2023
-survey,
+somewhat younger and more educated. Comparing the two waves, there are
+some modest demographic differences (notably education and marriage)
+differences between the two samples. As will be shown in
+Section~\ref{sec-analysis}, these minor differences do not appear to
+change any of the substantive results. Focusing on the 2023 survey, the
+modal respondent is someone from a small city, male, married, working in
+a white collar job at a small enterprise, who earns about 10,000 RMB a
+month and has an urban hukou. This demographic profile already suggests
+that while the large-scale lockdowns that occured in a few of the big
+cities generated a lot of press, they may not be the modal or average
+citizen's experience with zero Covid policies.
 
-\hypertarget{analysis}{%
-\subsection{Analysis}\label{analysis}}
+Taking a wide-angle view on the government's performance,
+Table~\ref{tbl-gp.summary.data} compares some different measures of
+government performance. While the higher level of government trust in
+the central government is unsurprising (consistent with previous
+literature, see ), the magnitude of the gap is somewhat smaller than in
+previous studies. There has been a small but statistically significant
+decrease in trust of both since 2021. Most interestingly, though, is
+that there was no dropoff in how residents feel the government handled
+their privacy information.
+
+\hypertarget{tbl-gp.q.text}{}
+\begin{table}
+\caption{\label{tbl-gp.q.text}Government performance questions }\tabularnewline
+
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+Q1 & Overall, I’m happy with the performance of the central government\\
+\hline
+Q2 & Overall, I’m happy with the performance of my local government\\
+\hline
+Q3 & \makecell[c]{The government does a good job balancing the rights of citizens to be free of surveillance\\in their daily lives with the need to preserve order and prevent crime.}\\
+\hline
+Q4 & Government performance index\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{tbl-gp.summary.data}{}
+\begin{table}
+\caption{\label{tbl-gp.summary.data}Government performance summary data }\tabularnewline
+
+\centering
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{2021 (N=1500)} & \multicolumn{2}{c}{2023 (N=2007)} & \multicolumn{2}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
+  & Mean & Std. Dev. & Mean & Std. Dev. & Diff. in Means & p\\
+\midrule
+Central government performance & 5.98 & 1.14 & 5.73 & 1.36 & -0.25 & 0.00\\
+Local government performance & 5.55 & 1.25 & 5.35 & 1.43 & -0.20 & 0.00\\
+Government performance Q3 & 5.45 & 1.22 & 5.42 & 1.41 & -0.03 & 0.44\\
+Government performance index & 0.78 & 0.17 & 0.75 & 0.21 & -0.03 & 0.00\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{sec-analysis}{%
+\subsection{Regression Analysis}\label{sec-analysis}}
 
 \hypertarget{conclusion}{%
 \subsection*{Conclusion}\label{conclusion}}
@@ -280,6 +335,12 @@ survey,
 \href{https://www.bbc.com/news/world-asia-china-55628488}{Wuhan
 lockdown: A year of china's fight against the covid pandemic}. Epub
 ahead of print 22 January 2021.
+
+\leavevmode\vadjust pre{\hypertarget{ref-mao2022}{}}%
+Mao (2022)
+\href{https://www.bbc.com/news/world-asia-china-63855508}{China abandons
+key parts of zero-covid strategy after protests}. \emph{BBC News}. Epub
+ahead of print 7 December 2022.
 
 \end{CSLReferences}
 

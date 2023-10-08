@@ -66,7 +66,7 @@ datasummary( ~ Year, data=demo.qs, longtable=TRUE) %>%
 
 As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban hukou. This demographic profile already suggests that while the large-scale lockdowns that occured in a few of the big cities generated a lot of press, they may not be the modal or average citizen's experience with zero Covid policies.
 
-Taking a wide-angle view on general government performance, as in @tbl-gp.summary.data
+Taking a wide-angle view on the government's performance, @tbl-gp.summary.data compares some different measures of government performance. While the higher level of government trust in the central government is unsurprising (consistent with previous literature, see CITATION), the magnitude of the gap is somewhat smaller than in previous studies. There has been a small but statistically significant decrease in trust of both since 2021. Most interestingly, though, is that there was no decrease in how residents feel the government handled their privacy information. This seems to indicate that it not necessarily government monitoring that made residents unhappy but instead other zero Covid policy failures.
 
 ```{r}
 #| label: tbl-gp.q.text
@@ -76,8 +76,10 @@ table.text <- list()
 
 table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
 table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
-table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.")
+table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance\nin their daily lives with the need to preserve order and prevent crime.")
 table.text[[4]] <- c("Q4", "Government performance index")
+
+table.text[[3]] <- linebreak(table.text[[3]])
 
 gp.text <- data.frame()
 
@@ -85,19 +87,12 @@ for(line in table.text) {
   gp.text <- rbind(gp.text, line)
 }
 
-kbl(gp.text, col.names = NULL) %>% 
-  kable_styling()
+kbl(gp.text, col.names = NULL, escape=F, align="l")
 ```
 
 ```{r}
 #| label: tbl-gp.summary.data
 #| tbl-cap: Government performance summary data
-#| tbl-subcap: 
-#|    - "2021"
-#|    - "2023"
-#|    - "2021"
-#|    - "2023"
-#| layout-ncol: 1   
 
 gp.qs <- privacy %>% 
   mutate(gp1 = as.numeric(gp1)) %>% 
@@ -106,42 +101,15 @@ gp.qs <- privacy %>%
   select(`Central government performance` = gp1,
          `Local government performance` = gp2,
          `Government performance Q3` = gp3,
+         `Government performance index` = gp.index,
          `Year` = year) 
 
-gp.qs.2021 <- gp.qs %>% 
-  filter(Year == "2021") %>% 
-  select(-Year)
-
-gp.qs.2023 <- gp.qs %>% 
-  filter(Year == "2023") %>% 
-  select(-Year)
-
-datasummary(All(gp.qs.2021) ~ 
-              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=gp.qs.2021,
-            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
-
-datasummary(All(gp.qs.2023) ~ 
-              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
-            data=gp.qs.2023,
-            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
-
-gp.index.q <- privacy %>% 
-  select(`Government performance index` = gp.index,
-         `Year` = year) 
-
-gp.index.q.2021 <- gp.index.q %>% 
-  filter(Year == "2021") %>% 
-  select(-Year)
-
-gp.index.q.2023 <- gp.index.q %>% 
-  filter(Year == "2023") %>% 
-  select(-Year)
-
-datasummary(All(gp.index.q.2021) ~ Mean + SD + Histogram, data=gp.index.q.2021)
-
-datasummary(All(gp.index.q.2023) ~ Mean + SD + Histogram, data=gp.index.q.2023)
+datasummary_balance(~ Year, data=gp.qs, dinm_statistic = "p.value",
+                    fmt=fmt_sprintf("%.2f")) %>% 
+  kable_styling()
 ```
+
+
 
 ## Regression Analysis {#sec-analysis}
 
