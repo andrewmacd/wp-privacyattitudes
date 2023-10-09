@@ -200,7 +200,7 @@ Regimes, Government Trust, China},
 \title{Learning to love big brother: Chinese attitudes toward online
 privacy after the pandemic}
 \author{Andrew MacDonald}
-\date{2023-10-08}
+\date{2023-10-09}
 
 \begin{document}
 \maketitle
@@ -213,7 +213,7 @@ White Paper movement protests and connect to a larger body of literature
 on why surveys of Chinese citizens indicate high levels of trust in
 their government.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden, boxrule=0pt, frame hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, enhanced, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \subsection{Introduction}\label{introduction}}
@@ -221,9 +221,8 @@ their government.
 \hypertarget{literature-review}{%
 \subsection{Literature review}\label{literature-review}}
 
-\hypertarget{data-and-summary-statistics}{%
-\subsection{Data and summary
-statistics}\label{data-and-summary-statistics}}
+\hypertarget{sec-datasummary}{%
+\subsection{Data and summary statistics}\label{sec-datasummary}}
 
 The data for this project was collected via a commercial survey firm in
 two waves, February of 2021 and March of 2023. In both the first and
@@ -602,8 +601,16 @@ falsification. That being said, the results do strongly parallel to the
 directly asked questions, adding confidence to the interpretation of the
 results of the previous tables.
 
+\hypertarget{tbl-listexp.q.text}{}
 \begin{table}
+\caption{\label{tbl-listexp.q.text}List experiment questions }\tabularnewline
 
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+Q1 & \makecell[c]{For the question below, please count how many of the entities listed below you would\\trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\\ \\• Alibaba\\\\• Tencent\\\\• Foreign internet companies (such as Microsoft)\\\\• Your family\\\\->Sensitive item only shown to 50 per cent of respondents\\\\• The central government}\\
+\hline
+\end{tabular}
 \end{table}
 
 \begin{table}
@@ -654,7 +661,287 @@ data}\begin{minipage}[t]{\linewidth}
 \end{table}
 
 \hypertarget{sec-analysis}{%
-\subsection{Regression Analysis}\label{sec-analysis}}
+\subsection{Additional Analysis}\label{sec-analysis}}
+
+In order to help rule out the possibility that some of the differences
+observed between 2021 and 2023 in the government trust and
+comfortability of being monitored are driven simply by demographi
+changes, Table~\ref{tbl-basicreg} reports on the results of a simple
+regression framework. The response variables are: 1) trust in the
+central government, 2) trust in the local government, 3) comfort with
+central government monitoring, 4) comfort with local government
+monitoring, and 5) comfort with private company monitoring. Included in
+the regression are a standard suite of demographic variables and the
+year variable.
+
+The year variable magnitude matches almost exactly the simple difference
+in means observed in Section~\ref{sec-datasummary}. This result is
+unsurprising given the very modest difference in demographics between
+the two waves of the survey. It may be the case that other factors
+besides the Covid situation precipitated the observed difference in
+means though it is hard to imagine any event or trend that had a
+stronger impact than the 2022 lockdowns. In terms of interesting
+coefficients, age is consistenly positively related to acceptance of
+government monitoring and negatively related to private corporation
+monitoring. This finding may partially explain events like the White
+Paper Revolution, which was primarily a protest of the young. However,
+the magnitude of coefficient is not very impactful - changing a
+respondent's age from 20 to 70 changes the predicted response to the
+acceptance of monitoring questions by 0.5 points - less than the size of
+the year coefficient (0.6). Not being a party member also decreased
+acceptance of monitoring by about 0.2 points. Income is sometimes a
+relevant predictor though inconsistently so. Overall, the regressions
+have a very low R2, indicating that most of the variation in individual
+responses is due to factors outside of demographic variables. So while
+suggestive, the demographic variables have only limited substantive
+relationship to variation in attitudes on these questions.
+
+\hypertarget{tbl-basicreg}{}
+\begin{table}
+\caption{\label{tbl-basicreg}Regressions on individual question results }\tabularnewline
+
+\centering
+\begin{tabular}[t]{lccccc}
+\toprule
+  & CG Trust & LG Trust & CG Monitor & LG Monitor & PR Monitor\\
+\midrule
+(Intercept) & \num{5.813}*** & \num{5.364}*** & \num{4.256}*** & \num{4.257}*** & \num{3.640}***\\
+ & (\num{0.174}) & (\num{0.186}) & (\num{0.194}) & (\num{0.195}) & (\num{0.236})\\
+Age & \num{0.002} & \num{0.000} & \num{0.009}*** & \num{0.010}*** & \num{-0.007}**\\
+ & (\num{0.002}) & (\num{0.002}) & (\num{0.002}) & (\num{0.002}) & (\num{0.003})\\
+Middle school & \num{-0.132} & \num{-0.240}+ & \num{-0.042} & \num{-0.069} & \num{-0.121}\\
+ & (\num{0.122}) & (\num{0.130}) & (\num{0.135}) & (\num{0.136}) & (\num{0.165})\\
+High school & \num{-0.032} & \num{-0.215}+ & \num{0.101} & \num{0.074} & \num{-0.158}\\
+ & (\num{0.114}) & (\num{0.121}) & (\num{0.127}) & (\num{0.127}) & \vphantom{1} (\num{0.154})\\
+University & \num{-0.023} & \num{-0.189} & \num{0.192} & \num{0.202} & \num{-0.149}\\
+ & (\num{0.114}) & (\num{0.121}) & (\num{0.127}) & (\num{0.127}) & (\num{0.154})\\
+Grad school & \num{-0.130} & \num{-0.175} & \num{0.018} & \num{0.105} & \num{-0.166}\\
+ & (\num{0.143}) & (\num{0.152}) & (\num{0.159}) & (\num{0.159}) & (\num{0.193})\\
+Income 3000-5999 & \num{0.276}** & \num{0.272}** & \num{0.022} & \num{0.097} & \num{-0.084}\\
+ & (\num{0.089}) & (\num{0.095}) & (\num{0.100}) & (\num{0.100}) & (\num{0.121})\\
+Income 6000-9999 & \num{0.258}** & \num{0.242}* & \num{0.115} & \num{0.148} & \num{-0.160}\\
+ & (\num{0.090}) & (\num{0.096}) & (\num{0.100}) & (\num{0.100}) & (\num{0.122})\\
+Income 10000-19999 & \num{0.288}** & \num{0.316}** & \num{0.184}+ & \num{0.161} & \num{-0.437}***\\
+ & (\num{0.091}) & (\num{0.097}) & (\num{0.102}) & (\num{0.102}) & (\num{0.124})\\
+Income 20000-49999 & \num{0.285}** & \num{0.341}** & \num{0.188} & \num{0.171} & \num{-0.501}***\\
+ & (\num{0.107}) & (\num{0.114}) & (\num{0.119}) & (\num{0.119}) & (\num{0.145})\\
+Income 50000-99999 & \num{0.237} & \num{0.362}* & \num{0.253} & \num{0.008} & \num{-0.107}\\
+ & (\num{0.156}) & (\num{0.166}) & (\num{0.174}) & (\num{0.174}) & (\num{0.211})\\
+Income > 100000 & \num{0.189} & \num{0.166} & \num{-0.034} & \num{-0.051} & \num{-0.061}\\
+ & (\num{0.173}) & (\num{0.184}) & (\num{0.193}) & (\num{0.193}) & (\num{0.234})\\
+Male & \num{0.034} & \num{-0.003} & \num{-0.075} & \num{-0.092}+ & \num{-0.010}\\
+ & (\num{0.043}) & (\num{0.046}) & (\num{0.048}) & (\num{0.048}) & (\num{0.058})\\
+Not a party member & \num{-0.112}+ & \num{-0.038} & \num{-0.215}** & \num{-0.186}* & \num{0.020}\\
+ & (\num{0.065}) & (\num{0.069}) & (\num{0.073}) & (\num{0.073}) & (\num{0.088})\\
+Location: small city & \num{0.040} & \num{0.132}+ & \num{0.078} & \num{0.017} & \num{-0.129}\\
+ & (\num{0.072}) & (\num{0.076}) & (\num{0.080}) & (\num{0.080}) & (\num{0.097})\\
+Location: mid city & \num{-0.030} & \num{0.233}** & \num{0.073} & \num{0.019} & \num{-0.156}\\
+ & (\num{0.076}) & (\num{0.081}) & (\num{0.085}) & (\num{0.085}) & (\num{0.103})\\
+Location: big city & \num{-0.151}* & \num{0.176}* & \num{0.083} & \num{0.046} & \num{-0.079}\\
+ & (\num{0.075}) & (\num{0.080}) & (\num{0.084}) & (\num{0.084}) & (\num{0.102})\\
+Year 2023 & \num{-0.245}*** & \num{-0.187}*** & \num{0.612}*** & \num{0.402}*** & \num{0.150}*\\
+ & (\num{0.044}) & (\num{0.047}) & (\num{0.049}) & (\num{0.049}) & (\num{0.059})\\
+\midrule
+Num.Obs. & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507}\\
+R2 & \num{0.018} & \num{0.015} & \num{0.055} & \num{0.030} & \num{0.017}\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{6}{l}{\rule{0pt}{1em}Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside}\\
+\end{tabular}
+\end{table}
+
+Turning toward differences between government and private protection of
+privacy, Table~\ref{tbl-trackingreg} presents regression results for
+tracking questions on the same suite of demographic controls. In
+particular, these regressions consider the question of ``how closely do
+you think \emph{x} tracks your online activity?'' (regressions 1-3) and
+``How comfortable are you with \emph{x} knowing personal details about
+your activity online?'' (regressions 4-6). Again, it should be repeated
+that the R2 for all regressions are also very low - most variation in
+question response is not accounted for in the model. However, there are
+a few interesting observations to make. First is that those in larger
+cities are more likely to notice monitoring as compared to those living
+small cities, even controlling for income and education. The magnitude
+of the coefficient is not large (0.3 for those living in big cities) but
+does suggest that urban surveillance does not go unnoticed. While the
+year coefficient is signficant in some instances, the magnitude is very
+small (0.1) indicating a substantively insignificant effect.
+Interestingly, not being a party member is assocated both with less
+noticing of monitrong and less comfort with organizations knowing their
+private details. Again, the coefficients are relatively small but does
+suggest that having some level of knowledge of what kind of surveilance
+is associated with more positive views of its use. Some of the other
+demographic variables are occasionally significant but not in a way that
+indicates a consistent and meaningful relationship with the response
+variables.
+
+\hypertarget{tbl-trackingreg}{}
+\begin{table}
+\caption{\label{tbl-trackingreg}Regressions on government vs.~private tracking }\tabularnewline
+
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & CG Track & LG Track & PR Track & CG PD & LG PD & PR PD\\
+\midrule
+(Intercept) & \num{4.121}*** & \num{4.009}*** & \num{3.913}*** & \num{4.247}*** & \num{4.209}*** & \num{3.481}***\\
+ & (\num{0.188}) & (\num{0.188}) & (\num{0.224}) & (\num{0.214}) & (\num{0.216}) & (\num{0.238})\\
+Age & \num{0.000} & \num{0.002} & \num{0.002} & \num{0.004}+ & \num{0.002} & \num{-0.007}*\\
+ & (\num{0.002}) & (\num{0.002}) & (\num{0.003}) & (\num{0.003}) & (\num{0.003}) & (\num{0.003})\\
+Middle school & \num{-0.066} & \num{-0.085} & \num{0.146} & \num{-0.143} & \num{-0.013} & \num{-0.033}\\
+ & (\num{0.131}) & (\num{0.131}) & (\num{0.156}) & (\num{0.149}) & (\num{0.151}) & (\num{0.166})\\
+High school & \num{0.021} & \num{0.010} & \num{0.037} & \num{-0.062} & \num{0.046} & \num{-0.059}\\
+ & (\num{0.123}) & (\num{0.123}) & (\num{0.147}) & (\num{0.140}) & (\num{0.141}) & (\num{0.155})\\
+University & \num{0.006} & \num{0.019} & \num{0.129} & \num{-0.049} & \num{0.046} & \num{-0.169}\\
+ & (\num{0.123}) & (\num{0.123}) & (\num{0.146}) & (\num{0.140}) & (\num{0.141}) & (\num{0.155})\\
+Grad school & \num{0.218} & \num{0.259}+ & \num{0.244} & \num{-0.081} & \num{-0.082} & \num{0.088}\\
+ & (\num{0.154}) & (\num{0.154}) & (\num{0.184}) & (\num{0.176}) & (\num{0.177}) & (\num{0.195})\\
+Income 3000-5999 & \num{-0.013} & \num{0.015} & \num{-0.017} & \num{0.026} & \num{-0.052} & \num{-0.117}\\
+ & (\num{0.096}) & (\num{0.097}) & (\num{0.115}) & (\num{0.110}) & (\num{0.111}) & (\num{0.122})\\
+Income 6000-9999 & \num{0.073} & \num{0.035} & \num{0.186} & \num{0.081} & \num{-0.046} & \num{-0.045}\\
+ & (\num{0.097}) & (\num{0.097}) & (\num{0.116}) & (\num{0.111}) & (\num{0.112}) & (\num{0.123})\\
+Income 10000-19999 & \num{0.069} & \num{0.064} & \num{0.244}* & \num{-0.006} & \num{-0.117} & \num{-0.288}*\\
+ & (\num{0.099}) & (\num{0.099}) & (\num{0.118}) & (\num{0.112}) & (\num{0.113}) & (\num{0.125})\\
+Income 20000-49999 & \num{0.129} & \num{0.136} & \num{0.384}** & \num{0.082} & \num{-0.177} & \num{-0.344}*\\
+ & (\num{0.115}) & (\num{0.115}) & (\num{0.137}) & (\num{0.131}) & (\num{0.132}) & (\num{0.146})\\
+Income 50000-99999 & \num{0.290}+ & \num{0.134} & \num{0.554}** & \num{-0.016} & \num{-0.067} & \num{-0.085}\\
+ & (\num{0.168}) & (\num{0.168}) & (\num{0.201}) & (\num{0.192}) & (\num{0.193}) & (\num{0.213})\\
+Income > 100000 & \num{0.146} & \num{0.038} & \num{0.320} & \num{-0.141} & \num{-0.198} & \num{-0.196}\\
+ & (\num{0.187}) & (\num{0.187}) & (\num{0.222}) & (\num{0.212}) & (\num{0.214}) & (\num{0.236})\\
+Male & \num{0.012} & \num{-0.092}* & \num{0.184}*** & \num{0.010} & \num{0.057} & \num{0.103}+\\
+ & (\num{0.046}) & (\num{0.047}) & (\num{0.055}) & (\num{0.053}) & (\num{0.053}) & (\num{0.059})\\
+Not a party member & \num{-0.125}+ & \num{-0.090} & \num{-0.178}* & \num{-0.203}* & \num{-0.227}** & \num{-0.220}*\\
+ & (\num{0.070}) & (\num{0.070}) & (\num{0.084}) & (\num{0.080}) & (\num{0.081}) & (\num{0.089})\\
+Location: small city & \num{0.089} & \num{0.096} & \num{0.070} & \num{-0.022} & \num{-0.058} & \num{-0.222}*\\
+ & (\num{0.077}) & (\num{0.077}) & (\num{0.092}) & (\num{0.088}) & (\num{0.089}) & (\num{0.098})\\
+Location: mid city & \num{0.187}* & \num{0.218}** & \num{0.145} & \num{0.065} & \num{0.012} & \num{-0.253}*\\
+ & (\num{0.082}) & (\num{0.082}) & (\num{0.098}) & (\num{0.093}) & (\num{0.094}) & (\num{0.104})\\
+Location: big city & \num{0.356}*** & \num{0.335}*** & \num{0.270}** & \num{0.072} & \num{0.086} & \num{-0.170}+\\
+ & (\num{0.081}) & (\num{0.081}) & (\num{0.097}) & (\num{0.093}) & (\num{0.093}) & (\num{0.103})\\
+Year 2023 & \num{0.112}* & \num{0.148}** & \num{-0.014} & \num{-0.083} & \num{-0.041} & \num{-0.131}*\\
+ & (\num{0.047}) & (\num{0.047}) & (\num{0.056}) & (\num{0.054}) & (\num{0.054}) & (\num{0.060})\\
+\midrule
+Num.Obs. & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507}\\
+R2 & \num{0.020} & \num{0.020} & \num{0.026} & \num{0.006} & \num{0.005} & \num{0.014}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside}\\
+\end{tabular}
+\end{table}
+
+Finally, a look at the subset of the data for those living in Xi'an,
+Shanghai, and Wuhan. Both Shanghai and Xi'an suffered painful lockdowns
+in December of 2021 and April 2022, respectively. Wuhan was the original
+source of the Covid outbreak and underwent a many months long set of
+lockdwns and restrictions in 2021. The results for key questions broken
+down by city can be found in Table~\ref{tbl-gp.detailed.data}. The set
+of questions relating to overall trust and whether respondents see good
+reasons to allow each entity to collect their data (part (a)) suggests
+that the only city that is significantly different from the overall
+pattern of cities is Shanghai, but in ways that one might expect.
+Shanghainese trust their local government more than cities overall (the
+Shanghai coefficient on LG Trust). This is not a surprising result given
+that Shanghai has long been seen as one of the most technocratic and
+sophisticated local governments (citation). However, the results also
+seem to indicate that Shanghai residents saw a very substantively large
+decrease in trust in their local governments (the Shanghai x 2023
+coefficient on CG Trust and LG Trust). Furthermore Shanghai residents
+also had a major decrease in agreement that the government has a good
+reason to monitor them in 2023 (the Shanghai x 2023 coefficient on CG
+Monitor and LG monitor). The size of the coefficient on all of these is
+also substantively very large. None of the other cities seem
+significantly different from the average of other cities or locations.
+
+These results make sense given the severity of the Shanghai lockdown and
+the post-lockdown strict controls. For many residents, the lockdown was
+highly traumatic but without a sense of shared unity or purpose, as was
+the case in the 2020 Wuhan lockdown. Furthermore, the Shaghainese local
+government, long considered one of the most capable city governments in
+China, seriously mishandled the logistics of the lockdown, leaving many
+people scrambling for food and medicine. However, the results presented
+in part (b) complicate this story somewhat. Shanghai does not appear to
+be any different than other cities while respondents from Wuhan
+consistently are more likely to notice tracking efforts. I have no stong
+hypothesis as to the Wuhan results but the Shanghai findings may be
+suggestive that respondents are reading this set of questions as
+referring to the present rather than including the pandemic time period.
+
+\begin{table}
+
+\caption{\label{tbl-gp.detailed.data}Key questions by
+city}\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-gp.detailed.data-1}Trust questions }
+
+{\centering 
+
+\tabularnewline
+
+\centering
+\begin{tabular}[t]{lccccc}
+\toprule
+  & CG Trust & LG Trust & CG Monitor & LG Monitor & PR Monitor\\
+\midrule
+(Intercept) & \num{5.994}*** & \num{5.541}*** & \num{4.673}*** & \num{4.663}*** & \num{2.919}***\\
+ & (\num{0.036}) & (\num{0.038}) & (\num{0.040}) & (\num{0.040}) & (\num{0.049})\\
+Shanghai & \num{0.163} & \num{0.371}* & \num{0.292} & \num{0.214} & \num{-0.235}\\
+ & (\num{0.172}) & (\num{0.183}) & (\num{0.192}) & (\num{0.192}) & (\num{0.234})\\
+Xi'an & \num{0.052} & \num{0.063} & \num{0.025} & \num{-0.082} & \num{0.151}\\
+ & (\num{0.197}) & (\num{0.210}) & (\num{0.220}) & (\num{0.220}) & (\num{0.268})\\
+Wuhan & \num{-0.173} & \num{-0.071} & \num{-0.169} & \num{-0.133} & \num{-0.078}\\
+ & (\num{0.109}) & (\num{0.117}) & (\num{0.122}) & (\num{0.122}) & (\num{0.149})\\
+2023 & \num{-0.227}*** & \num{-0.190}*** & \num{0.608}*** & \num{0.405}*** & \num{0.194}**\\
+ & (\num{0.047}) & (\num{0.051}) & (\num{0.053}) & (\num{0.053}) & (\num{0.065})\\
+Shanghai x 2023 & \num{-0.634}** & \num{-0.613}** & \num{-0.633}** & \num{-0.559}* & \num{-0.007}\\
+ & (\num{0.215}) & (\num{0.230}) & (\num{0.241}) & (\num{0.241}) & (\num{0.293})\\
+Xi'an x 2023 & \num{-0.045} & \num{-0.092} & \num{0.081} & \num{0.079} & \num{-0.264}\\
+ & (\num{0.303}) & (\num{0.323}) & (\num{0.339}) & (\num{0.339}) & (\num{0.412})\\
+Wuhan x 2023 & \num{0.064} & \num{0.161} & \num{0.047} & \num{0.006} & \num{-0.085}\\
+ & (\num{0.145}) & (\num{0.154}) & (\num{0.162}) & (\num{0.162}) & (\num{0.197})\\
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+}
+
+\end{minipage}%
+\newline
+\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-gp.detailed.data-2}Data use questions }
+
+{\centering 
+
+\tabularnewline
+
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & CG Track & LG Track & PR Track & CG PD & LG PD & PR PD\\
+\midrule
+(Intercept) & \num{4.264}*** & \num{4.192}*** & \num{4.360}*** & \num{4.187}*** & \num{4.054}*** & \num{2.649}***\\
+ & (\num{0.039}) & (\num{0.039}) & (\num{0.047}) & (\num{0.044}) & (\num{0.044}) & (\num{0.049})\\
+Shanghai & \num{0.490}** & \num{0.439}* & \num{0.166} & \num{0.146} & \num{0.209} & \num{-0.088}\\
+ & (\num{0.186}) & (\num{0.186}) & (\num{0.223}) & (\num{0.211}) & (\num{0.213}) & (\num{0.235})\\
+Xi'an & \num{0.340} & \num{0.343} & \num{0.314} & \num{0.022} & \num{0.039} & \num{0.537}*\\
+ & (\num{0.213}) & (\num{0.213}) & (\num{0.255}) & (\num{0.242}) & (\num{0.244}) & (\num{0.269})\\
+Wuhan & \num{0.146} & \num{0.046} & \num{-0.009} & \num{0.243}+ & \num{0.237}+ & \num{-0.179}\\
+ & (\num{0.118}) & (\num{0.119}) & (\num{0.142}) & (\num{0.134}) & (\num{0.135}) & (\num{0.150})\\
+2023 & \num{0.079} & \num{0.112}* & \num{-0.102}+ & \num{-0.064} & \num{-0.009} & \num{-0.125}+\\
+ & (\num{0.051}) & (\num{0.051}) & (\num{0.062}) & (\num{0.058}) & (\num{0.059}) & (\num{0.065})\\
+Shanghai x 2023 & \num{-0.289} & \num{-0.259} & \num{0.180} & \num{-0.279} & \num{-0.254} & \num{0.039}\\
+ & (\num{0.233}) & (\num{0.234}) & (\num{0.280}) & (\num{0.265}) & (\num{0.267}) & (\num{0.295})\\
+Xi'an x 2023 & \num{-0.232} & \num{-0.453} & \num{-0.153} & \num{0.371} & \num{0.077} & \num{-0.609}\\
+ & (\num{0.328}) & (\num{0.328}) & (\num{0.393}) & (\num{0.372}) & (\num{0.375}) & (\num{0.414})\\
+Wuhan x 2023 & \num{0.273}+ & \num{0.348}* & \num{0.444}* & \num{-0.153} & \num{-0.223} & \num{0.328}+\\
+ & (\num{0.157}) & (\num{0.157}) & (\num{0.188}) & (\num{0.178}) & (\num{0.179}) & (\num{0.198})\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+}
+
+\end{minipage}%
+
+\end{table}
 
 \hypertarget{conclusion}{%
 \subsection{Conclusion}\label{conclusion}}

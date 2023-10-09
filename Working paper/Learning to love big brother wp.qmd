@@ -35,7 +35,7 @@ load(file="../privacy.attitudes.RData")
 
 ## Literature review
 
-## Data and summary statistics
+## Data and summary statistics {#sec-datasummary}
 
 The data for this project was collected via a commercial survey firm in two waves, February of 2021 and March of 2023. In both the first and second waves, Wuhan was oversampled, with residents of the city set to be 10% of respondents. The 2021 survey had an n=1500 and the second had an n=2000. Questions on the two surveys were identical other than a minor change to a question that referenced a specific date. The timing of the two surveys came at two very different points in time of China's Covid-19 experience. The first survey was conducted approximately seven months after the last round of restrictions were lifted on the city of Wuhan. China, at the time, was essentially closed to foreign travel but otherwise had little in the way of day to day public health restrictions. Nationwide, daily Covid cases hovered around the single digits [@wuhanlo2021]. China was at a very different point in its journey in March of 2023. The year of 2022 saw widespread, intrusive digital monitoring introduced. Many major cities, such as Shanghai, Xi'an, and Shenzhen, underwent long and painful city-wide lockdown procedures. At the end of 2023, under the weight of a spiraling number of cases and widespread protests (termed the White Paper Revolution), China finally abandoned its zero Covid policy [@mao2022]. The two waves of these surveys aim to compare attitudes before and after this widespread and highly visible change in digital monitoring strategies.
 
@@ -281,13 +281,13 @@ The results of the list experiment are shown in @tbl-listexp.summary.data. For r
 
 table.text <- list()
 
-#table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n
-#•	Alibaba
-#•	Tencent
-#•	Foreign internet companies (such as Microsoft)
-#•	Your family
-#<Sensitive item only shown to 50% of respondents>
-#•	The central government")
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would\ntrust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n 
+• Alibaba\n
+• Tencent\n
+• Foreign internet companies (such as Microsoft)\n
+• Your family\n
+->Sensitive item only shown to 50 per cent of respondents\n
+• The central government")
 
 #table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details #about your purchase history, your browsing habits, and your social media posts\n
 #\n
@@ -298,17 +298,17 @@ table.text <- list()
 #<Sensitive item only shown to 50% of respondents>\n
 #•	The local government")
 
-#table.text[[1]] <- linebreak(table.text[[1]])
+table.text[[1]] <- linebreak(table.text[[1]])
 #table.text[[2]] <- linebreak(table.text[[2]])
 
-#listexp.text <- data.frame()
+listexp.text <- data.frame()
 
-#for(line in table.text) {
-#  listexp.text <- rbind(listexp.text, line)
-#}
+for(line in table.text) {
+  listexp.text <- rbind(listexp.text, line)
+}
 
-#kbl(listexp.text, col.names = NULL, escape=F, align="l") %>% 
-#  kable_styling()
+kbl(listexp.text, col.names = NULL, escape=F, align="l") %>% 
+  kable_styling()
 ```
 
 ```{r}
@@ -349,6 +349,216 @@ datasummary(`Number of items selected` ~ mean * Year * Shown,
 ```
 
 ## Additional Analysis {#sec-analysis}
+
+
+
+In order to help rule out the possibility that some of the differences observed between 2021 and 2023 in the government trust and comfortability of being monitored are driven simply by demographi changes, @tbl-basicreg reports on the results of a simple regression framework. The response variables are: 1) trust in the central government, 2) trust in the local government, 3) comfort with central government monitoring, 4) comfort with local government monitoring, and 5) comfort with private company monitoring. Included in the regression are a standard suite of demographic variables and the year variable.
+
+The year variable magnitude matches almost exactly the simple difference in means observed in @sec-datasummary. This result is unsurprising given the very modest difference in demographics between the two waves of the survey. It may be the case that other factors besides the Covid situation precipitated the observed difference in means though it is hard to imagine any event or trend that had a stronger impact than the 2022 lockdowns. In terms of interesting coefficients, age is consistenly positively related to acceptance of government monitoring and negatively related to private corporation monitoring. This finding may partially explain events like the White Paper Revolution, which was primarily a protest of the young. However, the magnitude of coefficient is not very impactful - changing a respondent's age from 20 to 70 changes the predicted response to the acceptance of monitoring questions by 0.5 points - less than the size of the year coefficient (0.6). Not being a party member also decreased acceptance of monitoring by about 0.2 points. Income is sometimes a relevant predictor though inconsistently so. Overall, the regressions have a very low R2, indicating that most of the variation in individual responses is due to factors outside of demographic variables. So while suggestive, the demographic variables have only limited substantive relationship to variation in attitudes on these questions.
+
+```{r}
+#| label: tbl-basicreg
+#| tbl-cap: Regressions on individual question results
+
+reg.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
+
+mod1 <- lm(data=reg.data, as.numeric(gp1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.data, as.numeric(gp2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.data, as.numeric(gm1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.data, as.numeric(gm2) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.data, as.numeric(gm3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+modelsummary(models, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
+```
+
+Turning toward differences between government and private protection of privacy, @tbl-trackingreg presents regression results for tracking questions on the same suite of demographic controls. In particular, these regressions consider the question of "how closely do you think *x* tracks your online activity?" (regressions 1-3) and "How comfortable are you with *x* knowing personal details about your activity online?" (regressions 4-6). Again, it should be repeated that the R2 for all regressions are also very low - most variation in question response is not accounted for in the model. However, there are a few interesting observations to make. First is that those in larger cities are more likely to notice monitoring as compared to those living small cities, even controlling for income and education. The magnitude of the coefficient is not large (0.3 for those living in big cities) but does suggest that urban surveillance does not go unnoticed. While the year coefficient is signficant in some instances, the magnitude is very small (0.1) indicating a substantively insignificant effect. Interestingly, not being a party member is assocated both with less noticing of monitrong and less comfort with organizations knowing their private details. Again, the coefficients are relatively small but does suggest that having some level of knowledge of what kind of surveilance is associated with more positive views of its use. Some of the other demographic variables are occasionally significant but not in a way that indicates a consistent and meaningful relationship with the response variables.
+
+```{r}
+#| label: tbl-trackingreg
+#| tbl-cap: Regressions on government vs. private tracking
+
+reg.tracking.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
+
+mod1 <- lm(data=reg.tracking.data, as.numeric(track1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.tracking.data, as.numeric(track2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.tracking.data, as.numeric(track3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.tracking.data, as.numeric(track4) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.tracking.data, as.numeric(track5) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod6 <- lm(data=reg.tracking.data, as.numeric(track6) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+modelsummary(models, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
+```
+
+Finally, a look at the subset of the data for those living in Xi'an, Shanghai, and Wuhan. Both Shanghai and Xi'an suffered painful lockdowns in December of 2021 and April 2022, respectively. Wuhan was the original source of the Covid outbreak and underwent a many months long set of lockdwns and restrictions in 2021. The results for key questions broken down by city can be found in @tbl-gp.detailed.data. The set of questions relating to overall trust and whether respondents see good reasons to allow each entity to collect their data (part (a)) suggests that the only city that is significantly different from the overall pattern of cities is Shanghai, but in ways that one might expect. Shanghainese trust their local government more than cities overall (the Shanghai coefficient on LG Trust). This is not a surprising result given that Shanghai has long been seen as one of the most technocratic and sophisticated local governments (citation). However, the results also seem to indicate that Shanghai residents saw a very substantively large decrease in trust in their local governments (the Shanghai x 2023 coefficient on CG Trust and LG Trust). Furthermore Shanghai residents also had a major decrease in agreement that the government has a good reason to monitor them in 2023 (the Shanghai x 2023 coefficient on CG Monitor and LG monitor). The size of the coefficient on all of these is also substantively very large. None of the other cities seem significantly different from the average of other cities or locations.
+
+These results make sense given the severity of the Shanghai lockdown and the post-lockdown strict controls. For many residents, the lockdown was highly traumatic but without a sense of shared unity or purpose, as was the case in the 2020 Wuhan lockdown. Furthermore, the Shaghainese local government, long considered one of the most capable city governments in China, seriously mishandled the logistics of the lockdown, leaving many people scrambling for food and medicine. However, the results presented in part (b) complicate this story somewhat. Shanghai does not appear to be any different than other cities while respondents from Wuhan consistently are more likely to notice tracking efforts. I have no stong hypothesis as to the Wuhan results but the Shanghai findings may be suggestive that respondents are reading this set of questions as referring to the present rather than including the pandemic time period.
+
+```{r}
+#| label: tbl-gp.detailed.data
+#| tbl-cap: Key questions by city
+#| tbl-subcap: 
+#|    - "Trust questions"
+#|    - "Data use questions"
+#| layout-ncol: 1   
+
+attitude.detail.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>% 
+  mutate(track6 = as.numeric(track6)) %>% 
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 grepl("西安市", city) ~ "Xi'an",
+                                 TRUE ~ "Other cities"),
+                       levels=c("Other cities", "Shanghai", "Xi'an", "Wuhan")))
+
+mod1 <- lm(data=attitude.detail.qs, gp1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, gp2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, gm1 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, gm2 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, gm3 ~ city + year + city*year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+modelsummary(models,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             stars = TRUE)
+
+mod1 <- lm(data=attitude.detail.qs, track1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, track2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, track3 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, track4 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, track5 ~ city + year + city*year)
+mod6 <- lm(data=attitude.detail.qs, track6 ~ city + year + city*year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+modelsummary(models,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             stars = TRUE)
+```
 
 ## Conclusion
 
