@@ -1,0 +1,594 @@
+---
+title: "Learning to love big brother"
+subtitle: "Chinese attitudes toward online privacy after the pandemic"
+author: "Andrew W. MacDonald"
+date: "11 October 2023"
+output: 
+  learnr::tutorial:
+    toc_depth: 2
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(learnr)
+library(kableExtra)
+library(estimatr)
+library(ggthemes)
+library(modelsummary)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+# set default chart theme
+theme_set(theme_tufte())
+
+load(file="www/privacy.attitudes.RData")
+
+Ones <- function(x) table(x)[1]
+Twos <- function(x) table(x)[2]
+Threes <- function(x) table(x)[3]
+Fours <- function(x) table(x)[4]
+Fives <- function(x) table(x)[5]
+Sixes <- function(x) table(x)[6]
+Sevens <- function(x) table(x)[7]
+```
+
+
+## Where to find this research
+
+```{r qrcode, out.width = "300px", fig.cap="QR code for this presentation"}
+#knitr::include_graphics("www/qrcode.png")
+```
+
+Presentation website:https://bit.ly/chinaapsa
+
+[Github repository](https://github.com/GracchusC/Chinese_Propaganda_Project)
+
+[Working paper](https://github.com/GracchusC/Chinese_Propaganda_Project/blob/c6e063c6e25e74e48e28cbea39d5c543e607ed82/Macdonald%20Panel%20%232%20Effectiveness%20of%20Government%20Propaganda.pdf)
+
+## Why this project?
+
+```{r prop1, out.width = "600px", fig.cap=""}
+#knitr::include_graphics("www/saohei.jpg")
+```
+
+## What is the purpose of propaganda?
+
+* Not obvious!
+
+```{r prop2, out.width = "400px", fig.cap=""}
+#knitr::include_graphics("www/linconfucius.jpg")
+```
+
+## What do we know about how people perceive propaganda?
+
+### Thinking fast / thinking slow
+
+```{r fastslow, out.width = "500px", fig.cap=""}
+#knitr::include_graphics("www/fastslow.png")
+```
+
+### Message effect vs. framing
+
+```{r messageframing}
+#dt_lb <- data.frame(
+#  col1 = c("Continue zero covid", "Support Russia in Russia/Ukraine war"),
+#  col2 = c("Emphasize health benefits to general population (public health)", "Create a world without hegemony"))
+
+#colnames(dt_lb) <- c("Message effect", "Framing effect")
+#rownames(dt_lb) <- c("Example 1", "Example 2")
+
+#dt_lb %>%
+#  kbl(booktabs=T, caption="Message vs. Framing Effects") %>% 
+#  kable_styling(position="center")
+```
+
+### Propaganda as power
+
+```{r proppower, out.width = "600px", fig.cap=""}
+#knitr::include_graphics("www/unfilial.jpg")
+```
+
+## Experiment Design
+
+```{r expdesign}
+#dt_lb <- data.frame(
+#  col1 = c("True propaganda text (TP)", "True alternative text (TA)"),
+#  col2 = c("Faked propaganda text (FP)", "Faked alternative text (FA)"))
+
+#colnames(dt_lb) <- c("Accurate Message", "Wrong Message")
+#rownames(dt_lb) <- c("Accurate Style", "Wrong Style")
+
+#dt_lb %>%
+#  kbl(booktabs=T, caption="Experimental Design") %>% 
+#  kable_styling(position="center")
+```
+
+### Model messages
+
+```{r proptp, out.width = "500px", fig.cap="True propaganda"}
+#knitr::include_graphics("www/tp.jpg")
+```
+
+```{r propta, out.width = "600px", fig.cap="True alternative text"}
+#knitr::include_graphics("www/ta.jpg")
+```
+
+```{r propfp, out.width = "600px", fig.cap="Faked propaganda"}
+#knitr::include_graphics("www/fp.jpg")
+```
+
+```{r propfa, out.width = "600px", fig.cap="Faked alternative"}
+#knitr::include_graphics("www/fa.jpg")
+```
+
+### Our treatments
+
+```{r expqsinternational}
+
+```
+
+### Hypotheses
+
+-   *Hypothesis 1:* Respondents have the same level of identification with true propaganda texts than faked propaganda texts, i.e., there is no message effect.
+-   *Hypothesis 2:* Respondents have a higher level of identification with faked propaganda texts than faked alternative texts, i.e., the framing effect is positive.
+-   *Hypothesis 3:* Respondents have a higher level of identification with true propaganda texts than faked alternative texts (transitivity).
+
+## Results
+
+### Simple results - performance and trust
+
+### Simple results - willingness to be tracked
+
+### Simple results - awareness of tracking
+
+### Simple results - additional questions
+
+### List experiment results
+
+## Regression results
+
+### Regression results - trust
+
+```{r regressiontrust}
+
+```
+
+### Regression results - tracking
+
+```{r regressiontracking}
+
+```
+
+### By city
+
+```{r summarycity}
+
+```
+
+## Implications and concluding thoughts
+
+* Uncanny valley?
+* Support for propaganda as power?
+* More research?
+* Help me out!
+
+## Appendix - run your own code
+
+### Demographics
+
+Demographic questions
+
+```{r demographicsqs, exercise=TRUE}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Which of these best describes the place in which you live?")
+table.text[[2]] <- c("Q2", "What province do you live in?")
+table.text[[3]] <- c("Q3", "How old are you?")
+table.text[[4]] <- c("Q4", "What is the highest level of education that you have obtained?")
+table.text[[5]] <- c("Q5", "Gender")
+table.text[[6]] <- c("Q6", "Marital Status")
+table.text[[7]] <- c("Q7", "Which of the following best describes the type of job you have?")
+table.text[[8]] <- c("Q8", "Which of the following best describes the type of company or work unit you work for?")
+table.text[[9]] <- c("Q9", "Are you a member or probationary member of the CCP?")
+table.text[[10]] <- c("Q10", "Are you a member of the Communist Youth League?")
+table.text[[11]] <- c("Q11", "Here is a table showing the range of monthly incomes that people have. Which of the letters on this table best represents the total monthly income of your household (after tax)?")
+table.text[[12]] <- c("Q12", "What is your residency status?")
+
+demo.text <- data.frame()
+
+for(line in table.text) {
+  demo.text <- rbind(demo.text, line)
+}
+
+kbl(demo.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+Demographic data
+
+```{r demographicdata, exercise=TRUE}
+demo.qs <- privacy %>% 
+  select(`Location` = location,
+         `Province` = province,
+         `Age` = age,
+         `Education` = education,
+         `Gender` = sex,
+         `Marriage status` = marriage.status,
+         `Job type` = job.type,
+         `Company type` = job.company.type,
+         `Party member status` = party.member.status,
+         `Communist Youth League status` = cyl.status,
+         `Income` = income,
+         `Hukou status` = hukou.status,
+         `Year` = year) 
+
+datasummary_balance( ~ Year, data=demo.qs)
+```
+
+### Summary data
+
+Performance questions
+
+```{r performanceqs, exercise=TRUE}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
+table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
+table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.")
+table.text[[4]] <- c("Q4", "Government performance index")
+
+gp.text <- data.frame()
+
+for(line in table.text) {
+  gp.text <- rbind(gp.text, line)
+}
+
+kbl(gp.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+Performance data
+
+```{r performancedata, exercise=TRUE}
+gp.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gp3 = as.numeric(gp3)) %>% 
+  select(`Central government performance` = gp1,
+         `Local government performance` = gp2,
+         `Government performance Q3` = gp3,
+         `Year` = year) 
+
+gp.qs.2021 <- gp.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gp.qs.2023 <- gp.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gp.qs.2021) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"),
+            title="2021")
+
+datasummary(All(gp.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gp.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"),
+            title="2023")
+
+gp.index.q <- privacy %>% 
+  select(`Government performance index` = gp.index,
+         `Year` = year) 
+
+gp.index.q.2021 <- gp.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gp.index.q.2023 <- gp.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gp.index.q.2021) ~ Mean + SD + Histogram, 
+            data=gp.index.q.2021,
+            title="2021")
+
+datasummary(All(gp.index.q.2023) ~ Mean + SD + Histogram, data=gp.index.q.2023,
+            title="2023")
+```
+
+Tracking - acceptance questions
+
+```{r trackingqs, exercise=TRUE}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "There are good reasons for the central government to monitor the activity of users online")
+table.text[[2]] <- c("Q2", "There are good reasons for the local government to monitor the activity of users online")
+table.text[[3]] <- c("Q3", "There are good reasons for private companies to monitor the activity of users online")
+table.text[[4]] <- c("Q4", "It doesn’t bother me to provide the government with biometric information including my fingerprints and face details for the purposes of monitoring public places")
+table.text[[5]] <- c("Q5", "It doesn’t bother me to provide private companies with biometric information including my fingerprints and face details for the purposes of monitoring public places")
+table.text[[6]] <- c("Q6", "Government monitoring index of Q1 + Q2 + Q4")
+table.text[[7]] <- c("Q7", "Private monitoring index of Q3 + Q5")
+table.text[[8]] <- c("Q8", "Total monitoring index of Q1-Q5")
+
+gm.text <- data.frame()
+
+for(line in table.text) {
+  gm.text <- rbind(gm.text, line)
+}
+
+kbl(gm.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+Tracking - acceptance data
+
+```{r trackingdata, exercise=TRUE}
+gm.qs <- privacy %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>% 
+  mutate(gm4 = as.numeric(gm4)) %>% 
+  mutate(gm5 = as.numeric(gm5)) %>% 
+  select(`Central government monitoring` = gm1,
+         `Local government monitoring` = gm2,
+         `Private company monitoring` = gm3,
+         `Government biometric monitoring` = gm4,
+         `Private biometric monitoring` = gm5,
+         `Year` = year) 
+
+gm.qs.2021 <- gm.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gm.qs.2023 <- gm.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gm.qs.2021) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gm.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"),
+            title="2021")
+
+datasummary(All(gm.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=gm.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"),
+            title="2023")
+
+gm.index.q <- privacy %>% 
+  select(`Government monitoring index` = gm.index.gov,
+         `Private monitoring index` = gm.index.priv,
+         `Total monitoring index` = gm.index.total,
+         `Year` = year) 
+
+gm.index.q.2021 <- gm.index.q %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+gm.index.q.2023 <- gm.index.q %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(gm.index.q.2021) ~ Mean + SD + Histogram, 
+            data=gm.index.q.2021,
+            title="2021")
+
+datasummary(All(gm.index.q.2023) ~ Mean + SD + Histogram, 
+            data=gm.index.q.2023,
+            title="2023")
+```
+
+Tracking - personal details questions
+
+```{r personaldetailsqs, exercise=TRUE}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "How closely do you think the central government tracks your online activity?")
+table.text[[2]] <- c("Q2", "How closely do you think the local government tracks your online activity?")
+table.text[[3]] <- c("Q3", "How closely do you think private companies track your online activity?")
+table.text[[4]] <- c("Q4", "How comfortable are you with the central government knowing personal details about your activity online?")
+table.text[[5]] <- c("Q5", "How comfortable are you with the local government knowing personal details about your activity online?")
+table.text[[6]] <- c("Q6", "How comfortable are you with private companies knowing personal details about your activity online?")
+
+track.text <- data.frame()
+
+for(line in table.text) {
+  track.text <- rbind(track.text, line)
+}
+
+kbl(track.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+Tracking - personal details data
+
+```{r personaldetailsdata, exercise=TRUE}
+track.qs <- privacy %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>%
+  mutate(track6 = as.numeric(track6)) %>% 
+  select(`Central government tracking - prevalence` = track1,
+         `Local government tracking - prevalence` = track2,
+         `Private company tracking - prevalence` = track3,
+         `Central government tracking - comfort` = track4,
+         `Local govenrment tracking - comfort` = track5,
+         `Private company tracking - comfort` = track6,
+         `Year` = year) 
+
+track.qs.2021 <- track.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+track.qs.2023 <- track.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(track.qs.2021) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=track.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(track.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=track.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
+
+Miscellaneous questions
+
+```{r miscqs, exercise=TRUE}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, the social credit system is a benefit for the public.")
+table.text[[2]] <- c("Q2", "I’ve changed my behavior in the last year due to worries about my social credit score.")
+table.text[[3]] <- c("Q3", "I don’t notice government use of technology to monitor my behavior in my daily life.")
+table.text[[4]] <- c("Q4", "The government is likely to securely store my online personal data and information better than private companies.")
+table.text[[5]] <- c("Q5", "It doesn’t bother me if private companies sell my user data to 3rd parties if it will allow me to use their applications for free.")
+table.text[[6]] <- c("Q6", "I’m worried that my payment information might be stolen or compromised.")
+
+
+misc.text <- data.frame()
+
+for(line in table.text) {
+  misc.text <- rbind(misc.text, line)
+}
+
+kbl(misc.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+Miscellaneous questions data
+
+```{r miscdata, exercise=TRUE}
+misc.qs <- privacy %>% 
+  mutate(misc1 = as.numeric(misc1)) %>% 
+  mutate(misc2 = as.numeric(misc2)) %>% 
+  mutate(misc3 = as.numeric(misc3)) %>% 
+  mutate(misc4 = as.numeric(misc4)) %>% 
+  mutate(misc5 = as.numeric(misc5)) %>%
+  mutate(misc6 = as.numeric(misc6)) %>% 
+  select(`Social credit system - overall benefit` = misc1,
+         `Changed behavior due to s.c. score fears` = misc2,
+         `Do not notice government tracking` = misc3,
+         `Government secures data better than private` = misc4,
+         `OK if apps sell my data so can use for free` = misc5,
+         `Payment data stolen worries` = misc6,
+         `Year` = year) 
+
+misc.qs.2021 <- misc.qs %>% 
+  filter(Year == "2021") %>% 
+  select(-Year)
+
+misc.qs.2023 <- misc.qs %>% 
+  filter(Year == "2023") %>% 
+  select(-Year)
+
+datasummary(All(misc.qs.2021) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=misc.qs.2021,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+
+datasummary(All(misc.qs.2023) ~ 
+              Ones + Twos + Threes + Fours + Fives + Sixes + Sevens + Mean + Histogram, 
+            data=misc.qs.2023,
+            col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
+```
+
+List experiment questions
+
+```{r listexpqs}
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
+•	The police")
+
+table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
+•	The central government")
+
+table.text[[3]] <- c("Q3", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+----------- LIST QUESTION BEGINS HERE ------------<br>
+•	The local government")
+
+listexp.text <- data.frame()
+
+for(line in table.text) {
+  listexp.text <- rbind(listexp.text, line)
+}
+
+kbl(listexp.text, col.names = NULL, escape=FALSE) %>% 
+  kable_styling()
+```
+
+List experiment data
+
+```{r listexpdata}
+listexp.qs <- privacy %>% 
+  mutate(le.num = as.numeric(le.num)) %>% 
+  select(`Number of items selected` = le.num,
+         `Group` = le.group,
+         `Shown` = le.5th.shown,
+         `Year` = year) 
+
+police.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 1) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`,
+           `Year`))
+
+datasummary(`Number of items selected` ~ mean * Year * Shown,
+                    data=police.qs,
+                    title="Police trust list experiment")
+
+centralgov.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 2) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`,
+           `Year`))
+
+datasummary(`Number of items selected` ~ mean * Year * Shown,
+                    data=centralgov.qs,
+                    title="Central government list experiment")
+
+localgov.qs <- listexp.qs %>% 
+  filter(as.numeric(Group) == 3) %>% 
+  select(c(`Number of items selected`, 
+           `Shown`,
+           `Year`))
+
+datasummary(`Number of items selected` ~ mean * Year * Shown,
+                    data=localgov.qs,
+                    title="Local government list experiment")
+```
+
+### Regression - trust
+
+### Regression - tracking
