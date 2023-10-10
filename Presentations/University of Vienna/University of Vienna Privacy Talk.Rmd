@@ -398,20 +398,225 @@ datasummary(`Number of items selected` ~ mean * Year * Shown,
 
 ### Regression results - trust
 
-```{r regressiontrust}
+```{r regtrustandacceptmain}
+reg.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
 
+mod1 <- lm(data=reg.data, as.numeric(gp1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.data, as.numeric(gp2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.data, as.numeric(gm1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.data, as.numeric(gm2) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.data, as.numeric(gm3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+mod_list_soc <- modelsummary(models, output = "modelsummary_list")
+mod_list_soc_update <- as.list(mod_list_soc)
+mod_list_soc_update <- replace_estimates(mod_list_soc_update)
+
+n <- "▲, ▼ indicates p>0.05"
+
+modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside", n))
 ```
 
-### Regression results - tracking
+### Regression results - tracking and data use
 
-```{r regressiontracking}
+```{r regtrackingdatausemain}
+reg.tracking.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
 
+mod1 <- lm(data=reg.tracking.data, as.numeric(track1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.tracking.data, as.numeric(track2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.tracking.data, as.numeric(track3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.tracking.data, as.numeric(track4) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.tracking.data, as.numeric(track5) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod6 <- lm(data=reg.tracking.data, as.numeric(track6) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+mod_list_soc <- modelsummary(models, output = "modelsummary_list")
+mod_list_soc_update <- as.list(mod_list_soc)
+mod_list_soc_update <- replace_estimates(mod_list_soc_update)
+
+n <- "▲, ▼ indicates p>0.05"
+
+modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             statistic = NULL,
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside", n))
 ```
 
 ### By city
 
-```{r summarycity}
+Trust and monitoring acceptance by city
 
+```{r regcityfirstqsmain}
+attitude.detail.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>% 
+  mutate(track6 = as.numeric(track6)) %>% 
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 grepl("西安市", city) ~ "Xi'an",
+                                 TRUE ~ "Other cities"),
+                       levels=c("Other cities", "Shanghai", "Xi'an", "Wuhan")))
+
+mod1 <- lm(data=attitude.detail.qs, gp1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, gp2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, gm1 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, gm2 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, gm3 ~ city + year + city*year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+mod_list_soc <- modelsummary(models, output = "modelsummary_list")
+mod_list_soc_update <- as.list(mod_list_soc)
+mod_list_soc_update <- replace_estimates(mod_list_soc_update)
+
+n <- "▲, ▼ indicates p>0.05"
+
+modelsummary(mod_list_soc_update,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             statistic = NULL,
+             notes = list(n))
+```
+
+Tracking awareness and personal data use comfort by city
+
+```{r regcitysecondqsmain}
+mod1 <- lm(data=attitude.detail.qs, track1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, track2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, track3 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, track4 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, track5 ~ city + year + city*year)
+mod6 <- lm(data=attitude.detail.qs, track6 ~ city + year + city*year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+mod_list_soc <- modelsummary(models, output = "modelsummary_list")
+mod_list_soc_update <- as.list(mod_list_soc)
+mod_list_soc_update <- replace_estimates(mod_list_soc_update)
+
+n <- "▲, ▼ indicates p>0.05"
+
+modelsummary(mod_list_soc_update,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             statistic = NULL,
+             notes = list(n))
 ```
 
 ## Implications and concluding thoughts
@@ -839,7 +1044,7 @@ datasummary(`Number of items selected` ~ mean * Year * Shown,
 
 ### Regressions - trust and acceptance
 
-```{r regtrustandaccept}
+```{r regfirstqs, exercise=TRUE}
 reg.data <- privacy %>% 
   mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
                                       education=="Primary" ~ "Less than middle",
@@ -872,13 +1077,7 @@ models <- list(
   "PR Monitor"   = mod5
 )
 
-mod_list_soc <- modelsummary(models, output = "modelsummary_list")
-mod_list_soc_update <- as.list(mod_list_soc)
-mod_list_soc_update <- replace_estimates(mod_list_soc_update)
-
-n <- "▲, ▼ indicates p>0.05"
-
-modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+modelsummary(models, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "Middle school",
                                      "educationHigh school" = "High school",
                                      "educationUniversity" = "University",
@@ -897,8 +1096,165 @@ modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
                                      "year2023" = "Year 2023"),
              gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
              stars = TRUE,
-             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside", n))
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
 ```
 
 
 ### Regression - tracking
+
+```{r regsecondqs, exercise=TRUE}
+reg.tracking.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
+
+mod1 <- lm(data=reg.tracking.data, as.numeric(track1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.tracking.data, as.numeric(track2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.tracking.data, as.numeric(track3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.tracking.data, as.numeric(track4) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.tracking.data, as.numeric(track5) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod6 <- lm(data=reg.tracking.data, as.numeric(track6) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+modelsummary(models, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
+```
+
+
+### By city
+
+Trust and monitoring acceptance by city
+
+```{r regcityfirstqs, exercise=TRUE}
+attitude.detail.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>% 
+  mutate(track6 = as.numeric(track6)) %>% 
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 grepl("西安市", city) ~ "Xi'an",
+                                 TRUE ~ "Other cities"),
+                       levels=c("Other cities", "Shanghai", "Xi'an", "Wuhan")))
+
+mod1 <- lm(data=attitude.detail.qs, gp1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, gp2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, gm1 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, gm2 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, gm3 ~ city + year + city*year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+modelsummary(models,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             stars = TRUE)
+```
+
+Tracking awareness and personal data use comfort by city
+
+```{r regcitysecondqs, exercise=TRUE}
+attitude.detail.qs <- privacy %>% 
+  mutate(gp1 = as.numeric(gp1)) %>% 
+  mutate(gp2 = as.numeric(gp2)) %>% 
+  mutate(gm1 = as.numeric(gm1)) %>% 
+  mutate(gm2 = as.numeric(gm2)) %>% 
+  mutate(gm3 = as.numeric(gm3)) %>% 
+  mutate(track1 = as.numeric(track1)) %>% 
+  mutate(track2 = as.numeric(track2)) %>% 
+  mutate(track3 = as.numeric(track3)) %>% 
+  mutate(track4 = as.numeric(track4)) %>% 
+  mutate(track5 = as.numeric(track5)) %>% 
+  mutate(track6 = as.numeric(track6)) %>% 
+  mutate(city = factor(case_when(province=="Shanghai" ~ "Shanghai",
+                                 grepl("武汉市", city) ~ "Wuhan",
+                                 grepl("西安市", city) ~ "Xi'an",
+                                 TRUE ~ "Other cities"),
+                       levels=c("Other cities", "Shanghai", "Xi'an", "Wuhan")))
+
+mod1 <- lm(data=attitude.detail.qs, track1 ~ city + year + city*year)
+mod2 <- lm(data=attitude.detail.qs, track2 ~ city + year + city*year)
+mod3 <- lm(data=attitude.detail.qs, track3 ~ city + year + city*year)
+mod4 <- lm(data=attitude.detail.qs, track4 ~ city + year + city*year)
+mod5 <- lm(data=attitude.detail.qs, track5 ~ city + year + city*year)
+mod6 <- lm(data=attitude.detail.qs, track6 ~ city + year + city*year)
+
+models <- list(
+  "CG Track" = mod1,
+  "LG Track" = mod2,
+  "PR Track" = mod3,
+  "CG PD"    = mod4,
+  "LG PD"    = mod5,
+  "PR PD"    = mod6
+)
+
+modelsummary(models,
+             coef_rename = c("cityShanghai" = "Shanghai",
+                             "cityXi'an" = "Xi'an",
+                             "cityWuhan" = "Wuhan",
+                             "year2023" = "2023",
+                             "cityShanghai:year2023" = "Shanghai x 2023",
+                             "cityXi'an:year2023" = "Xi'an x 2023",
+                             "cityWuhan:year2023" = "Wuhan x 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             stars = TRUE)
+```
