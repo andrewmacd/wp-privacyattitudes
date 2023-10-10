@@ -87,8 +87,8 @@ for(line in table.text) {
   gp.text <- rbind(gp.text, line)
 }
 
-kbl(gp.text, col.names = NULL, escape=F, align="l") %>% 
-  kable_styling(latex_options = c("striped", "scale_down"))
+kbl(gp.text, col.names = NULL) %>% 
+  kable_styling()
 ```
 
 ```{r}
@@ -350,8 +350,6 @@ datasummary(`Number of items selected` ~ mean * Year * Shown,
 
 ## Additional Analysis {#sec-analysis}
 
-
-
 In order to help rule out the possibility that some of the differences observed between 2021 and 2023 in the government trust and comfortability of being monitored are driven simply by demographi changes, @tbl-basicreg reports on the results of a simple regression framework. The response variables are: 1) trust in the central government, 2) trust in the local government, 3) comfort with central government monitoring, 4) comfort with local government monitoring, and 5) comfort with private company monitoring. Included in the regression are a standard suite of demographic variables and the year variable.
 
 The year variable magnitude matches almost exactly the simple difference in means observed in @sec-datasummary. This result is unsurprising given the very modest difference in demographics between the two waves of the survey. It may be the case that other factors besides the Covid situation precipitated the observed difference in means though it is hard to imagine any event or trend that had a stronger impact than the 2022 lockdowns. In terms of interesting coefficients, age is consistenly positively related to acceptance of government monitoring and negatively related to private corporation monitoring. This finding may partially explain events like the White Paper Revolution, which was primarily a protest of the young. However, the magnitude of coefficient is not very impactful - changing a respondent's age from 20 to 70 changes the predicted response to the acceptance of monitoring questions by 0.5 points - less than the size of the year coefficient (0.6). Not being a party member also decreased acceptance of monitoring by about 0.2 points. Income is sometimes a relevant predictor though inconsistently so. Overall, the regressions have a very low R2, indicating that most of the variation in individual responses is due to factors outside of demographic variables. So while suggestive, the demographic variables have only limited substantive relationship to variation in attitudes on these questions.
@@ -568,5 +566,3 @@ modelsummary(models,
 
 ::: {#refs}
 :::
-
-
