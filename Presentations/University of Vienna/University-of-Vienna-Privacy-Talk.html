@@ -1278,10 +1278,10 @@ Q1
 For the question below, please count how many of the entities listed
 below you would trust with your online personal information, such as
 details about your purchase history, your browsing habits, and your
-social media posts&lt;br&gt; &lt;br&gt; • Alibaba&lt;br&gt; •
-Tencent&lt;br&gt; • Foreign internet companies (such as
-Microsoft)&lt;br&gt; • Your family&lt;br&gt; -&gt;Sensitive item only
-shown to 50 per cent of respondents&lt;br&gt; • The central government
+social media posts<br> <br> • Alibaba<br> • Tencent<br> • Foreign
+internet companies (such as Microsoft)<br> • Your family<br>
+-&gt;Sensitive item only shown to 50 per cent of respondents<br> • The
+central government
 </td>
 </tr>
 <tr>
@@ -1292,10 +1292,10 @@ Q2
 For the question below, please count how many of the entities listed
 below you would trust with your online personal information, such as
 details #about your purchase history, your browsing habits, and your
-social media posts&lt;br&gt; &lt;br&gt; • Alibaba&lt;br&gt; •
-Tencent&lt;br&gt; • Foreign internet companies (such as
-Microsoft)&lt;br&gt; • Your family&lt;br&gt; -&gt;Sensitive item only
-shown to 50 per cent of respondents&lt;br&gt; • The local government
+social media posts<br> <br> • Alibaba<br> • Tencent<br> • Foreign
+internet companies (such as Microsoft)<br> • Your family<br>
+-&gt;Sensitive item only shown to 50 per cent of respondents<br> • The
+local government
 </td>
 </tr>
 </tbody>
@@ -3177,7 +3177,7 @@ for(line in table.text) {
   listexp.text &lt;- rbind(listexp.text, line)
 }
 
-kbl(listexp.text, col.names = NULL, escape=FALSE) %&gt;% 
+kbl(listexp.text, col.names = NULL, escape = FALSE) %&gt;% 
   kable_styling()</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
@@ -4187,7 +4187,7 @@ learnr:::store_exercise_cache(structure(list(label = "listexpqs", global_setup =
 "                                working[[model]]$tidy$estimate[obs] < 0 ~ \"▼\")", 
 "    }", "  }", "  ", "  return(working)", "}"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "listexpqs", code = "table.text <- list()\n\ntable.text[[1]] <- c(\"Q1\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe police\")\n\ntable.text[[2]] <- c(\"Q2\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe central government\")\n\ntable.text[[3]] <- c(\"Q3\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe local government\")\n\nlistexp.text <- data.frame()\n\nfor(line in table.text) {\n  listexp.text <- rbind(listexp.text, line)\n}\n\nkbl(listexp.text, col.names = NULL, escape=FALSE) %>% \n  kable_styling()", 
+    list(label = "listexpqs", code = "table.text <- list()\n\ntable.text[[1]] <- c(\"Q1\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe police\")\n\ntable.text[[2]] <- c(\"Q2\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe central government\")\n\ntable.text[[3]] <- c(\"Q3\", \"For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br>\n<br>\n•\tAlibaba<br>\n•\tTencent<br>\n•\tForeign internet companies (such as Microsoft)<br>\n•\tYour family<br>\n----------- LIST QUESTION BEGINS HERE ------------<br>\n•\tThe local government\")\n\nlistexp.text <- data.frame()\n\nfor(line in table.text) {\n  listexp.text <- rbind(listexp.text, line)\n}\n\nkbl(listexp.text, col.names = NULL, escape = FALSE) %>% \n  kable_styling()", 
         opts = list(label = "\"listexpqs\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
     check = NULL, solution = NULL, tests = NULL, options = list(
@@ -4218,7 +4218,7 @@ learnr:::store_exercise_cache(structure(list(label = "listexpqs", global_setup =
         "•\tYour family<br>", "----------- LIST QUESTION BEGINS HERE ------------<br>", 
         "•\tThe local government\")", "", "listexp.text <- data.frame()", 
         "", "for(line in table.text) {", "  listexp.text <- rbind(listexp.text, line)", 
-        "}", "", "kbl(listexp.text, col.names = NULL, escape=FALSE) %>% ", 
+        "}", "", "kbl(listexp.text, col.names = NULL, escape = FALSE) %>% ", 
         "  kable_styling()"), out.width.px = 624, out.height.px = 384, 
         params.src = "listexpqs, exercise=TRUE", fig.num = 0, 
         exercise.df_print = "paged", exercise.checker = "NULL"), 

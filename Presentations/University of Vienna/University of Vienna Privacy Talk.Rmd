@@ -337,7 +337,7 @@ table.text[[1]] <- c("Q1", "For the question below, please count how many of the
 • Tencent<br>
 • Foreign internet companies (such as Microsoft)<br>
 • Your family<br>
-->Sensitive item only shown to 50 per cent of respondents<br>
+-->Sensitive item only shown to 50 per cent of respondents<br>
 • The central government")
 
 table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details #about your purchase history, your browsing habits, and your social media posts<br>
@@ -346,7 +346,7 @@ table.text[[2]] <- c("Q2", "For the question below, please count how many of the
 •	Tencent<br>
 •	Foreign internet companies (such as Microsoft)<br>
 •	Your family<br>
-->Sensitive item only shown to 50 per cent of respondents<br>
+-->Sensitive item only shown to 50 per cent of respondents<br>
 •	The local government")
 
 listexp.text <- data.frame()
@@ -355,7 +355,7 @@ for(line in table.text) {
   listexp.text <- rbind(listexp.text, line)
 }
 
-kable(listexp.text, col.names = NULL) %>% 
+kable(listexp.text, col.names = NULL, escape=FALSE) %>% 
   kable_styling()
 ```
 
@@ -997,7 +997,7 @@ for(line in table.text) {
   listexp.text <- rbind(listexp.text, line)
 }
 
-kbl(listexp.text, col.names = NULL, escape=FALSE) %>% 
+kbl(listexp.text, col.names = NULL, escape = FALSE) %>% 
   kable_styling()
 ```
 
