@@ -200,7 +200,7 @@ Regimes, Government Trust, China},
 \title{Learning to love big brother: Chinese attitudes toward online
 privacy after the pandemic}
 \author{Andrew MacDonald}
-\date{2023-10-10}
+\date{2023-10-11}
 
 \begin{document}
 \maketitle
@@ -213,7 +213,7 @@ White Paper movement protests and connect to a larger body of literature
 on why surveys of Chinese citizens indicate high levels of trust in
 their government.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, interior hidden, boxrule=0pt, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, sharp corners, enhanced, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \subsection{Introduction}\label{introduction}}
@@ -250,18 +250,46 @@ The demographics of the 2021 and 2023 surveys are presented in
 Table~\ref{tbl-demographics}.
 
 \hypertarget{tbl-demographics}{}
-\begin{table}
-\caption{\label{tbl-demographics}Survey demographics }\tabularnewline
+\begin{longtable}[t]{llrr}
+\caption{\label{tbl-demographics}Select key demographic variables }\tabularnewline
 
-\centering
-\begin{tabular}[t]{lrr}
 \toprule
-  & 2021 & 2023\\
+  &    & Mean & Std. Dev.\\
 \midrule
- & \num{1500.00} & \num{2007.00}\\
+Age &  & 33.2 & 11.6\\
+\midrule
+ &  & N & Pct.\\
+Location & Countryside/village & 477 & 13.6\\
+ & Small city & 1059 & 30.2\\
+ & Mid-sized city & 840 & 24.0\\
+ & Big city & 1131 & 32.2\\
+Education & No formal education & 22 & 0.6\\
+ & Primary & 134 & 3.8\\
+ & Middle school & 384 & 10.9\\
+ & High school & 843 & 24.0\\
+ & University & 1914 & 54.6\\
+ & Advanced studies/Graduate school & 210 & 6.0\\
+Gender & Female & 1711 & 48.8\\
+ & Male & 1796 & 51.2\\
+Marriage status & Single & 1101 & 31.4\\
+ & In a relationship & 569 & 16.2\\
+ & Married & 1744 & 49.7\\
+ & Divorced & 93 & 2.7\\
+Party member status & Yes & 483 & 13.8\\
+ & No & 3024 & 86.2\\
+Communist Youth League status & Yes & 1116 & 31.8\\
+ & No & 2391 & 68.2\\
+Income & 0-2,999 & 275 & 7.8\\
+ & 3,000-5,999 & 822 & 23.4\\
+ & 6,000-9,999 & 899 & 25.6\\
+ & 10,000-19,999 & 962 & 27.4\\
+ & 20,000-49,999 & 385 & 11.0\\
+ & 50,000-99,999 & 94 & 2.7\\
+ & More than 100,000 & 70 & 2.0\\
+Year & 2021 & 1500 & 42.8\\
+ & 2023 & 2007 & 57.2\\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
 
 As is typical of online surveys in China, the sample respondents skew
 somewhat younger and more educated. Comparing the two waves, there are
@@ -293,18 +321,17 @@ unhappy but instead other zero Covid policy failures.
 \caption{\label{tbl-gp.q.text}Government performance questions }\tabularnewline
 
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{l|l}
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
 \hline
 Q1 & Overall, I’m happy with the performance of the central government\\
 \hline
 \cellcolor{gray!6}{Q2} & \cellcolor{gray!6}{Overall, I’m happy with the performance of my local government}\\
 \hline
-Q3 & \makecell[c]{The government does a good job balancing the rights of citizens to be free of surveillance\\in their daily lives with the need to preserve order and prevent crime.}\\
+Q3 & The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.\\
 \hline
-\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{Government performance index}\\
+\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{Government performance index of Q1 + Q2 + Q3}\\
 \hline
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 \hypertarget{tbl-gp.summary.data}{}
@@ -367,8 +394,7 @@ caused any great concern among the general public.
 \caption{\label{tbl-gm.q.text}Government and private monitoring questions }\tabularnewline
 
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{l|l}
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
 \hline
 Q1 & There are good reasons for the central government to monitor the activity of users online\\
 \hline
@@ -376,9 +402,9 @@ Q1 & There are good reasons for the central government to monitor the activity o
 \hline
 Q3 & There are good reasons for private companies to monitor the activity of users online\\
 \hline
-\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{\makecell[c]{It doesn’t bother me to provide the government with biometric information including\\my fingerprints and face details for the purposes of monitoring public places}}\\
+\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{It doesn’t bother me to provide the government with biometric information including my fingerprints and face details for the purposes of monitoring public places}\\
 \hline
-Q5 & \makecell[c]{It doesn’t bother me to provide private companies with biometric information including\\my fingerprints and face details for the purposes of monitoring public places}\\
+Q5 & It doesn’t bother me to provide private companies with biometric information including my fingerprints and face details for the purposes of monitoring public places\\
 \hline
 \cellcolor{gray!6}{Q6} & \cellcolor{gray!6}{Government monitoring index of Q1 + Q2 + Q4}\\
 \hline
@@ -386,7 +412,7 @@ Q7 & Private monitoring index of Q3 + Q5\\
 \hline
 \cellcolor{gray!6}{Q8} & \cellcolor{gray!6}{Total monitoring index of Q1-Q5}\\
 \hline
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 \hypertarget{tbl-gm.summary.data}{}
@@ -459,8 +485,7 @@ seen as acceptable at least after the fact.
 \caption{\label{tbl-track.q.text}Attitudes regarding tracking questions }\tabularnewline
 
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{l|l}
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
 \hline
 Q1 & How closely do you think the central government tracks your online activity?\\
 \hline
@@ -468,13 +493,13 @@ Q1 & How closely do you think the central government tracks your online activity
 \hline
 Q3 & How closely do you think private companies track your online activity?\\
 \hline
-\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{\makecell[c]{How comfortable are you with the central government knowing personal details about\\your activity online?}}\\
+\cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{How comfortable are you with the central government knowing personal details about your activity online?}\\
 \hline
-Q5 & \makecell[c]{How comfortable are you with the local government knowing personal details about\\your activity \vphantom{1} online?}\\
+Q5 & How comfortable are you with the local government knowing personal details about your activity online?\\
 \hline
-\cellcolor{gray!6}{Q5} & \cellcolor{gray!6}{\makecell[c]{How comfortable are you with the local government knowing personal details about\\your activity online?}}\\
+\cellcolor{gray!6}{Q6} & \cellcolor{gray!6}{How comfortable are you with private companies knowing personal details about your activity online?}\\
 \hline
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 \hypertarget{tbl-track.summary.data}{}
@@ -523,13 +548,13 @@ related to protection of their information from corporations.
 \caption{\label{tbl-misc.q.text}Attitudes on general questions }\tabularnewline
 
 \centering
-\begin{tabular}[t]{l|l}
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
 \hline
-Q1 & \makecell[c]{I don’t notice government use of technology to monitor my behavior in my \\daily life.}\\
+Q1 & I don’t notice government use of technology to monitor my behavior in my daily life.\\
 \hline
-\cellcolor{gray!6}{Q2} & \cellcolor{gray!6}{\makecell[c]{The government is likely to securely store my online personal data and \\information better than private companies.}}\\
+\cellcolor{gray!6}{Q2} & \cellcolor{gray!6}{The government is likely to securely store my online personal data and information better than private companies.}\\
 \hline
-Q3 & \makecell[c]{It doesn’t bother me if private companies sell my user data to third parties\\if it will allow me to use their applications for free.}\\
+Q3 & It doesn’t bother me if private companies sell my user data to third parties if it will allow me to use their applications for free.\\
 \hline
 \cellcolor{gray!6}{Q4} & \cellcolor{gray!6}{I’m worried that my payment information might be stolen or compromised.}\\
 \hline
@@ -606,9 +631,35 @@ results of the previous tables.
 \caption{\label{tbl-listexp.q.text}List experiment questions }\tabularnewline
 
 \centering
-\begin{tabular}[t]{l|l}
+\begin{tabular}{l|>{\raggedright\arraybackslash}p{5in}}
 \hline
-Q1 & \makecell[c]{For the question below, please count how many of the entities listed below you would\\trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\\ \\• Alibaba\\\\• Tencent\\\\• Foreign internet companies (such as Microsoft)\\\\• Your family\\\\->Sensitive item only shown to 50 per cent of respondents\\\\• The central government}\\
+Q1 & For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
+
+• Alibaba
+
+• Tencent
+
+• Foreign internet companies (such as Microsoft)
+
+• Your family
+
+--> Sensitive item only shown to 50 per cent of respondents
+
+• The central government\\
+\hline
+Q2 & For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts
+
+•   Alibaba
+
+•   Tencent
+
+•   Foreign internet companies (such as Microsoft)
+
+•   Your family
+
+--> Sensitive item only shown to 50 per cent of respondents>
+
+•   The local government\\
 \hline
 \end{tabular}
 \end{table}

@@ -1,0 +1,12 @@
+name: viennaprivacy
+title: viennaprivacy
+username: andrewm
+account: andrewm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10147595
+bundleId: 7785870
+url: https://andrewm.shinyapps.io/viennaprivacy/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

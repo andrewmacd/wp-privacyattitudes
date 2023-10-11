@@ -56,10 +56,10 @@ replace_estimates <- function(mod_list_func) {
 ## Where to find this research
 
 ```{r qrcode, out.width = "300px", fig.cap="QR code for this presentation"}
-#knitr::include_graphics("www/qrcode.png")
+knitr::include_graphics("www/prezqrcode.png")
 ```
 
-Presentation website:https://bit.ly/chinaapsa
+Presentation website: https://bit.ly/viennaprivacy
 
 [Github repository](https://github.com/andrewmacd/wp-privacyattitudes)
 
@@ -331,22 +331,22 @@ List experiment questions
 ```{r listexpmainqs}
 table.text <- list()
 
-table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would\ntrust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts 
-
-• Alibaba
-• Tencent
-• Foreign internet companies (such as Microsoft)
-• Your family
-->Sensitive item only shown to 50 per cent of respondents
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would\ntrust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts<br> 
+<br>
+• Alibaba<br>
+• Tencent<br>
+• Foreign internet companies (such as Microsoft)<br>
+• Your family<br>
+->Sensitive item only shown to 50 per cent of respondents<br>
 • The central government")
 
-table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details #about your purchase history, your browsing habits, and your social media posts
-
-•	Alibaba
-•	Tencent
-•	Foreign internet companies (such as Microsoft)
-•	Your family
-->Sensitive item only shown to 50 per cent of respondents
+table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details #about your purchase history, your browsing habits, and your social media posts<br>
+<br>
+•	Alibaba<br>
+•	Tencent<br>
+•	Foreign internet companies (such as Microsoft)<br>
+•	Your family<br>
+->Sensitive item only shown to 50 per cent of respondents<br>
 •	The local government")
 
 listexp.text <- data.frame()

@@ -43,25 +43,22 @@ The demographics of the 2021 and 2023 surveys are presented in @tbl-demographics
 
 ```{r}
 #| label: tbl-demographics
-#| tbl-cap: Survey demographics
+#| tbl-cap: Select key demographic variables
 
 demo.qs <- privacy %>% 
   select(`Age` = age,
          `Location` = location,
-         `Province` = province,
          `Education` = education,
          `Gender` = sex,
          `Marriage status` = marriage.status,
-         `Job type` = job.type,
-         `Company type` = job.company.type,
          `Party member status` = party.member.status,
          `Communist Youth League status` = cyl.status,
          `Income` = income,
-         `Hukou status` = hukou.status,
          `Year` = year) 
 
-datasummary( ~ Year, data=demo.qs) %>% 
-  kable_styling() 
+datasummary_balance( ~ 1, data=demo.qs, 
+                     output="kableExtra", longtable=TRUE) %>% 
+  kable_styling(c("repeat_header"))
 ```
 
 As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban *hukou*. This demographic profile already suggests that while the large-scale lockdowns that occurred in a few of the big cities generated a lot of press, they may not be the modal or average citizen's experience with zero Covid policies.
@@ -76,10 +73,8 @@ table.text <- list()
 
 table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
 table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
-table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance\nin their daily lives with the need to preserve order and prevent crime.")
-table.text[[4]] <- c("Q4", "Government performance index")
-
-table.text[[3]] <- linebreak(table.text[[3]])
+table.text[[3]] <- c("Q3", "The government does a good job balancing the rights of citizens to be free of surveillance in their daily lives with the need to preserve order and prevent crime.")
+table.text[[4]] <- c("Q4", "Government performance index of Q1 + Q2 + Q3")
 
 gp.text <- data.frame()
 
@@ -88,7 +83,8 @@ for(line in table.text) {
 }
 
 kbl(gp.text, col.names = NULL) %>% 
-  kable_styling()
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
 ```
 
 ```{r}
@@ -125,8 +121,8 @@ table.text <- list()
 table.text[[1]] <- c("Q1", "There are good reasons for the central government to monitor the activity of users online")
 table.text[[2]] <- c("Q2", "There are good reasons for the local government to monitor the activity of users online")
 table.text[[3]] <- c("Q3", "There are good reasons for private companies to monitor the activity of users online")
-table.text[[4]] <- c("Q4", "It doesn’t bother me to provide the government with biometric information including\nmy fingerprints and face details for the purposes of monitoring public places")
-table.text[[5]] <- c("Q5", "It doesn’t bother me to provide private companies with biometric information including\nmy fingerprints and face details for the purposes of monitoring public places")
+table.text[[4]] <- c("Q4", "It doesn’t bother me to provide the government with biometric information including my fingerprints and face details for the purposes of monitoring public places")
+table.text[[5]] <- c("Q5", "It doesn’t bother me to provide private companies with biometric information including my fingerprints and face details for the purposes of monitoring public places")
 table.text[[6]] <- c("Q6", "Government monitoring index of Q1 + Q2 + Q4")
 table.text[[7]] <- c("Q7", "Private monitoring index of Q3 + Q5")
 table.text[[8]] <- c("Q8", "Total monitoring index of Q1-Q5")
@@ -141,7 +137,8 @@ for(line in table.text) {
 }
 
 kbl(gm.text, col.names = NULL, escape=F, align="l") %>% 
-  kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
 ```
 
 ```{r}
@@ -182,13 +179,9 @@ table.text <- list()
 table.text[[1]] <- c("Q1", "How closely do you think the central government tracks your online activity?")
 table.text[[2]] <- c("Q2", "How closely do you think the local government tracks your online activity?")
 table.text[[3]] <- c("Q3", "How closely do you think private companies track your online activity?")
-table.text[[4]] <- c("Q4", "How comfortable are you with the central government knowing personal details about\nyour activity online?")
-table.text[[5]] <- c("Q5", "How comfortable are you with the local government knowing personal details about\nyour activity online?")
-table.text[[6]] <- c("Q6", "How comfortable are you with private companies knowing personal details about\nyour activity online?")
-
-table.text[[4]] <- linebreak(table.text[[4]])
-table.text[[5]] <- linebreak(table.text[[5]])
-table.text[[6]] <- linebreak(table.text[[5]])
+table.text[[4]] <- c("Q4", "How comfortable are you with the central government knowing personal details about your activity online?")
+table.text[[5]] <- c("Q5", "How comfortable are you with the local government knowing personal details about your activity online?")
+table.text[[6]] <- c("Q6", "How comfortable are you with private companies knowing personal details about your activity online?")
 
 track.text <- data.frame()
 
@@ -197,7 +190,8 @@ for(line in table.text) {
 }
 
 kbl(track.text, col.names = NULL, escape=F, align="l") %>% 
-  kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
 ```
 
 ```{r}
@@ -232,14 +226,10 @@ Rounding out the final section of the regular survey questions are a set of ques
 
 table.text <- list()
 
-table.text[[1]] <- c("Q1", "I don’t notice government use of technology to monitor my behavior in my \ndaily life.")
-table.text[[2]] <- c("Q2", "The government is likely to securely store my online personal data and \ninformation better than private companies.")
-table.text[[3]] <- c("Q3", "It doesn’t bother me if private companies sell my user data to third parties\nif it will allow me to use their applications for free.")
+table.text[[1]] <- c("Q1", "I don’t notice government use of technology to monitor my behavior in my daily life.")
+table.text[[2]] <- c("Q2", "The government is likely to securely store my online personal data and information better than private companies.")
+table.text[[3]] <- c("Q3", "It doesn’t bother me if private companies sell my user data to third parties if it will allow me to use their applications for free.")
 table.text[[4]] <- c("Q4", "I’m worried that my payment information might be stolen or compromised.")
-
-table.text[[1]] <- linebreak(table.text[[1]])
-table.text[[2]] <- linebreak(table.text[[2]])
-table.text[[3]] <- linebreak(table.text[[3]])
 
 misc.text <- data.frame()
 
@@ -248,7 +238,8 @@ for(line in table.text) {
 }
 
 kbl(misc.text, col.names = NULL, escape=F, align="l") %>% 
-  kable_styling(latex_options = c("striped"))
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
 ```
 
 ```{r}
@@ -281,25 +272,21 @@ The results of the list experiment are shown in @tbl-listexp.summary.data. For r
 
 table.text <- list()
 
-table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would\ntrust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n 
+table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n
 • Alibaba\n
 • Tencent\n
 • Foreign internet companies (such as Microsoft)\n
 • Your family\n
-->Sensitive item only shown to 50 per cent of respondents\n
+--> Sensitive item only shown to 50 per cent of respondents\n
 • The central government")
 
-#table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details #about your purchase history, your browsing habits, and your social media posts\n
-#\n
-#•	Alibaba\n
-#•	Tencent\n
-#•	Foreign internet companies (such as Microsoft)\n
-#•	Your family\n
-#<Sensitive item only shown to 50% of respondents>\n
-#•	The local government")
-
-#table.text[[1]] <- linebreak(table.text[[1]])
-#table.text[[2]] <- linebreak(table.text[[2]])
+table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n
+•	Alibaba\n
+•	Tencent\n
+•	Foreign internet companies (such as Microsoft)\n
+•	Your family\n
+--> Sensitive item only shown to 50 per cent of respondents>\n
+•	The local government")
 
 listexp.text <- data.frame()
 
@@ -307,8 +294,8 @@ for(line in table.text) {
   listexp.text <- rbind(listexp.text, line)
 }
 
-kable(listexp.text, col.names = NULL) %>% 
-  column_spec(2, width="6in", bold=FALSE)
+kable(listexp.text, col.names = NULL, escape=F) %>% 
+  column_spec(2, width="5in", bold=FALSE)
 ```
 
 ```{r}
