@@ -55,7 +55,7 @@ replace_estimates <- function(mod_list_func) {
 
 ## Where to find this research
 
-```{r qrcode, out.width = "300px", fig.cap="QR code for this presentation"}
+```{r qrcode, out.width = "50%", fig.cap="QR code for this presentation"}
 knitr::include_graphics("www/prezqrcode.png")
 ```
 
@@ -67,7 +67,7 @@ Presentation website: https://bit.ly/viennaprivacy
 
 ## Why this project?
 
-```{r whyproject, out.width = "600px", fig.cap="CCTV cameras near Tiananmen Square^[Image credit: https://www.cnbc.com/2020/02/25/coronavirus-china-to-boost-mass-surveillance-machine-experts-say.html]"}
+```{r whyproject, out.width = "100%", fig.cap="CCTV cameras near Tiananmen Square^[Image credit: https://www.cnbc.com/2020/02/25/coronavirus-china-to-boost-mass-surveillance-machine-experts-say.html]"}
 knitr::include_graphics("www/chinasurveillance.jpeg")
 ```
 
@@ -78,7 +78,7 @@ knitr::include_graphics("www/chinasurveillance.jpeg")
 * How did Covid change things?
 * Also not obvious!
 
-```{r goals, out.width = "600px", fig.cap="Covid-era health code^[Image credit: https://edition.cnn.com/2020/04/15/asia/china-coronavirus-qr-code-intl-hnk/index.html]"}
+```{r goals, out.width = "100%", fig.cap="Covid-era health code^[Image credit: https://edition.cnn.com/2020/04/15/asia/china-coronavirus-qr-code-intl-hnk/index.html]"}
 knitr::include_graphics("www/healthcode.jpeg")
 ```
 
@@ -86,7 +86,7 @@ knitr::include_graphics("www/healthcode.jpeg")
 
 ### Authoritarian priors
 
-```{r fastslow, out.width = "600px", fig.cap="Still shot from the film Lives of Others^[Image credit: https://www.opendemocracy.net/en/stasi_4455jsp/]"}
+```{r fastslow, out.width = "100%", fig.cap="Still shot from the film Lives of Others^[Image credit: https://www.opendemocracy.net/en/stasi_4455jsp/]"}
 knitr::include_graphics("www/livesofothers.jpg")
 ```
 
@@ -94,23 +94,23 @@ knitr::include_graphics("www/livesofothers.jpg")
 
 >"I think Chinese people are more open, or are not that sensitive about privacy. If they are able to exchange privacy for safety, convenience, or efficiency, in many cases they are willing to do that. Then we can make more use of that data"
 
-```{r robinli, out.width = "600px", fig.cap="Robin Li, founder of Baidu^[Image credit: https://www.scmp.com/abacus/tech/article/3028715/baidus-ceo-robin-li-isnt-afraid-googles-rumored-comeback-china]"}
+```{r robinli, out.width = "100%", fig.cap="Robin Li, founder of Baidu^[Image credit: https://www.scmp.com/abacus/tech/article/3028715/baidus-ceo-robin-li-isnt-afraid-googles-rumored-comeback-china]"}
 knitr::include_graphics("www/robinli.jpeg")
 ```
 
-```{r communistprivacy, out.width = "600px", fig.cap="Dining in a People's Commune^[Image credit: https://en.wikipedia.org/wiki/People%27s_commune]"}
+```{r communistprivacy, out.width = "100%", fig.cap="Dining in a People's Commune^[Image credit: https://en.wikipedia.org/wiki/People%27s_commune]"}
 knitr::include_graphics("www/commune.jpeg")
 ```
 
 ### Chinese trust their government
 
-```{r trust, out.width = "600px", fig.cap="Measure of trust in Chinese government^[Image credit: Wu et. al. https://doi.org/10.1080/10670564.2021.1893558]"}
+```{r trust, out.width = "100%", fig.cap="Measure of trust in Chinese government^[Image credit: Wu et. al. https://doi.org/10.1080/10670564.2021.1893558]"}
 knitr::include_graphics("www/trust.jpeg")
 ```
 
 ### Covid was a possible game changer
 
-```{r whitepaper, out.width = "600px", fig.cap="White paper protestors in Beijing^[Image credit: https://www.upi.com/Top_News/World-News/2022/11/28/Xi-Jinping-protests-Beijing-Shanghai-white-paper-lockdowns-COVID-19/8941669623371/]"}
+```{r whitepaper, out.width = "100%", fig.cap="White paper protestors in Beijing^[Image credit: https://www.upi.com/Top_News/World-News/2022/11/28/Xi-Jinping-protests-Beijing-Shanghai-white-paper-lockdowns-COVID-19/8941669623371/]"}
 knitr::include_graphics("www/whitepaper.jpeg")
 ```
 
@@ -120,13 +120,13 @@ knitr::include_graphics("www/whitepaper.jpeg")
 
 * Wave 1: March 2021, n=1500
 
-```{r wave1, out.width = "300px", fig.cap="Wuhan before and after the lockdown^[Image credits: https://www.japantimes.co.jp/news/2020/04/06/asia-pacific/china-wuhan-lockdown-coronavirus/, https://mixmag.net/read/thousands-music-festival-wuhan-water-park-news]", fig.show='hold',fig.align='left'}
+```{r wave1, out.width = "50%", fig.cap="Wuhan before and after the lockdown^[Image credits: https://www.japantimes.co.jp/news/2020/04/06/asia-pacific/china-wuhan-lockdown-coronavirus/, https://mixmag.net/read/thousands-music-festival-wuhan-water-park-news]", fig.show='hold',fig.align='left'}
 knitr::include_graphics(c("www/wuhanlockdown.jpeg", "www/wuhanparty.jpeg"))
 ```
 
 * Wave 2: March 2023, n=2000
 
-```{r wave2, out.width = "600px", fig.cap="Shanghai mass Covid testing^[Image credit: https://www.bbc.com/news/world-asia-china-61307148]"}
+```{r wave2, out.width = "100%", fig.cap="Shanghai mass Covid testing^[Image credit: https://www.bbc.com/news/world-asia-china-61307148]"}
 knitr::include_graphics("www/shanghailockdown.jpeg")
 ```
 
