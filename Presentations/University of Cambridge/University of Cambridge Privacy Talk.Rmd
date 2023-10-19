@@ -5,10 +5,11 @@ author: "Andrew W. MacDonald"
 date: "19 October 2023"
 output: 
   learnr::tutorial:
-    toc_depth: 2
+    toc_depth: 1
     theme: readable
 runtime: shiny_prerendered
 ---
+
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -45,7 +46,7 @@ replace_estimates <- function(mod_list_func) {
   for(model in 1:length(working)) {
     for(obs in 1:nrow(working[[model]]$tidy)) {
       working[[model]]$tidy$estimate[obs] <- case_when(working[[model]]$tidy$p.value[obs] > 0.05 ~ "—",
-                                working[[model]]$tidy$estimate[obs] >= 0 ~ "▲",
+                                working[[model]]$tidy$estimate[obs] >= 0 ~"▲",
                                 working[[model]]$tidy$estimate[obs] < 0 ~ "▼")
     }
   }
@@ -180,18 +181,18 @@ datasummary_balance( ~ Year, data=demo.qs)
 ### Hypotheses
 
 - $\mathbf{H1_a}: government\:monitoring \rightarrow high\:citizen\:privacy\:concern$
-  + *Reason*: Distrust in authoritarian regimes
+  + *Reason*: Distrust in authoritarian regimes<br><br>
 - $\mathbf{H1_b}: any\:type\:of\:monitoring \rightarrow low\:citizen\:privacy\:concern$
-  + *Reason*: Historical lack of privacy; culture
+  + *Reason*: Historical lack of privacy; culture<br><br>
 - $\mathbf{H1_c}: government\:monitoring \rightarrow low\:citizen\:privacy\:concern$
-  + *Reason*: High level of trust in government
+  + *Reason*: High level of trust in government<br><br>
 - $\mathbf{H2}: 2021\:to\:2023 \rightarrow trust\:in\:government\downarrow$
-  + *Reason*: Covid effects
+  + *Reason*: Covid effects<br><br>
 - $\mathbf{H2_b}: 2021\:to\:2023 \rightarrow acceptance\:of\:goverment\:monitoring\downarrow$
-  + *Reason*: Covid effects
+  + *Reason*: Covid effects<br><br>
 - $\mathbf{H3}: Living\:in\:city\:hit\:hard\:by\:Covid \rightarrow trust\:and\:monitoring\:acceptance\downarrow$ 
   + *Reason*: Heterogeneous effects?
-
+  
 ## Results
 
 ### Trust
@@ -471,7 +472,17 @@ kbl(gp.text, col.names = NULL) %>%
   column_spec(1, bold = T, border_right = T)
 ```
 
-```{r regtrustandacceptmain}
+```{r trustmenu, out.width = "100%"}
+selectInput(
+  'model1', label = 'Variable: ',
+  choices = c("All", "Age", "Demographics", "Location", "Year"), 
+  selected = "All"
+)
+
+uiOutput("trustmenu")
+```
+
+```{r trustmenudef, context="server"}
 reg.data <- privacy %>% 
   mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
                                       education=="Primary" ~ "Less than middle",
@@ -508,13 +519,14 @@ mod_list_soc <- modelsummary(models, output = "modelsummary_list")
 mod_list_soc_update <- as.list(mod_list_soc)
 mod_list_soc_update <- replace_estimates(mod_list_soc_update)
 
-n <- "▲, ▼ indicates p>0.05"
-
-modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
-                                     "educationMiddle school" = "Middle school",
-                                     "educationHigh school" = "High school",
-                                     "educationUniversity" = "University",
-                                     "educationAdvanced studies/Graduate school" = "Grad school",
+output$trustmenu <- renderUI({
+  
+  if(input$model1=="All") {
+    modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
                                      "income3,000-5,999" = "Income 3000-5999",
                                      "income6,000-9,999" = "Income 6000-9999",
                                      "income10,000-19,999" = "Income 10000-19999",
@@ -528,9 +540,128 @@ modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
                                      "locationBig city" = "Location: big city",
                                      "year2023" = "Year 2023"),
              statistic = NULL,
-             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.') %>% 
-  footnote(general = c("Reference categories are $Less\\:than\\:middle$, $Income\\:0-2999$, $Female$, $Party\\:member$, $Countryside$",
-                       "▲, ▼ indicates p>0.05"))
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  }else if(input$model1=="Age"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (-2),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Demographics"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-3:-14)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Location"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-15:-17)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Year"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-18)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  }})
 ```
 
 ### Regression results - tracking and data use
@@ -556,7 +687,18 @@ kbl(gp.text, col.names = NULL) %>%
   column_spec(1, bold = T, border_right = T)
 ```
 
-```{r regtrackingdatausemain}
+
+```{r trackingmenu, out.width = "100%"}
+selectInput(
+  'model2', label = 'Variable: ',
+  choices = c("All", "Age", "Demographics", "Location", "Year"), 
+  selected = "All"
+)
+
+uiOutput("trackingmenu")
+```
+
+```{r trackingmenudef, context="server"}
 reg.tracking.data <- privacy %>% 
   mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
                                       education=="Primary" ~ "Less than middle",
@@ -592,17 +734,19 @@ models <- list(
   "PR PD"    = mod6
 )
 
+
 mod_list_soc <- modelsummary(models, output = "modelsummary_list")
 mod_list_soc_update <- as.list(mod_list_soc)
 mod_list_soc_update <- replace_estimates(mod_list_soc_update)
 
-n <- "▲, ▼ indicates p>0.05"
-
-modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
-                                     "educationMiddle school" = "Middle school",
-                                     "educationHigh school" = "High school",
-                                     "educationUniversity" = "University",
-                                     "educationAdvanced studies/Graduate school" = "Grad school",
+output$trackingmenu <- renderUI({
+  
+  if(input$model2=="All") {
+    modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
                                      "income3,000-5,999" = "Income 3000-5999",
                                      "income6,000-9,999" = "Income 6000-9999",
                                      "income10,000-19,999" = "Income 10000-19999",
@@ -615,10 +759,129 @@ modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
                                      "locationMid-sized city" = "Location: mid city",
                                      "locationBig city" = "Location: big city",
                                      "year2023" = "Year 2023"),
+             statistic = NULL,
              gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
-             statistic = NULL) %>% 
-  footnote(general = c("Reference categories are $Less\\:than\\:middle$, $Income\\:0-2999$, $Female$, $Party\\:member$, $Countryside$",
-                       "▲, ▼ indicates p>0.05"))
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  }else if(input$model2=="Age"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (-2),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model2=="Demographics"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-3:-14)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model2=="Location"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-15:-17)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model2=="Year"){
+        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "EDU: Middle school",
+                                     "educationHigh school" = "EDU: High school",
+                                     "educationUniversity" = "EDU: University",
+                                     "educationAdvanced studies/Graduate school" = "EDU: Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             coef_omit = (c(-18)),       
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  }})
 ```
 
 ### By city
@@ -674,7 +937,13 @@ modelsummary(mod_list_soc_update,
                              "cityWuhan:year2023" = "Wuhan x 2023"),
              gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
              statistic = NULL,
-             notes = list(n))
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
 ```
 
 Tracking awareness and personal data use comfort by city
@@ -712,15 +981,54 @@ modelsummary(mod_list_soc_update,
                              "cityWuhan:year2023" = "Wuhan x 2023"),
              gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.|R2|Num.Obs.',
              statistic = NULL,
-             notes = list(n))
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
 ```
 
 ## Implications and concluding thoughts
+
+### Hypotheses revisited
+
+- $\mathbf{H1_a}: government\:monitoring \rightarrow high\:citizen\:privacy\:concern$
+  + **Reason**: Distrust in authoritarian regimes
+  + **Result**: ![](www/no.png){width=20px}
+  + **Evidence**: High trust in government even after zero Covid<br><br> 
+- $\mathbf{H1_b}: any\:type\:of\:monitoring \rightarrow low\:citizen\:privacy\:concern$
+  + **Reason**: Historical lack of privacy; culture
+  + **Result**: ![](www/no.png){width=20px}
+  + **Evidence**: Low trust in private corporation use of data<br><br> 
+- $\mathbf{H1_c}: government\:monitoring \rightarrow low\:citizen\:privacy\:concern$
+  + **Reason**: High level of trust in government
+  + **Result**: ![](www/yes.png){width=20px}
+  + **Evidence**: Increasing acceptance of monitoring after zero Covid<br><br> 
+- $\mathbf{H2}: 2021\:to\:2023 \rightarrow trust\:in\:government\downarrow$
+  + **Reason**: Covid effects
+  + **Result**: ![](www/no.png){width=20px} / ![](www/yes.png){width=20px}
+  + **Evidence**: Modest decrease in trust, cause unclear<br><br>
+- $\mathbf{H2_b}: 2021\:to\:2023 \rightarrow acceptance\:of\:goverment\:monitoring\downarrow$
+  + **Reason**: Covid effects
+  + **Result**: ![](www/no.png){width=20px}
+  + **Evidence**: Acceptance of government monitoring increased<br><br> 
+- $\mathbf{H3}: Living\:in\:city\:hit\:hard\:by\:Covid \rightarrow trust\:and\:monitoring\:acceptance\downarrow$ 
+  + **Reason**: Heterogeneous effects?
+  + **Result**: ![](www/yes.png){width=20px}
+  + **Evidence**: Shanghai residents have strongly divergent opinions
+
+### Final thoughts
 
 * White Paper Revolution only a specific grievance
 * Shanghai the exception
 * Citizens very suspicious of corporations not of government
 * Others?? Help me out!
+
+```{r qrcodeend, out.width = "50%", fig.cap="QR code for this presentation"}
+knitr::include_graphics("www/prezqrcode.png")
+```
 
 ## Appendix - run your own code
 
@@ -1194,7 +1502,6 @@ modelsummary(models, coef_rename = c("age" = "Age",
              stars = TRUE,
              notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
 ```
-
 
 ### Regression - tracking
 
