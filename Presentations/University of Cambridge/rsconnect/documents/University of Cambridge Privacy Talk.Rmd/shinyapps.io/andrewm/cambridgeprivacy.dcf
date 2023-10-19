@@ -1,0 +1,12 @@
+name: cambridgeprivacy
+title: cambridgeprivacy
+username: andrewm
+account: andrewm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10231816
+bundleId: 7819346
+url: https://andrewm.shinyapps.io/cambridgeprivacy/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
