@@ -41,7 +41,7 @@
 \makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -200,7 +200,7 @@ Regimes, Government Trust, China},
 \title{Learning to love big brother: Chinese attitudes toward online
 privacy after the pandemic}
 \author{Andrew MacDonald}
-\date{2023-10-11}
+\date{2024-01-11}
 
 \begin{document}
 \maketitle
@@ -213,16 +213,149 @@ White Paper movement protests and connect to a larger body of literature
 on why surveys of Chinese citizens indicate high levels of trust in
 their government.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, boxrule=0pt, sharp corners, enhanced, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
-\subsection{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}}
 
-\hypertarget{literature-review}{%
-\subsection{Literature review}\label{literature-review}}
+The trauamtic period of the Covid-19 controls in China in 2022 lead many
+news commentators to believe that the Chinese regime was in deep
+trouble. In particular, alarm was raised in Western news and scholarly
+sources regarding China's increasingly (as the sources term it)
+dystopian digital surveillance state (for some examples of these
+reports, see (Ang, 2022; Intercepted, 2022; Vlahos, 2019)). However,
+existing literature also finds a deep wellspring of trust among Chinese
+citizens toward the state and general lack of concern regarding
+government surveillance of their online activities (Chen, 2017;
+Steinhardt et al., 2022). This report seeks to examine whether the
+events of 2022 in China significantly altered 1) citizen's attitudes
+about government monitoring and 2) the overall trust in government. It
+does so by analyzing the results of two waves of a survey focused on
+Chinese citizens' attitudes toward online privacy, with one wave
+conducted in the spring of 2021 and the other in the spring of 2023. The
+results suggest that Covid-19 controls, if anything, increased
+respondent support for government digital monitoring and only modestly
+decreased trust in the state. The one major exception was the
+respondents in the city of Shanghai, where there was a large and
+significant decrease in both measures between the two waves. Taken
+together, these findings suggest that the type, duration, and severity
+of monitoring is an important variable in public acceptance of
+monitoring.
+
+\hypertarget{sec-litreview}{%
+\section{Literature review}\label{sec-litreview}}
+
+The Covid-19 restrictions in China in 2022 were perhaps one of the most
+extreme forms of digital control ever enacted. Residents were required
+to show a digital health code to enter public spaces (Dou, 2022;
+McMorrow and Leng, 2022). A separate app generated a travel pass code
+based on which cell phone towers a resident's mobile phone had connected
+to. City residents were required to upload regular Covid-19 tests or
+face bans from entering most public areas, including city parks. One
+relatively unique aspect of the technological controls was its
+public-private nature. The health code end user interface existed within
+the two most popular consumer app platforms in China, Alipay and WeChat.
+These interfaces connected with provincial or local government-run
+databases to log user scans and to generate current health code status.
+In China, these public-private technological monitoring solutions are
+relatively common yet how citizens react to and receive these solutions
+remain understudied and under-theorized (Steinhardt et al., 2022).
+
+The overall Covid-19 control regime in China in 2022 generated
+significant resistance among the population. The most iconic episode of
+the Chinese government's attempt to control the virus was the 60 day
+Shanghai lockdown. Residents fumed online at being shut indoors, being
+denied access to vital medicines or access to medical facilities, and
+needing to scrounge for food (Dou et al., 2022; Lin and Jie, 2022). By
+November, many Chinese citizens had enough of the controls. After a
+number of fatalities arising from a fire in a building with all the
+emergency doors padlocked to prevent quarantining residents from
+escaping, young people reacted by launching the so-called White Paper
+movement. Youth around China held up blank sheets of white paper,
+protesting their lack of free speech to comment on the Covid-19
+controls. Shortly thereafter, according to reporting from Western news
+sources, Xi Jinping acceded to the demands of the protesters and the
+Covid-19 restrictions were finally relaxed in the winter of 2022 (Huang
+and Han, 2022).
+
+From a theoretical perspective, one may expect that the impact of such
+draconian forms of control would shift public views against government
+monitoring and surveillance, especially in an authoritarian context.
+Authoritarian leaders need to solve the information dilemma presented by
+preference falsification - citizens are disincentivized from revealing
+their true thoughts on policies or the regime due to fear of punishment
+(Xu, 2021). Therefore, many authoritarian regimes employ a large
+surveillance apparatus to monitor private spaces in an attempt to detect
+the true feelings of residents. The classic response of citizens in the
+countries behind the former Iron Curtain to such controls was to
+withdraw inward into even more private spaces (PFAFF, 2001). In the long
+run, this heavy-handed surveillance actually worked against regime goals
+by decreasing regime support. One aspect of Chinese digital surveillance
+has been that, for most citizens, it feels like a light touch. In
+previous surveys, many Chinese respondents do not report feeling
+excessively monitored or censored in any way (Gainous et al.,
+2023).\footnote{This response may be due to the way digital censorship
+  and monitoring is implemented in China. Since it is a public-private
+  partnership, usually the first instance of control is by the platform;
+  the hand of the state is not visible unless citizens engage in
+  something more than simply blowing off steam (King et al., 2013).}
+However, if theoretical expectation is true for the case of China, one
+would expect that moving from a regime of light touch surveillance to
+one more similar to that used in former Soviet-bloc countries would
+decrease support for both surveillance and the regime itself.
+
+\(H_1\): acceptance of surveillance and regime support among Chinese
+survey respondents decreased after the digital Covid-19 controls of
+2022.
+
+Robin Li, founder of Baidu, expresses another common expectation of
+Chinese citizen with regard to their attitude toward privacy, in which
+he claimed that, ``I think that the Chinese people are more open, or not
+so sensitive, about the privacy issue. If they are able to exchange
+privacy for convenience or efficiency, they are willing to do so in many
+cases'' \emph{People's Daily Online} (2018). Li ignited significant
+controversy on the Chinese internet with his claims, with most users
+criticizing or mocking his claims {[}Shen (2018){]}. More recent
+scholarly research has refined this his claim, with findings that
+generally suggest users have a significantly greater concern for their
+privacy when considering private corporations compared to government
+entities (Kostka, 2019; Steinhardt et al., 2022; Wang and Yu, 2015;
+Zhang et al., 2002).
+
+\(H_2:\) concern for user's personal privacy will be greater with
+respect to corporations compared to government entities
+
+If we combine \(H_1\) with \(H_2\), it would follow that another
+expectation should be that concern about government monitoring should
+increase, though perhaps from a low level, as citizens experience more
+coercive forms of digital control.
+
+\(H_3:\) concern for government monitoring should start at a low level
+but increase after the events of 2022
+
+In a separate line of literature, recent research on privacy in
+democratic socieities has suggested that acceptance of digital
+surveillance is tied to the level of government trust. Respondents with
+high levels of trust in the government are more willing to accept
+government monitoring (Ioannou and Tussyadiah, 2021; Reddick et al.,
+2015; Trüdinger and Steckermeier, 2017). These theories may help explain
+why previous studies have found a high degree of acceptance of
+government monitoring, as Chinese respondents, in many different
+contexts and studies, have repeatedly indicated that they have a high
+level of trust in the Central government (Kennedy, 2009; Zhong, 2014),
+though with lesser levels of trust in local governments. Therefore, the
+decisive factor in changing attitudes toward online monitoring may be a
+decrease in government trust during the pandemic rather than specific
+views about technological controls.
+
+\(H_4:\) views regarding online monitoring should move in line with
+changing views of government trust in 2022
+
+In the next section, I explore a two-wave survey to examine each of
+these hypotheses in turn.
 
 \hypertarget{sec-datasummary}{%
-\subsection{Data and summary statistics}\label{sec-datasummary}}
+\section{Data and summary statistics}\label{sec-datasummary}}
 
 The data for this project was collected via a commercial survey firm in
 two waves, February of 2021 and March of 2023. In both the first and
@@ -307,14 +440,15 @@ average citizen's experience with zero Covid policies.
 Taking a wide-angle view on the government's performance,
 Table~\ref{tbl-gp.summary.data} compares some different measures of
 government performance. While the higher level of government trust in
-the central government is unsurprising (consistent with previous
-literature, see CITATION), the magnitude of the gap is somewhat smaller
-than in previous studies. There has been a small but statistically
-significant decrease in trust of both since 2021. Most interestingly,
-though, is that there was no decrease in how residents feel the
-government handled their privacy information. This seems to indicate
-that it not necessarily government monitoring that made residents
-unhappy but instead other zero Covid policy failures.
+the central government is unsurprising and consistent with previous
+literature, the magnitude of the gap is somewhat smaller than in
+previous studies. There has been a small but statistically significant
+decrease in trust of both since 2021. Most interestingly, though, is
+that there was no decrease in how residents feel the government handled
+their privacy information. This result is some evidence against
+hypothesis \(H_4\), that the two measures should move together. It also
+calls into question \(H_1\) and \(H_2\), as the post-Covid controls wave
+does not appear to have increased concern for government monitoring.
 
 \hypertarget{tbl-gp.q.text}{}
 \begin{table}
@@ -361,33 +495,35 @@ all forms of monitoring. Given the phrasing of the question - ``there
 are good reasons for the government to monitor you'', it seems likely
 that respondents were accepting the government's framing that such
 digital monitoring and control was a necessary part of the pandemic
-response. Not surprisingly, and consistent with previous research (Chen,
-2017; Chen and MacDonald, 2020; Li, 2016), respondents trust the
-government at significantly higher levels than private corporations.
-While the pandemic-era monitoring was in fact a public-private
-partnership\footnote{Alibaba and Tencent served as the interface for the
-  health code system while the data was analyzed and manipulated by
-  local governments (McMorrow and Leng, 2022).}, respondents seem to
-have a very clear delineation of which parties may acceptably gather
-their data and which should not.
+response. Not surprisingly, and consistent with previous research,
+respondents trust the government at significantly higher levels than
+private corporations. While the pandemic-era monitoring was in fact a
+public-private partnership, respondents seem to have a very clear
+delineation of which parties may acceptably gather their data and which
+should not. These results are in line with \(H_2\), that respondents
+should have greater trust in the government to monitor them online
+compared to private corporations.
 
-This result is one of the largest differences between 2021 and 2023
-among all survey questions. In 2023, respondents felt that the central
-government had a significantly stronger reason to monitor them compared
-to 2021. Respondents also agreed that the local government had a better
-case to monitor them compared to 2021, though the magnitude of the
-change was not as dramatic. Other types of monitoring (private
+The change in these variables from 2021 to 2023 is one of the largest
+differences among all survey questions. In 2023, respondents felt that
+the central government had a significantly stronger reason to monitor
+them compared to 2021. Respondents also agreed that the local government
+had a better case to monitor them compared to 2021, though the magnitude
+of the change was not as dramatic. Other types of monitoring (private
 monitoring, biometric monitoring) also exhibited a statistically
 significant change in the direction of being more accepting of tracking.
 The most direct interpretation of this response pattern is that
 respondents fundamentally accepted the government's position that
 monitoring was necessary and justified during the pandemic. Contrary to
-the Western popular press reports of the White Paper Revolution, it does
-not seem that most Chinese citizens were unhappy about Covid electronic
-controls. The slight decrease in government trust could indicate
-dissatisfaction with other Covid policies (including forced
-quarantines), but it does not seem that app-based monitoring itsellf
-caused any great concern among the general public.
+Western popular press reports of the White Paper Revolution, it does not
+seem that most Chinese citizens were unhappy about Covid electronic
+controls due to the feeling of being monitored. The slight decrease in
+government trust could indicate dissatisfaction with other Covid
+policies (including forced quarantines), but it does not seem that
+app-based monitoring itself caused any great concern among the general
+public. These results suggest that the motivation and type of monitoring
+are also important factors in public acceptance of online monitoring,
+factors not significantly considered in previous literature.
 
 \hypertarget{tbl-gm.q.text}{}
 \begin{table}
@@ -451,34 +587,31 @@ government sources decreases modestly compared to the previous phrasing
 in Table~\ref{tbl-gm.q.text}. However, this decrease is matched by a
 similar decrease in comfort with private companies monitoring them.
 These results reinforce the results in Table~\ref{tbl-gm.summary.data}
-and further strengthen the finding of
+and further support \(H_2\).
 
 What may explain the lack of increased concern about digital privacy is
 that respondents generally did not notice a major change in the level of
 online monitoring. While the increase was statistically significant, it
 was just barely at the edge of significance and amounts to less than
-1/10th a standard deviation increase in perceived monitoring. Given the
-invasiveness of the technological means of control employed to control
-Covid, this result is surprising. Two reasonable explanations for this
-divergence are 1) respondents do not consider the Covid controls to be
-online monitoring and/or, in my view, more likely, 2) respondents have
-already readjusted their frame of reference and no longer bring to mind
-the Covid-19 era when answering this question. While the survey results
-cannot arbitrate between these two explanations, both of these
-explanations suggest that even a massive and intrusive increase in
-surveillance has shifted attitudes about monitoring overall. If the
-first explanation is true, it suggests that the kinds of monitoring that
-Chinese citizens are worried about are drastically different than the
-kinds Western privacy advocates are concerned about. If a government is
-monitoring your every move and such activity is not considered to be
-tracking your activity, then it suggests a very different set of ideas
-about what is a concerning type of monitoring. If the second explanation
-is true, it does suggest that respondents that view somewhat
-time-limited surveillance and surveillance for a specific purpose as
-being acceptable. One can easily imagine, however, such tools being used
-again for periodic incidents of unrest and these results suggest that
-respondents may view controls, as long as viewed as `necessary' may be
-seen as acceptable at least after the fact.
+1/10th of a standard deviation increase in perceived monitoring. Given
+the invasiveness of the technological means of control employed to
+manage Covid, this result is surprising. Two reasonable explanations for
+this divergence are 1) respondents do not consider the Covid controls to
+be online monitoring and/or 2) respondents have already readjusted their
+frame of reference and no longer bring to mind the Covid-19 era when
+answering this question. While the survey results cannot arbitrate
+between these two explanations, both of these explanations suggest that
+even a massive and intrusive increase in surveillance has not made a
+significant impact on how intrusive people view government monitoring.
+If the first explanation is true, it suggests that the kinds of
+monitoring that Chinese citizens are worried about are drastically
+different than the kinds Western privacy advocates are concerned about.
+If a government is monitoring every location you visit and such activity
+is not considered to be particularly intrusive, then it suggests a very
+different set of ideas about what is a concerning type of monitoring. If
+the second explanation is true, it does suggest that respondents view
+somewhat time-limited surveillance and surveillance for a specific
+purpose as being acceptable.
 
 \hypertarget{tbl-track.q.text}{}
 \begin{table}
@@ -535,13 +668,13 @@ Respondents generally agree that they do not notice government tracking.
 They strongly agree that the government protects their data better than
 private corporations. They strongly disagree that they are willing to
 give up their privacy simply to use apps for free. Finally, many
-respondents feel worried about having their payment data stolen. In most
-cases, it is unwise to place too much emphasis on any one question,
-given respondents can misinterpret or gloss over any specific question.
-In this survey, however, respondents have repeatedly indicated that they
-trust the government at significantly higher rates than private
-corporations and that most of users worries about being online are
-related to protection of their information from corporations.
+respondents feel worried about having their payment data stolen. While
+it is unwise to place too much emphasis on any one question, given
+respondents can misinterpret or gloss over any specific question,
+respondents have repeatedly indicated that they trust the government at
+significantly higher rates than private corporations regarding online
+montoring and that most of users worries about being online are related
+to protection of their information from corporations.
 
 \hypertarget{tbl-misc.q.text}{}
 \begin{table}
@@ -613,18 +746,18 @@ lower than compared to when respondents are shown the sensitive list
 item). While it is hard to directly compare with the Likert-scaled
 questions, note that the average on the Likert scale questions for
 various trust measure of government use of data was about 4.5 out of 7,
-or roughly the 65th percentile of the scale. By way of contrast, 3 out
-of the 4 list items were private technology firms and the other list
-item was their family. Considering private corporations, if one
-speculatively assumes is that most people will select the trust in their
-family list item, roughly indicating that a little over 1 out of 3 of
-the private corporations on the list were mentally chosen. This roughly
+or roughly the 65th percentile of the scale. For private corporations,
+consider that 3 out of the 4 list items were private technology firms
+and the other list item was their family. If one speculatively assumes
+that most people will select the trust in their family list item, that
+roughly indicates that respondents selected little over 1 out of 3 of
+the private corporations as something that they trust. This roughly
 accords with the average responses to trust in private corporations of
 2.5 out of 7 on a Likert scale. These results are not meant to
 definitively confirm that there are no issues of preference
-falsification. That being said, the results do strongly parallel to the
-directly asked questions, adding confidence to the interpretation of the
-results of the previous tables.
+falsification. That being said, the results do strongly parallel the
+results of the regular survey questions, adding confidence to the
+interpretation of the results of the previous tables.
 
 \hypertarget{tbl-listexp.q.text}{}
 \begin{table}
@@ -712,11 +845,11 @@ data}\begin{minipage}[t]{\linewidth}
 \end{table}
 
 \hypertarget{sec-analysis}{%
-\subsection{Additional Analysis}\label{sec-analysis}}
+\section{Additional analysis}\label{sec-analysis}}
 
 In order to help rule out the possibility that some of the differences
 observed between 2021 and 2023 in the government trust and
-comfortability of being monitored are driven simply by demographi
+comfortability of being monitored are driven simply by demographic
 changes, Table~\ref{tbl-basicreg} reports on the results of a simple
 regression framework. The response variables are: 1) trust in the
 central government, 2) trust in the local government, 3) comfort with
@@ -726,26 +859,21 @@ the regression are a standard suite of demographic variables and the
 year variable.
 
 The year variable magnitude matches almost exactly the simple difference
-in means observed in Section~\ref{sec-datasummary}. This result is
-unsurprising given the very modest difference in demographics between
-the two waves of the survey. It may be the case that other factors
-besides the Covid situation precipitated the observed difference in
-means though it is hard to imagine any event or trend that had a
-stronger impact than the 2022 lockdowns. In terms of interesting
-coefficients, age is consistenly positively related to acceptance of
-government monitoring and negatively related to private corporation
-monitoring. This finding may partially explain events like the White
-Paper Revolution, which was primarily a protest of the young. However,
-the magnitude of coefficient is not very impactful - changing a
+in means observed in Section~\ref{sec-datasummary}. In terms of
+interesting coefficients, age is consistenly positively related to
+acceptance of government monitoring and negatively related to private
+corporation monitoring. This finding may partially explain events like
+the White Paper Revolution, which was primarily a protest of the young.
+However, the magnitude of coefficient is not very impactful - changing a
 respondent's age from 20 to 70 changes the predicted response to the
 acceptance of monitoring questions by 0.5 points - less than the size of
 the year coefficient (0.6). Not being a party member also decreased
 acceptance of monitoring by about 0.2 points. Income is sometimes a
 relevant predictor though inconsistently so. Overall, the regressions
-have a very low R2, indicating that most of the variation in individual
-responses is due to factors outside of demographic variables. So while
-suggestive, the demographic variables have only limited substantive
-relationship to variation in attitudes on these questions.
+have a very low \(r^2\), indicating that most of the variation in
+individual responses is due to factors outside of demographic variables.
+So, while suggestive, the demographic variables have only limited
+substantive relationship to variation in attitudes on these questions.
 
 \hypertarget{tbl-basicreg}{}
 \begin{table}
@@ -808,23 +936,23 @@ particular, these regressions consider the question of ``how closely do
 you think \emph{x} tracks your online activity?'' (regressions 1-3) and
 ``How comfortable are you with \emph{x} knowing personal details about
 your activity online?'' (regressions 4-6). Again, it should be repeated
-that the R2 for all regressions are also very low - most variation in
-question response is not accounted for in the model. However, there are
-a few interesting observations to make. First is that those in larger
-cities are more likely to notice monitoring as compared to those living
-small cities, even controlling for income and education. The magnitude
-of the coefficient is not large (0.3 for those living in big cities) but
-does suggest that urban surveillance does not go unnoticed. While the
-year coefficient is signficant in some instances, the magnitude is very
-small (0.1) indicating a substantively insignificant effect.
-Interestingly, not being a party member is assocated both with less
-noticing of monitrong and less comfort with organizations knowing their
-private details. Again, the coefficients are relatively small but does
-suggest that having some level of knowledge of what kind of surveilance
-is associated with more positive views of its use. Some of the other
-demographic variables are occasionally significant but not in a way that
-indicates a consistent and meaningful relationship with the response
-variables.
+that the \(r^2\) for all regressions are also very low - most variation
+in question response is not accounted for in the model. However, there
+are a few interesting observations to make. First is that those in
+larger cities are more likely to notice monitoring as compared to those
+living small cities, even controlling for income and education. The
+magnitude of the coefficient is not large (0.3 for those living in big
+cities) but does suggest that urban surveillance is qualitatively of a
+different type or scale. While the year coefficient is significant in
+some instances, the magnitude is very small (0.1) indicating a
+substantively insignificant effect. Interestingly, not being a party
+member is associated both with less noticing of motioning and less
+comfort with organizations knowing their private details. Again, the
+coefficients are relatively small but does suggest that having some
+level of knowledge of what kind of surveillance is associated with more
+positive views of its use. Some of the other demographic variables are
+occasionally significant but not in a way that indicates a consistent
+and meaningful relationship with the response variables.
 
 \hypertarget{tbl-trackingreg}{}
 \begin{table}
@@ -892,29 +1020,28 @@ that the only city that is significantly different from the overall
 pattern of cities is Shanghai, but in ways that one might expect.
 Shanghainese trust their local government more than cities overall (the
 Shanghai coefficient on LG Trust). This is not a surprising result given
-that Shanghai has long been seen as one of the most technocratic and
-sophisticated local governments (citation). However, the results also
-seem to indicate that Shanghai residents saw a very substantively large
-decrease in trust in their local governments (the Shanghai x 2023
-coefficient on CG Trust and LG Trust). Furthermore Shanghai residents
-also had a major decrease in agreement that the government has a good
-reason to monitor them in 2023 (the Shanghai x 2023 coefficient on CG
-Monitor and LG monitor). The size of the coefficient on all of these is
-also substantively very large. None of the other cities seem
-significantly different from the average of other cities or locations.
+that Shanghai is one of the most developed cities in China. However, the
+results also seem to indicate that Shanghai residents saw a very
+substantively large decrease in trust in their local governments (the
+Shanghai x 2023 coefficient on CG Trust and LG Trust). Furthermore
+Shanghai residents also had a major decrease in agreement that the
+government has a good reason to monitor them in 2023 (the Shanghai x
+2023 coefficient on CG Monitor and LG monitor). The size of the
+coefficient on all of these is also substantively very large. None of
+the other cities seem significantly different from the average of other
+cities or locations.
 
 These results make sense given the severity of the Shanghai lockdown and
 the post-lockdown strict controls. For many residents, the lockdown was
 highly traumatic but without a sense of shared unity or purpose, as was
 the case in the 2020 Wuhan lockdown. Furthermore, the Shaghainese local
-government, long considered one of the most capable city governments in
-China, seriously mishandled the logistics of the lockdown, leaving many
-people scrambling for food and medicine. However, the results presented
-in part (b) complicate this story somewhat. Shanghai does not appear to
-be any different than other cities while respondents from Wuhan
-consistently are more likely to notice tracking efforts. I have no stong
-hypothesis as to the Wuhan results but the Shanghai findings may be
-suggestive that respondents are reading this set of questions as
+government seriously mishandled the logistics of the lockdown, leaving
+many people scrambling for food and medicine. However, the results
+presented in part (b) complicate this story somewhat. Shanghai does not
+appear to be any different than other cities while respondents from
+Wuhan consistently are more likely to notice tracking efforts. I have no
+stong hypothesis as to the Wuhan results but the Shanghai findings may
+be suggestive that respondents are reading this set of questions as
 referring to the present rather than including the pandemic time period.
 
 \begin{table}
@@ -994,16 +1121,49 @@ Wuhan x 2023 & \num{0.273}+ & \num{0.348}* & \num{0.444}* & \num{-0.153} & \num{
 
 \end{table}
 
-\hypertarget{conclusion}{%
-\subsection{Conclusion}\label{conclusion}}
+\hypertarget{discussion-and-conclusion}{%
+\section{Discussion and conclusion}\label{discussion-and-conclusion}}
+
+With respect to the hypotheses posed in Section~\ref{sec-litreview}, the
+only one that found unambiguous support was \(H_2\), that Chinese
+respondents trust private corporations with their digital data at a
+significantly lower level than the government. This survey did find that
+overall trust in government decreased somewhat between 2021 and 2023 but
+there was no corresponding decrease in acceptance of government
+surveillance (as would be expected from \(H_1\), \(H_3\), and \(H_4\)).
+In fact, if anything, acceptance of the principle of government
+monitoring increased. The only exception to this pattern is the
+respondents located in Shanghai, which did see a significant decrease in
+government trust and acceptance of surveillance (as predicted by the
+hypotheses). A plausible interpretation of these results is that the
+average Covid-19 control experience for most Chinese citizens was
+relatively mild and did not significantly change their views of the
+state or of digital surveillance. Only in a place where the surveillance
+and controls were especially severe, like Shanghai, do we notice a
+significant shift in attitudes. It may be that if the relatively more
+mild experience were extended for a longer period of time elsewhere in
+China, survey responses would show a more significant attitudinal
+change. Overall, it suggests that acceptance of government monitoring
+more or less follows public trust in the government but is also impacted
+by the reason and need for the surveillance, a factor not given
+sustained attention in the literature. Contra stories of a new
+surveillance dystopia in China, this research suggests that even
+relatively invasive monitoring will not lead to significant changes in
+attitudes in China.
 
 \newpage{}
 
 \hypertarget{references}{%
-\subsection{References}\label{references}}
+\section{References}\label{references}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-ang2022}{}}%
+Ang YY (2022)
+\href{https://www.foreignaffairs.com/china/problem-zero-xi-pandemic-policy-crisis}{The
+problem with zero}. \emph{Foreign Affairs}. Epub ahead of print 2
+December 2022.
+
 \leavevmode\vadjust pre{\hypertarget{ref-wuhanlo2021}{}}%
 \emph{BBC News} (2021)
 \href{https://www.bbc.com/news/world-asia-china-55628488}{Wuhan
@@ -1020,16 +1180,64 @@ Chen D (2017) \href{https://doi.org/10.1177/1065912917691360}{Local
 Distrust and Regime Support: Sources and Effects of Political Trust in
 China}. \emph{Political Research Quarterly} 70(2): 314--326.
 
-\leavevmode\vadjust pre{\hypertarget{ref-chen2020}{}}%
-Chen D and MacDonald AW (2020)
-\href{https://doi.org/10.1017/XPS.2019.15}{Bread and Circuses: Sports
-and Public Opinion in China}. \emph{Journal of Experimental Political
-Science} 7(1): 41--55.
+\leavevmode\vadjust pre{\hypertarget{ref-dou2022}{}}%
+Dou E (2022)
+\href{https://www.washingtonpost.com/world/2022/05/24/china-covid-lockdown-testing-green/}{It{'}s
+not easy staying green: Keeping out of china{'}s covid lockdown}.
+\emph{Washington Post}. Epub ahead of print 24 May 2022.
 
-\leavevmode\vadjust pre{\hypertarget{ref-li2016}{}}%
-Li L (2016) \href{https://doi.org/10.1017/S0305741015001629}{Reassessing
-Trust in the Central Government: Evidence from Five National Surveys}.
-\emph{The China Quarterly} 225: 100--121.
+\leavevmode\vadjust pre{\hypertarget{ref-dou2022a}{}}%
+Dou E, Qiang V and Li L (2022)
+\href{https://www.washingtonpost.com/world/2022/04/01/china-shanghai-medical-emergencies-coronavirus-lockdown/}{Medical
+emergencies mount as shanghai{'}s lockdown tightens}. \emph{Washington
+Post}. Epub ahead of print 1 April 2022.
+
+\leavevmode\vadjust pre{\hypertarget{ref-gainous2023}{}}%
+Gainous J, Han R, MacDonald AW, et al. (2023) \emph{Directed Digital
+Dissidence in Autocracies: How China Wins Online}. Oxford University
+Press. Available at: \url{https://academic.oup.com/book/55291}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-huang2022}{}}%
+Huang K and Han M (2022) Did China{'}s Street Protests End Harsh COVID
+Policies? Available at:
+\url{https://www.cfr.org/blog/did-chinas-street-protests-end-harsh-covid-policies}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-intercepted2022}{}}%
+Intercepted (2022) Intercepted: Inside china{'}s growing surveillance
+state. Available at:
+\url{https://theintercept.com/2022/10/05/intercepted-china-surveillance/}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-ioannou2021}{}}%
+Ioannou A and Tussyadiah I (2021)
+\href{https://doi.org/10.1016/j.techsoc.2021.101774}{Privacy and
+surveillance attitudes during health crises: Acceptance of surveillance
+and privacy protection behaviours}. \emph{Technology in Society} 67:
+101774.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kennedy2009}{}}%
+Kennedy JJ (2009)
+\href{https://doi.org/10.1111/j.1467-9248.2008.00740.x}{Maintaining
+Popular Support for the Chinese Communist Party: The Influence of
+Education and the State-Controlled Media}. \emph{Political Studies}
+57(3): 517--536.
+
+\leavevmode\vadjust pre{\hypertarget{ref-king2013}{}}%
+King G, Pan J and Roberts ME (2013) How censorship in china allows
+government criticism but silences collective expression. \emph{American
+Political Science Review} 107: 1--18.
+
+\leavevmode\vadjust pre{\hypertarget{ref-kostka2019}{}}%
+Kostka G (2019)
+\href{https://doi.org/10.1177/1461444819826402}{China{'}s social credit
+systems and public opinion: Explaining high levels of approval}.
+\emph{New Media \& Society} 21(7): 1565--1593.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lin2022}{}}%
+Lin L and Jie Y (2022)
+\href{https://www.wsj.com/articles/shanghai-lockdown-leads-to-logistics-disarray-with-quarantined-truckers-piled-up-containers-11650537303}{Shanghai{'}s
+covid lockdown leads to logistics disarray, with quarantined truckers,
+piled-up containers}. \emph{Wall Street Journal}. Epub ahead of print 21
+April 2022.
 
 \leavevmode\vadjust pre{\hypertarget{ref-mao2022}{}}%
 Mao (2022)
@@ -1049,17 +1257,83 @@ Moseson H, Treleaven E, Gerdts C, et al. (2017)
 Measuring Abortion: What We Know and What We Need}. \emph{Studies in
 Family Planning} 48(4): 397--405.
 
+\leavevmode\vadjust pre{\hypertarget{ref-baiduch2018}{}}%
+\emph{People's Daily Online} (2018)
+\href{http://en.people.cn/n3/2018/0328/c90000-9442509.html}{Baidu chief
+under fire for privacy comments}. Epub ahead of print 28 March 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-pfaff2001}{}}%
+PFAFF S (2001) \href{https://doi.org/10.1177/1462474501003003003}{The
+Limits of Coercive Surveillance: Social and Penal Control in the German
+Democratic Republic}. \emph{Punishment \& Society} 3(3): 381--407.
+
+\leavevmode\vadjust pre{\hypertarget{ref-reddick2015}{}}%
+Reddick CG, Chatfield AT and Jaramillo PA (2015)
+\href{https://doi.org/10.1016/j.giq.2015.01.003}{Public opinion on
+national security agency surveillance programs: A multi-method
+approach}. \emph{Government Information Quarterly} 32(2): 129--141.
+
 \leavevmode\vadjust pre{\hypertarget{ref-redlawsk2010}{}}%
 Redlawsk DP, Tolbert CJ and Franko W (2010)
 \href{https://doi.org/10.1177/1065912910373554}{Voters, Emotions, and
 Race in 2008: Obama as the First Black President}. \emph{Political
 Research Quarterly} 63(4): 875--889.
 
+\leavevmode\vadjust pre{\hypertarget{ref-shen2018}{}}%
+Shen X (2018)
+\href{https://www.scmp.com/abacus/tech/article/3028402/chinese-internet-users-criticize-baidu-ceo-saying-people-china-are}{Chinese
+internet users criticize Baidu CEO for saying people in China are
+willing to give up data privacy for convenience}. \emph{South China
+Morning Post}. Epub ahead of print 28 March 2018.
+
+\leavevmode\vadjust pre{\hypertarget{ref-steinhardt2022}{}}%
+Steinhardt HC, Holzschuh L and MacDonald AW (2022) Dreading big brother
+or dreading big profit? Privacy concerns toward the state and companies
+in China. \emph{First Monday}. Epub ahead of print 13 December 2022.
+DOI:
+\href{https://doi.org/10.5210/fm.v27i12.12679}{10.5210/fm.v27i12.12679}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-traunmuxfcller2019}{}}%
 Traunmüller R, Kijewski S and Freitag M (2019)
 \href{https://doi.org/10.1177/0022002719828053}{The Silent Victims of
 Sexual Violence during War: Evidence from a List Experiment in Sri
 Lanka}. \emph{Journal of Conflict Resolution} 63(9): 2015--2042.
+
+\leavevmode\vadjust pre{\hypertarget{ref-truxfcdinger2017}{}}%
+Trüdinger E-M and Steckermeier LC (2017)
+\href{https://doi.org/10.1016/j.giq.2017.07.003}{Trusting and
+controlling? Political trust, information and acceptance of surveillance
+policies: The case of germany}. \emph{Government Information Quarterly}
+34(3): 421--433.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vlahos2019}{}}%
+Vlahos KB (2019)
+\href{https://www.theamericanconservative.com/george-orwells-dystopian-nightmare-in-china-1984/}{George
+orwell{'}s dystopian nightmare in china}. \emph{The American
+Conservative}. Epub ahead of print 24 June 2019.
+
+\leavevmode\vadjust pre{\hypertarget{ref-wang2015}{}}%
+Wang Z and Yu Q (2015)
+\href{https://doi.org/10.1016/j.clsr.2015.08.006}{Privacy trust crisis
+of personal data in china in the era of big data: The survey and
+countermeasures}. \emph{Computer Law \& Security Review} 31(6):
+782--792.
+
+\leavevmode\vadjust pre{\hypertarget{ref-xu2021}{}}%
+Xu X (2021) \href{https://doi.org/10.1111/ajps.12514}{To Repress or to
+Co-opt? Authoritarian Control in the Age of Digital Surveillance}.
+\emph{American Journal of Political Science} 65(2): 309--325.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhang2002}{}}%
+Zhang Y``Jeff'', Chen JQ and Wen K-W (2002)
+\href{https://doi.org/10.1300/J179v01n02_01}{Characteristics of internet
+users and their privacy concerns}. \emph{Journal of Internet Commerce}
+1(2): 1--16.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zhong2014}{}}%
+Zhong Y (2014) Do Chinese People Trust Their Local Government, and Why?
+\emph{Problems of Post-Communism}. Epub ahead of print 1 May 2014. DOI:
+\href{https://doi.org/10.2753/PPC1075-8216610303}{10.2753/PPC1075-8216610303}.
 
 \end{CSLReferences}
 
