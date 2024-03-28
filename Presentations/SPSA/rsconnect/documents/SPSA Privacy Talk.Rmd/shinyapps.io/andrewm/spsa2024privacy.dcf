@@ -1,0 +1,12 @@
+name: spsa2024privacy
+title: spsa2024privacy
+username: andrewm
+account: andrewm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10921287
+bundleId: 8140972
+url: https://andrewm.shinyapps.io/spsa2024privacy/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
