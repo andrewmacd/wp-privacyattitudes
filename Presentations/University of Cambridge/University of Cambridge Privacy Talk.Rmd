@@ -712,37 +712,37 @@ reg.tracking.data <- privacy %>%
                                      "University",
                                      "Advanced studies/Graduate school")))
 
-mod1 <- lm(data=reg.tracking.data, as.numeric(track1) ~ age + education + income + sex  
+mod6 <- lm(data=reg.tracking.data, as.numeric(track1) ~ age + education + income + sex  
            + party.member.status + location + year)
-mod2 <- lm(data=reg.tracking.data, as.numeric(track2) ~ age + education + income + sex 
+mod7 <- lm(data=reg.tracking.data, as.numeric(track2) ~ age + education + income + sex 
            + party.member.status + location + year)
-mod3 <- lm(data=reg.tracking.data, as.numeric(track3) ~ age + education + income + sex  
+mod8 <- lm(data=reg.tracking.data, as.numeric(track3) ~ age + education + income + sex  
            + party.member.status + location + year)
-mod4 <- lm(data=reg.tracking.data, as.numeric(track4) ~ age + education + income + sex  
+mod9 <- lm(data=reg.tracking.data, as.numeric(track4) ~ age + education + income + sex  
            + party.member.status + location + year)
-mod5 <- lm(data=reg.tracking.data, as.numeric(track5) ~ age + education + income + sex  
+mod10 <- lm(data=reg.tracking.data, as.numeric(track5) ~ age + education + income + sex  
            + party.member.status + location + year)
-mod6 <- lm(data=reg.tracking.data, as.numeric(track6) ~ age + education + income + sex  
+mod11 <- lm(data=reg.tracking.data, as.numeric(track6) ~ age + education + income + sex  
            + party.member.status + location + year)
 
-models <- list(
-  "CG Track" = mod1,
-  "LG Track" = mod2,
-  "PR Track" = mod3,
-  "CG PD"    = mod4,
-  "LG PD"    = mod5,
-  "PR PD"    = mod6
+mod.tracking <- list(
+  "CG Track" = mod6,
+  "LG Track" = mod7,
+  "PR Track" = mod8,
+  "CG PD"    = mod9,
+  "LG PD"    = mod10,
+  "PR PD"    = mod11
 )
 
 
-mod_list_soc <- modelsummary(models, output = "modelsummary_list")
-mod_list_soc_update <- as.list(mod_list_soc)
-mod_list_soc_update <- replace_estimates(mod_list_soc_update)
+mod_list_soc_tracking <- modelsummary(mod.tracking, output = "modelsummary_list")
+mod_list_soc_update_tracking <- as.list(mod_list_soc_tracking)
+mod_list_soc_update_tracking <- replace_estimates(mod_list_soc_update_tracking)
 
 output$trackingmenu <- renderUI({
   
   if(input$model2=="All") {
-    modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+    modelsummary(mod_list_soc_update_tracking, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "EDU: Middle school",
                                      "educationHigh school" = "EDU: High school",
                                      "educationUniversity" = "EDU: University",
@@ -770,7 +770,7 @@ output$trackingmenu <- renderUI({
                    x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
                  })
   }else if(input$model2=="Age"){
-        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+        modelsummary(mod_list_soc_update_tracking, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "EDU: Middle school",
                                      "educationHigh school" = "EDU: High school",
                                      "educationUniversity" = "EDU: University",
@@ -798,7 +798,7 @@ output$trackingmenu <- renderUI({
                    x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
                  })
   } else if(input$model2=="Demographics"){
-        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+        modelsummary(mod_list_soc_update_tracking, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "EDU: Middle school",
                                      "educationHigh school" = "EDU: High school",
                                      "educationUniversity" = "EDU: University",
@@ -826,7 +826,7 @@ output$trackingmenu <- renderUI({
                    x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
                  })
   } else if(input$model2=="Location"){
-        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+        modelsummary(mod_list_soc_update_tracking, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "EDU: Middle school",
                                      "educationHigh school" = "EDU: High school",
                                      "educationUniversity" = "EDU: University",
@@ -854,7 +854,7 @@ output$trackingmenu <- renderUI({
                    x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
                  })
   } else if(input$model2=="Year"){
-        modelsummary(mod_list_soc_update, coef_rename = c("age" = "Age",
+        modelsummary(mod_list_soc_update_tracking, coef_rename = c("age" = "Age",
                                      "educationMiddle school" = "EDU: Middle school",
                                      "educationHigh school" = "EDU: High school",
                                      "educationUniversity" = "EDU: University",
