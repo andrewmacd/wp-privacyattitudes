@@ -1,0 +1,539 @@
+---
+title: "Learning to love big brother: Chinese attitudes toward online privacy after the pandemic"
+author: "Andrew MacDonald"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+format: pdf
+abstract: test
+keywords: 
+  - Digital Privacy
+  - Covid-19
+  - Authoriatrian Regimes
+  - Government Trust
+  - China
+execute: 
+  echo: false
+  warning: false
+keep-tex: true
+number-sections: true
+bibliography: references.bib
+csl: sage-harvard.csl
+---
+
+```{r}
+#| label: setup
+#| include: FALSE
+
+library(tidyverse)
+library(kableExtra)
+library(modelsummary)
+library(estimatr)
+library(psy)
+library(broom)
+library(sjPlot)
+library(sjmisc)
+library(dagitty)
+library(ggdag)
+library(lavaan)
+library(scales)
+
+load(file="../privacy.attitudes.RData")
+
+set.seed(88888888)
+
+cronbach.total.track <- privacy %>% 
+  select(gm1, gm2, track4, track5) %>% 
+  mutate(track4 = as.numeric(track4),
+         track5 = as.numeric(track5),
+         gm1 = as.numeric(gm1),
+         gm2 = as.numeric(gm2))
+
+ca.tt <- cronbach(cronbach.total.track)
+
+cronbach.ts <- privacy %>% 
+  select(ts1, ts2, ts3) %>% 
+  mutate(ts1 = as.numeric(ts1),
+         ts2 = as.numeric(ts2),
+         ts3 = as.numeric(ts3))
+
+ca.ts <- cronbach(cronbach.ts)
+
+cronbach.k <- privacy %>% 
+  select(k1, k4, k5, k6) %>% 
+  mutate(k1 = as.numeric(k1),
+         k4 = as.numeric(k4),
+         k5 = as.numeric(k5),
+         k6 = as.numeric(k6))
+
+ca.k <- cronbach(cronbach.k)
+
+cronbach.gp <- privacy %>% 
+  select(gp1, gp2) %>% 
+  mutate(gp1 = as.numeric(gp1),
+         gp2 = as.numeric(gp2))
+
+ca.gp <- cronbach(cronbach.gp)
+```
+
+## Introduction {#sec-introduction}
+
+## Literature review {#sec-litreview}
+
+### Hypotheses
+
+## Data and summary statistics {#sec-datasummary}
+
+The data for this project was collected via a commercial survey firm in two waves, February of 2021 and March of 2023. In both the first and second waves, Wuhan was oversampled, with residents of the city set to be 10% of respondents. The 2021 survey had an n=1500 and the second had an n=2000. Questions on the two surveys were identical other than a minor change to a question that referenced a specific date. The timing of the two surveys came at two very different points in time of China's Covid-19 experience. The first survey was conducted approximately seven months after the last round of restrictions were lifted on the city of Wuhan. China, at the time, was essentially closed to foreign travel but otherwise had little in the way of day to day public health restrictions. Nationwide, daily Covid cases hovered around the single digits [@wuhanlo2021]. China was at a very different point in its journey in March of 2023. The year of 2022 saw widespread, intrusive digital monitoring introduced. Many major cities, such as Shanghai, Xi'an, and Shenzhen, underwent long and painful city-wide lockdown procedures. At the end of 2023, under the weight of a spiraling number of cases and widespread protests (termed the White Paper Revolution), China finally abandoned its zero Covid policy [@mao2022]. The two waves of these surveys aim to compare attitudes before and after this widespread and highly visible change in digital monitoring strategies.
+
+The demographics of the 2021 and 2023 surveys are presented in @tbl-demographics.
+
+```{r}
+#| label: tbl-demographics
+#| tbl-cap: Select key demographic variables
+
+demo.qs <- privacy %>% 
+  select(`Age` = age,
+         `Location` = location,
+         `Education` = education,
+         `Gender` = sex,
+         `Marriage status` = marriage.status,
+         `Party member status` = party.member.status,
+         `Communist Youth League status` = cyl.status,
+         `Income` = income,
+         `Year` = year) 
+
+datasummary_balance( ~ 1, data=demo.qs, 
+                     output="kableExtra", longtable=TRUE) %>% 
+  kable_styling(c("repeat_header"))
+```
+
+As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban *hukou*. 
+
+To simplify the analysis that follows, the variables are recoded such that income is divided into three categories (low, middle, and high) and education is divided into two categories, those with college education and those without. The regressions in the following sections were tested with alternate specifications of these categorical variables (code for these regressions available at the author's webite) and the key results were unaffected. 
+
+```{r}
+#| label: tbl-respvarindex
+#| tbl-cap: "Questions asking about attitudes toward government monitoring"
+
+table.text <- list()
+
+table.text[[1]] <- c("GM1", "There are good reasons for the central government to monitor the activity of users online")
+table.text[[2]] <- c("GM2", "There are good reasons for the local government to monitor the activity of users online")
+table.text[[3]] <- c("TRACK1", "How comfortable are you with the central government knowing personal details about your activity online?")
+table.text[[4]] <- c("TRACK2", "How comfortable are you with the local government knowing personal details about your activity online?")
+
+track.text <- data.frame()
+
+for(line in table.text) {
+  track.text <- rbind(track.text, line)
+}
+
+kbl(track.text, col.names = NULL, escape=F, align="l") %>% 
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
+```
+
+
+The key response variable for the following analysis is an index variable created by combining the results of the four questions in @tbl-respvarindex, rescaled to be between zero and one. It is true that previous research has found that Chinese respondents place lower levels of trust in local governments as compared to central governments (CITE). However, the correlation between `GM1` and `GM2` is `r round(cor(as.numeric(privacy$gm1), as.numeric(privacy$gm2)), digits=2)` and the correlation between `TRACK1` and `TRACK2` is `r round(cor(as.numeric(privacy$track4), as.numeric(privacy$track5)), digits=2)`. Additionally, as shown in the online appendices, each of the major regression results in @sec-analysis do not demonstrate major changes if the same variables are regressed on each of the survey question items individually. Indicating their close relationship, the variables taken together have a Cronbach's $\alpha$ of `r round(ca.tt$alpha, digits=2)`. Intuitively, this high level of relatedness makes sense as while respondents have some background attitudes about the difference between central and local governments, they may not easily be able to identify at which level government tracking occurs.
+
+Finally, there has been some debate as to the extent of preference falsification on online surveys in China. To test for preference falsification, the surveys also contained several list experiment questions. List experiments have been used in a number of surveys (CITE) to allow residents a confidential method to express their true attitudes about topics such as racial views, sexual assault experience, and political views. While (CITE) points out that list experiments should not be seen as silver bullet to the problem of preference falsification, the results of the list experiments (also available in the online appendices) roughly match the answers to the component questions that comprise the response variable index. 
+
+Overall, the survey data should provide a robust test to arbitrate between the hypotheses posed in @sec-litreview.
+
+## Analysis {#sec-analysis}
+
+### Predicting citizen attitudes about government monitoring
+
+The first set of models considers the question of which demographic variables predict variation in attitudes toward being tracked by the government. (stuff related to lit review)
+
+The key predictor variables included in @tbl-citizenatt are the tech savvy index (TSI) and the knowledge index (KI). The items used to construct each are listed in @sec-appendix. The Cronbach's $\alpha$ for each set of variables is `r round(ca.ts$alpha, digits=2)` and `r round(ca.k$alpha, digits=2)` respectively, indicating that the questions are suitable for use in an index. 
+
+```{r}
+#| label: tbl-citizenatt
+#| tbl-cap: "Demographic predictors of attitude toward government privacy"
+
+citizen.att <- privacy %>% 
+  mutate(ts.edu.interact = ts.index * as.numeric(education.binary),
+         ts.sex.interact = ts.index * as.numeric(sex),
+         track.edu.interact = ts.index * as.numeric(education.binary))
+
+mod1 <- lm(data=citizen.att, total.track.gov.index ~ age + education.binary
+           + income.simple + sex + 
+           + party.member.status + location)
+mod2 <- lm(data=citizen.att, total.track.gov.index ~ age + education.binary 
+           + income.simple + sex +  
+           + party.member.status + location + year)
+mod3 <- lm(data=citizen.att, total.track.gov.index ~ age + education.binary 
+           + income.simple + sex +
+           + party.member.status + location + year + ts.index)
+mod4 <- lm(data=citizen.att, total.track.gov.index ~ age + education.binary 
+           + income.simple + sex + 
+           + party.member.status + location + year + ts.index + ts.edu.interact)
+mod5 <- lm(data=citizen.att, total.track.gov.index ~ age + 
+           education.binary + 
+           income.simple + sex + 
+           party.member.status + location + year + ts.index + ts.sex.interact)
+mod6 <- lm(data=citizen.att, total.track.gov.index ~ age + 
+           education.binary + 
+           income.simple + sex + 
+           party.member.status + location + year + k.index)
+
+models <- list(
+  "(1)"   = mod1,
+  "(2)"   = mod2,
+  "(3)"   = mod3,
+  "(4)"   = mod4,
+  "(5)"   = mod5,
+  "(6)"   = mod6
+)
+
+sd.text <- paste("Standard deviation of the response variable: ",
+                                round(sd(privacy$total.track.gov.index), digits=2))
+
+modelsummary(models,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text),
+             coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "ts.edu.interact" = "TSI x education",
+                             "ts.sex.interact" = "TSI x sex",
+                             "k.index" = "KI"))
+```
+
+The coefficients generally indicate effects in the direction expected. Older respondents are more accepting of government tracking, while being male and not being a member of the party predict lower acceptance of tracking. Curiously, living in a big city has a positive relationship with tracking acceptance, as does the year 2023. Being tech savvy is positively related to acceptance of tracking, while having knowledge of privacy is negatively associated with the response variable.
+
+However, with respect to the magnitude of the coefficients, the response variable is scaled between zero and one with a standard deviation of `r round(sd(privacy$total.track.gov.index), digits=2)`. Given this scaling, the coefficients of the categorical variables all have rather small effect sizes - being in year 2023 instead of year 2021 produces a shift in the response variable of about a third of a standard deviation. For the other categorical variables, while some reach significance, they have even smaller effect sizes. The tech savvy index has a standard deviation of `r round(sd(privacy$ts.index), digits=2)`. The coefficient of `TSI` indicates the impact of a one unit change in the index (going from its minimum to its maximum) on the response variable. However, a more typical shift in `TSI` produces an effect only one fifth as large, or about a fifth to a tenth of a standard deviation change in the response variable. Similarly, for `KI`, a typical shift in the predictor variable leads to a nearly negligible change in the response variable.
+
+As can be inferred from the results in this table, the model fit is relatively poor. The poor model fit can also be seen in the very low $R^2$ values and in the extremely poor model residuals (available in the online appendices). Taken together, these results indicate that the available demographic factors do a poor job explaining variation in attitudes towards government tracking. 
+
+### Does government trust affect attitudes?
+
+Another plausible relationship is that generalized trust in government is a strong predictor of attitudes toward government monitoring. Similar to the key variables in the preceding section, the measure of both local government and central government performance are combined into an index (`GPI`). As noted in @sec-datasummary, while there has been an observed gap in measurement of the two concepts in previous literature (and in these surveys), the responses to the two questions are nevertheless highly correlated ($\rho=`r round(cor(as.numeric(privacy$gp1), as.numeric(privacy$gp2)), digits=2)`$). To the extent that they measure disjoint opinions, models 1b and 1c take central government performance alone and local government performance alone, as the response variables.
+
+```{r}
+#| label: tbl-governmentatt
+
+gov.att <- privacy %>% 
+  mutate(notice.year.interact = track.notice.gov.index * as.numeric(year),
+         gp.edu.interact = gp.index * as.numeric(education.binary),
+         gp.year.interact = gp.index * as.numeric(year))
+
+
+mod1 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index)
+mod2 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp1.rescale)
+mod3 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp2.rescale)
+mod4 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index + 
+           gp.edu.interact)
+mod5 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index  
+           + gp.year.interact)
+mod6 <- lm(data=gov.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index + 
+           gp.edu.interact + gp.year.interact)
+
+models <- list(
+  "(1)"    = mod1,
+  "(1a)"   = mod2,
+  "(1b)"   = mod3,
+  "(2)"    = mod4,
+  "(3)"    = mod5,
+  "(4)"    = mod6
+)
+
+modelsummary(models,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text),
+             coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "gp.index" = "GPI",
+                             "gp.edu.interact" = "GPI x education",
+                             "gp.year.interact" = "GPI x year",
+                             "gp1.rescale" = "CG performance",
+                             "gp2.rescale" = "LG performance"))
+```
+
+The coefficients on in @tbl-governmentatt indicate that government performance is a much stronger predictor of attitudes towards government tracking than the index demographic variables. In model 1, a one standard deviation increase in the government performance index (`r round(sd(privacy$gp.index), digits=2)`) predicts about a one third of a standard deviation change in attitudes towards government tracking, a relatively significant effect for an attitudinal survey. Additionally, the two interaction terms are also both significant. The effect of these interaction terms can be viewed in @fig-marginplotperform. Education lessens the impact of government performance on acceptance of government tracking while year 2023 increases the impact. Finally, the model fit diagnostics have improved, indicating a better model fit.
+
+```{r}
+#| label: fig-marginplotperform
+#| fig-cap: "Marginal effect plots of interaction terms"
+#| fig-subcap: 
+#|    - "GPI x education"
+#|    - "GPI x year"
+
+plot_model(mod6, type = "pred", 
+           terms = c("gp.index", "education.binary"),
+           ci.lvl = NA)
+plot_model(mod6, type = "pred", 
+           terms = c("gp.index", "year"),
+           ci.lvl = NA)
+```
+
+As expected, government performance, controlling for demographic factors, is a relatively strong predictor of acceptance of government performance. According to the model, a positive view of government performance is associated with an increased acceptance of government monitoring. However, the relationship is likely more complex than this story, particularly given the tumultuous events of the 2022 Covid-19 lockdowns in China. To further explore how these factors interact with each other, the next section develops a mediation model to better understand the causal factors at play.
+
+### Changing attitudes since the pandemic
+
+The following directed acyclic graph (DAG) indicates the hypothesized causal process that generates the observed outcome variable, tracking acceptance. In @fig-dag, `TA` represents tracking acceptance, `GP` represents government performance approval, `DEMO` represents demographic characteristics, and `COVID` represents respondents' Covid-19 experience.
+
+```{r}
+#| label: fig-dag
+#| fig-cap: "Causal process"
+
+dag <- dagitty("dag {
+COVID [pos=\"-0.212,-1.176\"]
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+COVID -> GP
+COVID -> TA
+DEMO -> GP
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+To operationalize this model, the first step is to create a latent demographics variable with the demographic factors previously used in regressions in the earlier sections loading onto this variable. `COVID` is operationalized by the `year` variable. Admittedly, this is not a precise mapping. The `year` variable actually measures all changes between survey waves not accounted for by other variables. With respect to government tracking acceptance attitudes, however, this assumption can be justified by the fact that the Covid-19 experience was both a daily and often traumatic one for the Chinese public; it was a time period that involved constant and invasive technological monitoring. If the model does indicate that the `year` variable predicts significant change in the response variable over the two year difference between survey waves, it would be hard to imagine any other plausible cause. Nevertheless, it is important to keep in mind that it is only a proxy measurement. These variables (`year` for `COVID`, `GP`, `TA`, and `DEMO`) are entered into a structural equation model with paths constrained to that described by the DAG in @fig-dag and then the parameters are estimated using the `lavaan` library in `R`.
+
+```{r}
+#| label: tbl-mediationmodel
+#| tbl-cap: "Mediation model results"
+
+sem.data <- privacy %>% 
+  mutate(education.binary = as.numeric(education.binary),
+         income.simple = as.numeric(income.simple),
+         sex = as.numeric(sex),
+         party.member.status = as.numeric(party.member.status),
+         location = as.numeric(location))
+
+specmod <- "
+### Specify directional paths/relations
+# Demographic features
+demo =~ s*age + t*education.binary + u*income.simple + v*sex + w*party.member.status + x*location
+# Path a
+gp.index ~ a*demo
+# Path b
+total.track.gov.index ~ b*gp.index 
+# Path c 
+total.track.gov.index ~ c*demo
+# Path d
+total.track.gov.index ~ d*year
+# Path e
+gp.index ~ e*year
+
+### Specify indirect effect (a*b)
+ab := a*b
+de := d*e
+"
+
+# Estimate mediation analysis model & assign to fitted model object
+fitmod <- sem(specmod,  # name of specified model object 
+              data=sem.data)  # name of data frame object
+
+# Print summary of model results
+modelsummary(fitmod,
+             stars = TRUE,
+             coef_omit = "demo =~*",
+             coef_rename = c("gp.index ~ demo" = "DEMO to GP",
+                             "total.track.gov.index ~ gp.index" = "GP to TA",
+                             "total.track.gov.index ~ demo" = "DEMO to TA",
+                             "total.track.gov.index ~ year" = "COVID to TA",
+                             "gp.index ~ year" = "COVID to GP",
+                             "ab := a*b" = "DEMO to GP to TA",
+                             "de := d*e" = "COVID to GP to TA"),
+              notes = list("Demographic factor variable loadings omitted"))
+```
+
+The results from this analysis in @tbl-mediationmodel confirm some of the previous findings and also reveal some interesting new features of the data. As before, government performance plays an important role in determining tracking acceptance. Similarly, demographic questions do help predict tracking acceptance, but only by a little bit. Demographics do not help predict views on government performance, and therefore, it is not surprising that demographics does not have an indirect effect on tracking acceptance through government performance either. However, the Covid-19 experience, as operationalized by the year variable, does 1) positively increase tracking acceptance (direct path) 2) negatively decreases government performance evaluations (direct path) and 3) negatively decreases tracking acceptance through government performance evaluations (indirect path). The size of the coefficients indicates that the sum of the effects is still positive on tracking acceptance. 
+
+
+
+### Comparing attitudes to private monitoring
+
+Finally, it is interesting to compare the determinants of government tracking attitudes with those that determine attitudes toward private tracking of personal information. T compare these two, @tbl-privatepublic includes models that use the previous acceptance of government tracking index (`Public TA`) as the variable alongside a similarly constructed index variable that measures acceptance of private monitoring (`Private TA`).
+
+```{r}
+#| label: tbl-privatepublic
+#| tbl-cap: "Comparison of public vs. private tracking acceptance"
+
+comp.att <- privacy 
+
+sd.text1 <- paste("Standard deviation of Public TA is: ",
+                                round(sd(privacy$total.track.gov.index), digits=2))
+sd.text2 <- paste("Standard deviation of Private TA is: ",
+                                round(sd(privacy$pm.index), digits=2))
+
+mod1 <- lm(data=comp.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + ts.index)
+mod2 <- lm(data=comp.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + k.index)
+mod3 <- lm(data=comp.att, total.track.gov.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index)
+mod4 <- lm(data=comp.att, pm.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + ts.index)
+mod5 <- lm(data=comp.att, pm.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + k.index)
+mod6 <- lm(data=comp.att, pm.index ~ age + 
+           education.binary +
+           income.simple + sex + 
+           party.member.status + location + year + gp.index)
+
+models <- list(
+  "(1a)"    = mod1,
+  "(1b)"   = mod2,
+  "(1c)"   = mod3,
+  "(2a)"    = mod4,
+  "(2b)"    = mod5,
+  "(2c)"    = mod6
+)
+
+tab <- modelsummary(models,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+             coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"))
+
+tab %>% 
+  add_header_above(c(" " = 1, "Public TA" = 3, "Private TA" = 3))
+```
+
+The results here suggest that the determinants of attitudes towards private company tracking are somewhat different than those that determine attitudes towards public tracking. The `year` variable is not significant for the private tracking models, while the tech savvy coefficient has roughly doubled. Unsurprisingly, government performance is also not related to private tracking acceptance. Finally, the intercept is generally lower for private tracking acceptance, indicating that respondents are less willing to accept private tracking, all things being equal. 
+
+## Conclusion {#sec-conclusion}
+
+{{< pagebreak >}}
+
+## References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+## Appendix {#sec-appendix}
+
+### Index variable definitions
+
+```{r}
+#| label: tbl-ts.q.text
+#| tbl-cap: Tech savvy index questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "How would you rate your general ability to use a computer?")
+table.text[[2]] <- c("Q2", "How would you rate your skill at fixing a computer? ")
+table.text[[3]] <- c("Q3", "How would you rate your ability to program a computer? ")
+
+ts.text <- data.frame()
+
+for(line in table.text) {
+  ts.text <- rbind(ts.text, line)
+}
+
+kbl(ts.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-kw.q.text
+#| tbl-cap: Knowledge index questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "I am very concerned about my privacy online")
+table.text[[2]] <- c("Q2", "I spend a lot of time reading about technology related privacy issues")
+table.text[[3]] <- c("Q3", "In the last year, I have had discussions with my friends about online privacy issues")
+table.text[[4]] <- c("Q4", "I feel like I know exactly how much privacy I have online")
+table.text[[5]] <- c("Q5", "Have you heard of the social credit system (official terminology)?")
+
+kw.text <- data.frame()
+
+for(line in table.text) {
+  kw.text <- rbind(kw.text, line)
+}
+
+kbl(kw.text, col.names = NULL) %>% 
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-gp.q.text
+#| tbl-cap: Government performance index questions
+
+table.text <- list()
+
+table.text[[1]] <- c("Q1", "Overall, I’m happy with the performance of the central government")
+table.text[[2]] <- c("Q2", "Overall, I’m happy with the performance of my local government")
+
+gp.text <- data.frame()
+
+for(line in table.text) {
+  gp.text <- rbind(gp.text, line)
+}
+
+kbl(gp.text, col.names = NULL) %>% 
+  kable_styling(latex_options = c("striped")) %>% 
+  column_spec(2, width="5in", bold=FALSE)
+```

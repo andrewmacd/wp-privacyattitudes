@@ -1,0 +1,861 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{siunitx}
+
+  \newcolumntype{d}{S[
+    input-open-uncertainty=,
+    input-close-uncertainty=,
+    parse-numbers = false,
+    table-align-text-pre=false,
+    table-align-text-post=false
+  ]}
+  
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Learning to love big brother: Chinese attitudes toward online privacy after the pandemic},
+  pdfauthor={Andrew MacDonald},
+  pdfkeywords={Digital Privacy, Covid-19, Authoriatrian
+Regimes, Government Trust, China},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Learning to love big brother: Chinese attitudes toward online
+privacy after the pandemic}
+\author{Andrew MacDonald}
+\date{2024-09-04}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+test
+\end{abstract}
+
+\section{Introduction}\label{sec-introduction}
+
+\section{Literature review}\label{sec-litreview}
+
+\subsection{Hypotheses}\label{hypotheses}
+
+\section{Data and summary statistics}\label{sec-datasummary}
+
+The data for this project was collected via a commercial survey firm in
+two waves, February of 2021 and March of 2023. In both the first and
+second waves, Wuhan was oversampled, with residents of the city set to
+be 10\% of respondents. The 2021 survey had an n=1500 and the second had
+an n=2000. Questions on the two surveys were identical other than a
+minor change to a question that referenced a specific date. The timing
+of the two surveys came at two very different points in time of China's
+Covid-19 experience. The first survey was conducted approximately seven
+months after the last round of restrictions were lifted on the city of
+Wuhan. China, at the time, was essentially closed to foreign travel but
+otherwise had little in the way of day to day public health
+restrictions. Nationwide, daily Covid cases hovered around the single
+digits (\emph{BBC News}, 2021). China was at a very different point in
+its journey in March of 2023. The year of 2022 saw widespread, intrusive
+digital monitoring introduced. Many major cities, such as Shanghai,
+Xi'an, and Shenzhen, underwent long and painful city-wide lockdown
+procedures. At the end of 2023, under the weight of a spiraling number
+of cases and widespread protests (termed the White Paper Revolution),
+China finally abandoned its zero Covid policy (Mao, 2022). The two waves
+of these surveys aim to compare attitudes before and after this
+widespread and highly visible change in digital monitoring strategies.
+
+The demographics of the 2021 and 2023 surveys are presented in
+Table~\ref{tbl-demographics}.
+
+\begin{longtable}[t]{llrr}
+
+\caption{\label{tbl-demographics}Select key demographic variables}
+
+\tabularnewline
+
+\toprule
+  &    & Mean & Std. Dev.\\
+\midrule
+Age &  & 33.2 & 11.6\\
+\midrule
+ &  & N & Pct.\\
+Location & Countryside/village & 477 & 13.6\\
+ & Small city & 1059 & 30.2\\
+ & Mid-sized city & 840 & 24.0\\
+ & Big city & 1131 & 32.2\\
+Education & No formal education & 22 & 0.6\\
+ & Primary & 134 & 3.8\\
+ & Middle school & 384 & 10.9\\
+ & High school & 843 & 24.0\\
+ & University & 1914 & 54.6\\
+ & Advanced studies/Graduate school & 210 & 6.0\\
+Gender & Female & 1711 & 48.8\\
+ & Male & 1796 & 51.2\\
+Marriage status & Single & 1101 & 31.4\\
+ & In a relationship & 569 & 16.2\\
+ & Married & 1744 & 49.7\\
+ & Divorced & 93 & 2.7\\
+Party member status & Yes & 483 & 13.8\\
+ & No & 3024 & 86.2\\
+Communist Youth League status & Yes & 1116 & 31.8\\
+ & No & 2391 & 68.2\\
+Income & 0-2,999 & 275 & 7.8\\
+ & 3,000-5,999 & 822 & 23.4\\
+ & 6,000-9,999 & 899 & 25.6\\
+ & 10,000-19,999 & 962 & 27.4\\
+ & 20,000-49,999 & 385 & 11.0\\
+ & 50,000-99,999 & 94 & 2.7\\
+ & More than 100,000 & 70 & 2.0\\
+Year & 2021 & 1500 & 42.8\\
+ & 2023 & 2007 & 57.2\\
+\bottomrule
+
+\end{longtable}
+
+As is typical of online surveys in China, the sample respondents skew
+somewhat younger and more educated. Comparing the two waves, there are
+some modest demographic differences (notably education and marriage)
+differences between the two samples. As will be shown in
+Section~\ref{sec-analysis}, these minor differences do not appear to
+change any of the substantive results. Focusing on the 2023 survey, the
+modal respondent is someone from a small city, male, married, working in
+a white collar job at a small enterprise, who earns about 10,000 RMB a
+month and has an urban \emph{hukou}.
+
+To simplify the analysis that follows, the variables are recoded such
+that income is divided into three categories (low, middle, and high) and
+education is divided into two categories, those with college education
+and those without. The regressions in the following sections were tested
+with alternate specifications of these categorical variables (code for
+these regressions available at the author's webite) and the key results
+were unaffected.
+
+\begin{table}
+
+\caption{\label{tbl-respvarindex}Questions asking about attitudes toward
+government monitoring}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
+\hline
+GM1 & There are good reasons for the central government to monitor the activity of users online\\
+\hline
+\cellcolor{gray!6}{GM2} & \cellcolor{gray!6}{There are good reasons for the local government to monitor the activity of users online}\\
+\hline
+TRACK1 & How comfortable are you with the central government knowing personal details about your activity online?\\
+\hline
+\cellcolor{gray!6}{TRACK2} & \cellcolor{gray!6}{How comfortable are you with the local government knowing personal details about your activity online?}\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+The key response variable for the following analysis is an index
+variable created by combining the results of the four questions in
+Table~\ref{tbl-respvarindex}, rescaled to be between zero and one. It is
+true that previous research has found that Chinese respondents place
+lower levels of trust in local governments as compared to central
+governments (CITE). However, the correlation between \texttt{GM1} and
+\texttt{GM2} is 0.84 and the correlation between \texttt{TRACK1} and
+\texttt{TRACK2} is 0.87. Additionally, as shown in the online
+appendices, each of the major regression results in
+Section~\ref{sec-analysis} do not demonstrate major changes if the same
+variables are regressed on each of the survey question items
+individually. Indicating their close relationship, the variables taken
+together have a Cronbach's \(\alpha\) of 0.81. Intuitively, this high
+level of relatedness makes sense as while respondents have some
+background attitudes about the difference between central and local
+governments, they may not easily be able to identify at which level
+government tracking occurs.
+
+Finally, there has been some debate as to the extent of preference
+falsification on online surveys in China. To test for preference
+falsification, the surveys also contained several list experiment
+questions. List experiments have been used in a number of surveys (CITE)
+to allow residents a confidential method to express their true attitudes
+about topics such as racial views, sexual assault experience, and
+political views. While (CITE) points out that list experiments should
+not be seen as silver bullet to the problem of preference falsification,
+the results of the list experiments (also available in the online
+appendices) roughly match the answers to the component questions that
+comprise the response variable index.
+
+Overall, the survey data should provide a robust test to arbitrate
+between the hypotheses posed in Section~\ref{sec-litreview}.
+
+\section{Analysis}\label{sec-analysis}
+
+\subsection{Predicting citizen attitudes about government
+monitoring}\label{predicting-citizen-attitudes-about-government-monitoring}
+
+The first set of models considers the question of which demographic
+variables predict variation in attitudes toward being tracked by the
+government. (stuff related to lit review)
+
+The key predictor variables included in Table~\ref{tbl-citizenatt} are
+the tech savvy index (TSI) and the knowledge index (KI). The items used
+to construct each are listed in Section~\ref{sec-appendix}. The
+Cronbach's \(\alpha\) for each set of variables is 0.8 and 0.55
+respectively, indicating that the questions are suitable for use in an
+index.
+
+\begin{table}
+
+\caption{\label{tbl-citizenatt}Demographic predictors of attitude toward
+government privacy}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & (1) & (2) & (3) & (4) & (5) & (6)\\
+\midrule
+(Intercept) & \num{0.573}*** & \num{0.548}*** & \num{0.488}*** & \num{0.506}*** & \num{0.504}*** & \num{0.576}***\\
+ & (\num{0.019}) & (\num{0.019}) & (\num{0.021}) & (\num{0.023}) & (\num{0.022}) & (\num{0.022})\\
+Age & \num{0.001}*** & \num{0.001}** & \num{0.002}*** & \num{0.001}*** & \num{0.002}*** & \num{0.001}***\\
+ & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000})\\
+College education & \num{0.010} & \num{0.014}+ & \num{0.006} & \num{-0.026} & \num{0.006} & \num{0.014}+\\
+ & (\num{0.008}) & (\num{0.008}) & (\num{0.008}) & (\num{0.017}) & (\num{0.008}) & (\num{0.008})\\
+Middle income & \num{0.000} & \num{0.002} & \num{-0.003} & \num{-0.004} & \num{-0.003} & \num{0.001}\\
+ & (\num{0.008}) & (\num{0.008}) & (\num{0.008}) & (\num{0.008}) & (\num{0.008}) & (\num{0.008})\\
+High income & \num{-0.015} & \num{-0.012} & \num{-0.024} & \num{-0.025} & \num{-0.024} & \num{-0.014}\\
+ & (\num{0.017}) & (\num{0.017}) & (\num{0.017}) & (\num{0.017}) & (\num{0.017}) & (\num{0.017})\\
+Male & \num{-0.004} & \num{-0.003} & \num{-0.009} & \num{-0.010} & \num{-0.040}* & \num{-0.004}\\
+ & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.016}) & (\num{0.007})\\
+Not a party member & \num{-0.033}** & \num{-0.034}*** & \num{-0.030}** & \num{-0.029}** & \num{-0.030}** & \num{-0.032}**\\
+ & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010})\\
+Location: small city & \num{0.000} & \num{0.002} & \num{-0.003} & \num{-0.001} & \num{-0.003} & \num{0.002}\\
+ & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011})\\
+Location: mid city & \num{0.007} & \num{0.009} & \num{0.000} & \num{0.001} & \num{0.000} & \num{0.008}\\
+ & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & \vphantom{1} (\num{0.012})\\
+Location: big city & \num{0.013} & \num{0.014} & \num{0.001} & \num{0.002} & \num{0.001} & \num{0.013}\\
+ & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012})\\
+Year 2023 &  & \num{0.037}*** & \num{0.039}*** & \num{0.038}*** & \num{0.038}*** & \num{0.036}***\\
+ &  & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007})\\
+TSI &  &  & \num{0.118}*** & \num{0.010} & \num{0.017} & \\
+ &  &  & (\num{0.017}) & (\num{0.055}) & (\num{0.052}) & \\
+TSI x education &  &  &  & \num{0.069}* &  & \\
+ &  &  &  & (\num{0.034}) &  & \\
+TSI x sex &  &  &  &  & \num{0.065}* & \\
+ &  &  &  &  & (\num{0.032}) & \\
+KI &  &  &  &  &  & \num{-0.058}**\\
+ &  &  &  &  &  & (\num{0.022})\\
+\midrule
+Num.Obs. & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507}\\
+R2 & \num{0.008} & \num{0.016} & \num{0.029} & \num{0.030} & \num{0.030} & \num{0.018}\\
+F & \num{3.271} & \num{5.846} & \num{9.539} & \num{9.105} & \num{9.107} & \num{5.928}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference values: no college education, low income, female, party member, countryside}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Standard deviation of the response variable:  0.2}\\
+\end{tabular}
+
+}
+
+\end{table}%
+
+The coefficients generally indicate effects in the direction expected.
+Older respondents are more accepting of government tracking, while being
+male and not being a member of the party predict lower acceptance of
+tracking. Curiously, living in a big city has a positive relationship
+with tracking acceptance, as does the year 2023. Being tech savvy is
+positively related to acceptance of tracking, while having knowledge of
+privacy is negatively associated with the response variable.
+
+However, with respect to the magnitude of the coefficients, the response
+variable is scaled between zero and one with a standard deviation of
+0.2. Given this scaling, the coefficients of the categorical variables
+all have rather small effect sizes - being in year 2023 instead of year
+2021 produces a shift in the response variable of about a third of a
+standard deviation. For the other categorical variables, while some
+reach significance, they have even smaller effect sizes. The tech savvy
+index has a standard deviation of 0.21. The coefficient of \texttt{TSI}
+indicates the impact of a one unit change in the index (going from its
+minimum to its maximum) on the response variable. However, a more
+typical shift in \texttt{TSI} produces an effect only one fifth as
+large, or about a fifth to a tenth of a standard deviation change in the
+response variable. Similarly, for \texttt{KI}, a typical shift in the
+predictor variable leads to a nearly negligible change in the response
+variable.
+
+As can be inferred from the results in this table, the model fit is
+relatively poor. The poor model fit can also be seen in the very low
+\(R^2\) values and in the extremely poor model residuals (available in
+the online appendices). Taken together, these results indicate that the
+available demographic factors do a poor job explaining variation in
+attitudes towards government tracking.
+
+\subsection{Does government trust affect
+attitudes?}\label{does-government-trust-affect-attitudes}
+
+Another plausible relationship is that generalized trust in government
+is a strong predictor of attitudes toward government monitoring. Similar
+to the key variables in the preceding section, the measure of both local
+government and central government performance are combined into an index
+(\texttt{GPI}). As noted in Section~\ref{sec-datasummary}, while there
+has been an observed gap in measurement of the two concepts in previous
+literature (and in these surveys), the responses to the two questions
+are nevertheless highly correlated (\(\rho=0.73\)). To the extent that
+they measure disjoint opinions, models 1b and 1c take central government
+performance alone and local government performance alone, as the
+response variables.
+
+\begin{table}
+
+\caption{\label{tbl-governmentatt}}
+
+\centering{
+
+\captionsetup{labelsep=none}
+
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & (1) & (1a) & (1b) & (2) & (3) & (4)\\
+\midrule
+(Intercept) & \num{0.214}*** & \num{0.212}*** & \num{0.299}*** & \num{0.236}*** & \num{0.266}*** & \num{0.297}***\\
+ & (\num{0.021}) & (\num{0.021}) & (\num{0.020}) & (\num{0.024}) & (\num{0.027}) & (\num{0.031})\\
+Age & \num{0.001}** & \num{0.001}** & \num{0.001}*** & \num{0.001}*** & \num{0.001}** & \num{0.001}***\\
+ & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000})\\
+College education & \num{0.012}+ & \num{0.012}+ & \num{0.013}+ & \num{-0.026} & \num{0.012}+ & \num{-0.035}\\
+ & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.024}) & (\num{0.007}) & (\num{0.024})\\
+Middle income & \num{-0.003} & \num{-0.001} & \num{-0.003} & \num{-0.003} & \num{-0.003} & \num{-0.003}\\
+ & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007}) & (\num{0.007})\\
+High income & \num{-0.013} & \num{-0.010} & \num{-0.015} & \num{-0.013} & \num{-0.013} & \num{-0.013}\\
+ & (\num{0.015}) & (\num{0.015}) & (\num{0.015}) & (\num{0.015}) & (\num{0.015}) & (\num{0.015})\\
+Male & \num{-0.005} & \num{-0.006} & \num{-0.003} & \num{-0.005} & \num{-0.005} & \num{-0.005}\\
+ & (\num{0.006}) & (\num{0.006}) & (\num{0.006}) & (\num{0.006}) & (\num{0.006}) & (\num{0.006})\\
+Not a party member & \num{-0.028}** & \num{-0.026}** & \num{-0.031}*** & \num{-0.028}** & \num{-0.029}** & \num{-0.029}**\\
+ & (\num{0.009}) & (\num{0.009}) & (\num{0.009}) & (\num{0.009}) & (\num{0.009}) & (\num{0.009})\\
+Location: small city & \num{-0.006} & \num{-0.003} & \num{-0.007} & \num{-0.006} & \num{-0.006} & \num{-0.006}\\
+ & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010})\\
+Location: mid city & \num{-0.001} & \num{0.008} & \num{-0.006} & \num{-0.001} & \num{-0.001} & \num{-0.001}\\
+ & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011}) & (\num{0.011})\\
+Location: big city & \num{0.011} & \num{0.022}* & \num{0.002} & \num{0.010} & \num{0.010} & \num{0.010}\\
+ & (\num{0.010}) & (\num{0.010}) & (\num{0.011}) & (\num{0.010}) & (\num{0.010}) & (\num{0.010})\\
+Year 2023 & \num{0.052}*** & \num{0.053}*** & \num{0.047}*** & \num{0.052}*** & \num{-0.024} & \num{-0.030}\\
+ & (\num{0.006}) & (\num{0.006}) & (\num{0.006}) & (\num{0.006}) & (\num{0.025}) & (\num{0.025})\\
+GPI & \num{0.431}*** &  &  & \num{0.352}*** & \num{0.269}*** & \num{0.158}*\\
+ & (\num{0.015}) &  &  & (\num{0.050}) & (\num{0.054}) & (\num{0.077})\\
+CG performance &  & \num{0.406}*** &  &  &  & \\
+ &  & (\num{0.014}) &  &  &  & \\
+LG performance &  &  & \num{0.344}*** &  &  & \\
+ &  &  & (\num{0.014}) &  &  & \\
+GPI x education &  &  &  & \num{0.050}+ &  & \num{0.062}*\\
+ &  &  &  & (\num{0.030}) &  & (\num{0.030})\\
+GPI x year &  &  &  &  & \num{0.098}** & \num{0.105}***\\
+ &  &  &  &  & (\num{0.031}) & (\num{0.032})\\
+\midrule
+Num.Obs. & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507}\\
+R2 & \num{0.207} & \num{0.200} & \num{0.165} & \num{0.207} & \num{0.209} & \num{0.210}\\
+F & \num{82.827} & \num{79.326} & \num{62.844} & \num{76.189} & \num{76.920} & \num{71.388}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference values: no college education, low income, female, party member, countryside}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Standard deviation of the response variable:  0.2}\\
+\end{tabular}
+
+}
+
+\end{table}%
+
+The coefficients on in Table~\ref{tbl-governmentatt} indicate that
+government performance is a much stronger predictor of attitudes towards
+government tracking than the index demographic variables. In model 1, a
+one standard deviation increase in the government performance index
+(0.2) predicts about a one third of a standard deviation change in
+attitudes towards government tracking, a relatively significant effect
+for an attitudinal survey. Additionally, the two interaction terms are
+also both significant. The effect of these interaction terms can be
+viewed in Figure~\ref{fig-marginplotperform}. Education lessens the
+impact of government performance on acceptance of government tracking
+while year 2023 increases the impact. Finally, the model fit diagnostics
+have improved, indicating a better model fit.
+
+\begin{figure}
+
+\centering{
+
+\centering{
+
+\includegraphics{Learning-to-love-big-brother-wp_files/figure-pdf/fig-marginplotperform-1.pdf}
+
+}
+
+\subcaption{\label{fig-marginplotperform-1}GPI x education}
+
+\centering{
+
+\includegraphics{Learning-to-love-big-brother-wp_files/figure-pdf/fig-marginplotperform-2.pdf}
+
+}
+
+\subcaption{\label{fig-marginplotperform-2}GPI x year}
+
+}
+
+\caption{\label{fig-marginplotperform}Marginal effect plots of
+interaction terms}
+
+\end{figure}%
+
+As expected, government performance, controlling for demographic
+factors, is a relatively strong predictor of acceptance of government
+performance. According to the model, a positive view of government
+performance is associated with an increased acceptance of government
+monitoring. However, the relationship is likely more complex than this
+story, particularly given the tumultuous events of the 2022 Covid-19
+lockdowns in China. To further explore how these factors interact with
+each other, the next section develops a mediation model to better
+understand the causal factors at play.
+
+\subsection{Changing attitudes since the
+pandemic}\label{changing-attitudes-since-the-pandemic}
+
+The following directed acyclic graph (DAG) indicates the hypothesized
+causal process that generates the observed outcome variable, tracking
+acceptance. In Figure~\ref{fig-dag}, \texttt{TA} represents tracking
+acceptance, \texttt{GP} represents government performance approval,
+\texttt{DEMO} represents demographic characteristics, and \texttt{COVID}
+represents respondents' Covid-19 experience.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{Learning-to-love-big-brother-wp_files/figure-pdf/fig-dag-1.pdf}
+
+}
+
+\caption{\label{fig-dag}Causal process}
+
+\end{figure}%
+
+To operationalize this model, the first step is to create a latent
+demographics variable with the demographic factors previously used in
+regressions in the earlier sections loading onto this variable.
+\texttt{COVID} is operationalized by the \texttt{year} variable.
+Admittedly, this is not a precise mapping. The \texttt{year} variable
+actually measures all changes between survey waves not accounted for by
+other variables. With respect to government tracking acceptance
+attitudes, however, this assumption can be justified by the fact that
+the Covid-19 experience was both a daily and often traumatic one for the
+Chinese public; it was a time period that involved constant and invasive
+technological monitoring. If the model does indicate that the
+\texttt{year} variable predicts significant change in the response
+variable over the two year difference between survey waves, it would be
+hard to imagine any other plausible cause. Nevertheless, it is important
+to keep in mind that it is only a proxy measurement. These variables
+(\texttt{year} for \texttt{COVID}, \texttt{GP}, \texttt{TA}, and
+\texttt{DEMO}) are entered into a structural equation model with paths
+constrained to that described by the DAG in Figure~\ref{fig-dag} and
+then the parameters are estimated using the \texttt{lavaan} library in
+\texttt{R}.
+
+\begin{table}
+
+\caption{\label{tbl-mediationmodel}Mediation model results}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & (1)\\
+\midrule
+DEMO to GP & \num{-0.008}\\
+ & \vphantom{1} (\num{0.005})\\
+GP to TA & \num{0.430}***\\
+ & (\num{0.015})\\
+DEMO to TA & \num{-0.010}*\\
+ & (\num{0.005})\\
+COVID to TA & \num{0.053}***\\
+ & (\num{0.006})\\
+COVID to GP & \num{-0.037}***\\
+ & (\num{0.007})\\
+DEMO to GP to TA & \num{-0.003}\\
+ & (\num{0.002})\\
+COVID to GP to TA & \num{-0.002}***\\
+ & (\num{0.000})\\
+\midrule
+Num.Obs. & \num{3507}\\
+AIC & \num{52129.6}\\
+BIC & \num{52246.7}\\
+\bottomrule
+\multicolumn{2}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{2}{l}{\rule{0pt}{1em}Demographic factor variable loadings omitted}\\
+\end{tabular}
+
+}
+
+\end{table}%
+
+The results from this analysis in Table~\ref{tbl-mediationmodel} confirm
+some of the previous findings and also reveal some interesting new
+features of the data. As before, government performance plays an
+important role in determining tracking acceptance. Similarly,
+demographic questions do help predict tracking acceptance, but only by a
+little bit. Demographics do not help predict views on government
+performance, and therefore, it is not surprising that demographics does
+not have an indirect effect on tracking acceptance through government
+performance either. However, the Covid-19 experience, as operationalized
+by the year variable, does 1) positively increase tracking acceptance
+(direct path) 2) negatively decreases government performance evaluations
+(direct path) and 3) negatively decreases tracking acceptance through
+government performance evaluations (indirect path). The size of the
+coefficients indicates that the sum of the effects is still positive on
+tracking acceptance.
+
+\subsection{Comparing attitudes to private
+monitoring}\label{comparing-attitudes-to-private-monitoring}
+
+Finally, it is interesting to compare the determinants of government
+tracking attitudes with those that determine attitudes toward private
+tracking of personal information. T compare these two,
+Table~\ref{tbl-privatepublic} includes models that use the previous
+acceptance of government tracking index (\texttt{Public\ TA}) as the
+variable alongside a similarly constructed index variable that measures
+acceptance of private monitoring (\texttt{Private\ TA}).
+
+\begin{table}
+
+\caption{\label{tbl-privatepublic}Comparison of public vs.~private
+tracking acceptance}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Public TA} & \multicolumn{3}{c}{Private TA} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7}
+  & (1a) & (1b) & (1c) & (2a) & (2b) & (2c)\\
+\midrule
+(Intercept) & \num{0.488}*** & \num{0.576}*** & \num{0.214}*** & \num{0.270}*** & \num{0.432}*** & \num{0.344}***\\
+ & (\num{0.021}) & (\num{0.022}) & (\num{0.021}) & (\num{0.025}) & (\num{0.026}) & (\num{0.027})\\
+Age & \num{0.002}*** & \num{0.001}*** & \num{0.001}** & \num{0.000} & \num{-0.001}** & \num{-0.001}**\\
+ & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000}) & (\num{0.000})\\
+College education & \num{0.006} & \num{0.014}+ & \num{0.012}+ & \num{-0.027}** & \num{-0.010} & \num{-0.010}\\
+ & (\num{0.008}) & (\num{0.008}) & (\num{0.007}) & (\num{0.009}) & (\num{0.009}) & \vphantom{1} (\num{0.009})\\
+Middle income & \num{-0.003} & \num{0.001} & \num{-0.003} & \num{-0.059}*** & \num{-0.049}*** & \num{-0.049}***\\
+ & (\num{0.008}) & (\num{0.008}) & (\num{0.007}) & (\num{0.009}) & (\num{0.009}) & (\num{0.009})\\
+High income & \num{-0.024} & \num{-0.014} & \num{-0.013} & \num{-0.027} & \num{-0.004} & \num{-0.002}\\
+ & (\num{0.017}) & (\num{0.017}) & (\num{0.015}) & (\num{0.019}) & (\num{0.020}) & (\num{0.020})\\
+Male & \num{-0.009} & \num{-0.004} & \num{-0.005} & \num{-0.006} & \num{0.006} & \num{0.007}\\
+ & (\num{0.007}) & (\num{0.007}) & (\num{0.006}) & (\num{0.008}) & (\num{0.008}) & \vphantom{1} (\num{0.008})\\
+Not a party member & \num{-0.030}** & \num{-0.032}** & \num{-0.028}** & \num{-0.010} & \num{-0.016} & \num{-0.017}\\
+ & (\num{0.010}) & (\num{0.010}) & (\num{0.009}) & (\num{0.012}) & (\num{0.012}) & (\num{0.012})\\
+Location: small city & \num{-0.003} & \num{0.002} & \num{-0.006} & \num{-0.043}** & \num{-0.032}* & \num{-0.033}*\\
+ & (\num{0.011}) & (\num{0.011}) & (\num{0.010}) & (\num{0.013}) & (\num{0.013}) & (\num{0.013})\\
+Location: mid city & \num{0.000} & \num{0.008} & \num{-0.001} & \num{-0.056}*** & \num{-0.038}** & \num{-0.039}**\\
+ & (\num{0.012}) & (\num{0.012}) & (\num{0.011}) & (\num{0.014}) & (\num{0.014}) & (\num{0.014})\\
+Location: big city & \num{0.001} & \num{0.013} & \num{0.011} & \num{-0.051}*** & \num{-0.024}+ & \num{-0.024}+\\
+ & (\num{0.012}) & (\num{0.012}) & (\num{0.010}) & (\num{0.014}) & (\num{0.014}) & (\num{0.014})\\
+Year 2023 & \num{0.039}*** & \num{0.036}*** & \num{0.052}*** & \num{0.006} & \num{0.001} & \num{0.005}\\
+ & (\num{0.007}) & (\num{0.007}) & (\num{0.006}) & (\num{0.008}) & (\num{0.008}) & (\num{0.008})\\
+TSI & \num{0.118}*** &  &  & \num{0.252}*** &  & \\
+ & (\num{0.017}) &  &  & (\num{0.021}) &  & \\
+KI &  & \num{-0.058}** &  &  & \num{-0.069}** & \\
+ &  & (\num{0.022}) &  &  & (\num{0.027}) & \\
+GPI &  &  & \num{0.431}*** &  &  & \num{0.071}***\\
+ &  &  & (\num{0.015}) &  &  & (\num{0.020})\\
+\midrule
+Num.Obs. & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507} & \num{3507}\\
+R2 & \num{0.029} & \num{0.018} & \num{0.207} & \num{0.057} & \num{0.018} & \num{0.020}\\
+F & \num{9.539} & \num{5.928} & \num{82.827} & \num{19.081} & \num{5.865} & \num{6.450}\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference values: no college education, low income, female, party member, countryside}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Standard deviation of Public TA is:  0.2}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Standard deviation of Private TA is:  0.24}\\
+\end{tabular}
+
+}
+
+\end{table}%
+
+The results here suggest that the determinants of attitudes towards
+private company tracking are somewhat different than those that
+determine attitudes towards public tracking. The \texttt{year} variable
+is not significant for the private tracking models, while the tech savvy
+coefficient has roughly doubled. Unsurprisingly, government performance
+is also not related to private tracking acceptance. Finally, the
+intercept is generally lower for private tracking acceptance, indicating
+that respondents are less willing to accept private tracking, all things
+being equal.
+
+\section{Conclusion}\label{sec-conclusion}
+
+\newpage{}
+
+\section{References}\label{references}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{1}
+\bibitem[\citeproctext]{ref-wuhanlo2021}
+\emph{BBC News} (2021)
+\href{https://www.bbc.com/news/world-asia-china-55628488}{Wuhan
+lockdown: A year of china's fight against the covid pandemic}. Epub
+ahead of print 22 January 2021.
+
+\bibitem[\citeproctext]{ref-mao2022}
+Mao (2022)
+\href{https://www.bbc.com/news/world-asia-china-63855508}{China abandons
+key parts of zero-covid strategy after protests}. \emph{BBC News}. Epub
+ahead of print 7 December 2022.
+
+\end{CSLReferences}
+
+\newpage{}
+
+\section{Appendix}\label{sec-appendix}
+
+\subsection{Index variable
+definitions}\label{index-variable-definitions}
+
+\begin{table}
+
+\caption{\label{tbl-ts.q.text}Tech savvy index questions}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+Q1 & How would you rate your general ability to use a computer?\\
+\hline
+Q2 & How would you rate your skill at fixing a computer?\\
+\hline
+Q3 & How would you rate your ability to program a computer?\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-kw.q.text}Knowledge index questions}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{l|l}
+\hline
+Q1 & I am very concerned about my privacy online\\
+\hline
+Q2 & I spend a lot of time reading about technology related privacy issues\\
+\hline
+Q3 & In the last year, I have had discussions with my friends about online privacy issues\\
+\hline
+Q4 & I feel like I know exactly how much privacy I have online\\
+\hline
+Q5 & Have you heard of the social credit system (official terminology)?\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-gp.q.text}Government performance index questions}
+
+\centering{
+
+\centering
+\begin{tabular}[t]{l|>{\raggedright\arraybackslash}p{5in}}
+\hline
+Q1 & Overall, I’m happy with the performance of the central government\\
+\hline
+\cellcolor{gray!6}{Q2} & \cellcolor{gray!6}{Overall, I’m happy with the performance of my local government}\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+
+
+\end{document}

@@ -498,8 +498,8 @@ datasummary(All(gm.qs.2023) ~
             col.names = c("", "1", "2", "3", "4", "5", "6", "7", "Mean", "Histogram"))
 
 gm.index.q <- privacy %>% 
-  select(`Government monitoring index` = gm.index.gov,
-         `Private monitoring index` = gm.index.priv,
+  select(`Government monitoring index inc biometric` = gm.index.gov.inc.track,
+         `Private monitoring index inc biometric` = gm.index.priv.inc.track,
          `Total monitoring index` = gm.index.total,
          `Year` = year) 
 
@@ -1050,3 +1050,62 @@ datasummary(`Number of items selected` ~ mean * Year * Shown,
                     data=localgov.qs,
                     title="Local government list experiment")
 ```
+
+```{r}
+#| label: tbl-gp-model
+#| tbl-cap: "Government performance model"
+
+reg.data <- privacy %>% 
+  mutate(education = factor(case_when(education=="No formal education" ~ "Less than middle",
+                                      education=="Primary" ~ "Less than middle",
+                                      education=="Middle school" ~ "Middle school",
+                                      education=="High school" ~ "High school",
+                                      education=="University" ~ "University",
+                                      education=="Advanced studies/Graduate school" ~ "Advanced studies/Graduate school"), 
+                            levels=c("Less than middle", 
+                                     "Middle school",
+                                     "High school",
+                                     "University",
+                                     "Advanced studies/Graduate school")))
+
+mod1 <- lm(data=reg.data, as.numeric(gp1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod2 <- lm(data=reg.data, as.numeric(gp2) ~ age + education + income + sex 
+           + party.member.status + location + year)
+mod3 <- lm(data=reg.data, as.numeric(gm1) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod4 <- lm(data=reg.data, as.numeric(gm2) ~ age + education + income + sex  
+           + party.member.status + location + year)
+mod5 <- lm(data=reg.data, as.numeric(gm3) ~ age + education + income + sex  
+           + party.member.status + location + year)
+
+models <- list(
+  "CG Trust"     = mod1,
+  "LG Trust"     = mod2,
+  "CG Monitor"   = mod3,
+  "LG Monitor"   = mod4,
+  "PR Monitor"   = mod5
+)
+
+modelsummary(models, coef_rename = c("age" = "Age",
+                                     "educationMiddle school" = "Middle school",
+                                     "educationHigh school" = "High school",
+                                     "educationUniversity" = "University",
+                                     "educationAdvanced studies/Graduate school" = "Grad school",
+                                     "income3,000-5,999" = "Income 3000-5999",
+                                     "income6,000-9,999" = "Income 6000-9999",
+                                     "income10,000-19,999" = "Income 10000-19999",
+                                     "income20,000-49,999" = "Income 20000-49999",
+                                     "income50,000-99,999" = "Income 50000-99999",
+                                     "incomeMore than 100,000" = "Income > 100000",
+                                     "sexMale" = "Male",
+                                     "party.member.statusNo" = "Not a party member",
+                                     "locationSmall city" = "Location: small city",
+                                     "locationMid-sized city" = "Location: mid city",
+                                     "locationBig city" = "Location: big city",
+                                     "year2023" = "Year 2023"),
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             stars = TRUE,
+             notes = list("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside"))
+```
+

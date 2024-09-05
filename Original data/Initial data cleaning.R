@@ -181,6 +181,11 @@ privacy <- privacy %>%
                                     "Xinjiang",
                                     "Other"))) %>%
   mutate(city = factor(city)) %>% 
+  mutate(education.binary = factor(case_when(education <= 4 ~ 1,
+                                             TRUE ~ 2),
+                                   levels=c(1:2),
+                                   labels=c("No college",
+                                            "College"))) %>% 
   mutate(education = factor(education,
                             levels=c(1:6),
                             labels=c("No formal education",
@@ -188,7 +193,7 @@ privacy <- privacy %>%
                                      "Middle school",
                                      "High school",
                                      "University",
-                                     "Advanced studies/Graduate school"))) %>% 
+                                     "Advanced studies/Graduate school"))) %>%
   mutate(sex = factor(sex,
                       levels=c(1:2),
                       labels=c("Female",
@@ -225,6 +230,13 @@ privacy <- privacy %>%
                              levels=c(1:2),
                              labels=c("Yes",
                                       "No"))) %>% 
+  mutate(income.simple = factor(case_when(income <= 3 ~ 1,
+                                          income > 3 & income < 6 ~ 2,
+                                          TRUE ~ 3),
+                                levels=c(1:3),
+                                labels=c("Low income",
+                                         "Middle income",
+                                         "High income"))) %>% 
   mutate(income = factor(income,
                          levels=c(1:7),
                          labels=c("0-2,999",
@@ -271,7 +283,10 @@ privacy <- privacy %>%
   mutate(across(c(p.lo1, p.lo2), ~factor(.,
                                          levels=c(1:7),
                                          labels=likert.important.labels))) %>%
-  mutate(gp.index = rescale((gp1 + gp2 + gp3) / 3)) %>% 
+  mutate(gp.index = rescale((gp1 + gp2) / 2)) %>% 
+  mutate(gp.index.inc.balance = rescale((gp1 + gp2 + gp3) / 3)) %>%
+  mutate(gp1.rescale = rescale(gp1)) %>% 
+  mutate(gp2.rescale = rescale(gp2)) %>% 
   mutate(across(c(gp1, gp2, gp3), ~factor(.,
                                           levels=c(1:7),
                                           labels=likert.agree.labels))) %>%
@@ -292,9 +307,12 @@ privacy <- privacy %>%
                                "Overseas sources",
                                "Other"))) %>%
   mutate(ma2.other = ifelse(ma2.other=="", NA, ma2.other)) %>% 
-  mutate(gm.index.gov = rescale((gm1 + gm2 + gm4) / 3)) %>% 
-  mutate(gm.index.priv = rescale((gm3 + gm5) / 2)) %>% 
-  mutate(gm.index.total = rescale((gm1 + gm2 + gm3 + gm4 + gm5) / 5)) %>% 
+  mutate(pm.index = rescale((gm3 + track6) / 2)) %>% 
+  mutate(gm.index.gov = rescale((gm1 + gm2) / 2)) %>% 
+  mutate(gm.index.gov.inc.track = rescale((gm1 + gm2 + gm4) / 3)) %>% 
+  mutate(gm.index.priv.inc.track = rescale((gm3 + gm5) / 2)) %>% 
+  mutate(gm.index.total = rescale((gm1 + gm2 + gm3 + gm4 + gm5) / 5)) %>%
+  mutate(total.track.gov.index = rescale((gm1 + gm2 + track4 + track5) / 4)) %>% 
   mutate(across(c(gm1, gm2, gm3, gm4, gm5), ~factor(.,
                                                     levels=c(1:7),
                                                     labels=likert.agree.labels))) %>%
@@ -313,12 +331,14 @@ privacy <- privacy %>%
                                "Moderate - deployment is mixed",
                                "Limited use - used only in a few places",
                                "Not used - only used as a trial or not used at all"))) %>%
+  mutate(track.notice.gov.index = rescale((track1 + track2) / 2)) %>% 
+  mutate(track.gov.accept.index = rescale((track3 + track4) / 2)) %>%
   mutate(across(c(track1, track2, track3), ~factor(.,
                                                    levels=c(1:7),
                                                    labels=likert.closely.labels))) %>%
   mutate(across(c(track4, track5, track6), ~factor(.,
                                                    levels=c(1:7),
-                                                   labels=likert.comfortable.labels)))
+                                                   labels=likert.comfortable.labels))) 
 
 # Recode experiment variables
 privacy <- privacy %>%   
