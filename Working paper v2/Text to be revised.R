@@ -231,74 +231,7 @@ One obvious objection to the finding that respondents have a higher degree of co
 
 The results of the list experiment are shown in @tbl-listexp.summary.data. For respondents shown the sensitive list item, one can estimate that about 60% of people selected it (given that the baseline level is about 0.6 number of items selected lower than compared to when respondents are shown the sensitive list item). While it is hard to directly compare with the Likert-scaled questions, note that the average on the Likert scale questions for various trust measure of government use of data was about 4.5 out of 7, or roughly the 65th percentile of the scale. For private corporations, consider that 3 out of the 4 list items were private technology firms and the other list item was their family. If one speculatively assumes that most people will select the trust in their family list item, that roughly indicates that respondents selected little over 1 out of 3 of the private corporations as something that they trust. This roughly accords with the average responses to trust in private corporations of 2.5 out of 7 on a Likert scale. These results are not meant to definitively confirm that there are no issues of preference falsification. That being said, the results do strongly parallel the results of the regular survey questions, adding confidence to the interpretation of the results of the previous tables.
 
-```{r}
-#| label: tbl-listexp.q.text
-#| tbl-cap: List experiment questions
 
-table.text <- list()
-
-table.text[[1]] <- c("Q1", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n
-• Alibaba\n
-• Tencent\n
-• Foreign internet companies (such as Microsoft)\n
-• Your family\n
---> Sensitive item only shown to 50 per cent of respondents\n
-• The central government")
-
-table.text[[2]] <- c("Q2", "For the question below, please count how many of the entities listed below you would trust with your online personal information, such as details about your purchase history, your browsing habits, and your social media posts\n
-•	Alibaba\n
-•	Tencent\n
-•	Foreign internet companies (such as Microsoft)\n
-•	Your family\n
---> Sensitive item only shown to 50 per cent of respondents>\n
-•	The local government")
-
-listexp.text <- data.frame()
-
-for(line in table.text) {
-  listexp.text <- rbind(listexp.text, line)
-}
-
-kable(listexp.text, col.names = NULL, escape=F) %>% 
-  column_spec(2, width="5in", bold=FALSE)
-```
-
-```{r}
-#| label: tbl-listexp.summary.data
-#| tbl-cap: List experiment summary data
-
-listexp.qs <- privacy %>% 
-  mutate(le.num = as.numeric(le.num),
-         le.5th.shown = factor(le.5th.shown, labels=c("SI not shown", "SI shown"))) %>% 
-  select(`Number of items selected` = le.num,
-         `Group` = le.group,
-         `Shown` = le.5th.shown,
-         `Year` = year) 
-
-centralgov.qs <- listexp.qs %>% 
-  filter(as.numeric(Group) == 2) %>% 
-  select(c(`Number of items selected`, 
-           `Shown`,
-           `Year`))
-
-datasummary(`Number of items selected` ~ mean * Year * Shown,
-                    data=centralgov.qs,
-                    title="Central government list experiment",
-                    notes=c("SI = sensitive item")) %>% 
-  kable_styling(latex_options = c("striped"))
-
-localgov.qs <- listexp.qs %>% 
-  filter(as.numeric(Group) == 3) %>% 
-  select(c(`Number of items selected`, 
-           `Shown`,
-           `Year`))
-
-datasummary(`Number of items selected` ~ mean * Year * Shown,
-                    data=localgov.qs,
-                    title="Local government list experiment",
-                    notes=c("SI = sensitive item")) %>% 
-  kable_styling(latex_options = c("striped"))
-```
 
 ## Additional analysis {#sec-analysis}
 

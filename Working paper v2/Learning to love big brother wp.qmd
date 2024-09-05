@@ -3,7 +3,6 @@ title: "Learning to love big brother: Chinese attitudes toward online privacy af
 author: "Andrew MacDonald"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 format: pdf
-abstract: test
 keywords: 
   - Digital Privacy
   - Covid-19
@@ -78,11 +77,53 @@ ca.gp <- cronbach(cronbach.gp)
 
 ## Literature review {#sec-litreview}
 
+### Background
+
+How online users feel about government tracking of their data is a subject that has been studied in a wide variety of contexts yet the research has produced highly divergent results, depending on the technology studied, the cultural context, and the exact framing of the research question. Compounding this problem, to date, most of the research on the topic has been conducted primarily on U.S. or Western respondents, with comparatively fewer researchers reporting on developing or non-democratic countries. This research agenda has taken on new urgency during the Covid-19 pandemic, as governments around the globe engaged in highly intrusive monitoring and data collection activities.
+
+From the pre-Covid privacy literature, three important findings stand out. The first is that demographic variables are important predictors of attitudes toward online privacy. In an important early study of early Internet users, Sheehan has found that education and age are two important determinants of online privacy attitudes @sheehan2002. Others have replicated this result and found that characteristics such as gender, social setting, and income also play a role in forming privacy expectations [@anwar2017; @büchi2021; @lee2019]. The second finding is that respondent personal experience with privacy and technology is also an important factor. Malandrino et al. finds that users who work in ICT fields are actually less concerned with their online privacy @malandrino2013. Dupree et al. suggest that there are possibly several types of online user typologies, with user experience being a variable that matters but can potentially shift respondents to an extreme view in either direction @dupree2016. Gerber et al., as part of a meta-analysis of privacy, notes that young people may be more conscious of their online privacy context and therefore are more active in policing their privacy boundaries @gerber2012. These findings all suggest that personal characteristics and background are important determinants of privacy attitudes.
+
+The third finding, more specific to the focus of this paper, is that trust in the state is an important predictor variable in whether respondents feel anxious about government monitoring of their online behavior. Pavone and Esposti found that users either trusted the government and therefore did not find proposed monitoring concerning, or did not trust the government and therefore believed any monitoring to be threatening @pavone2012. Trüdinger and Steckermeier find that acceptance of government surveillance in Germany depends on how much respondents trust the state @trüdinger2017.
+
+The literature on government monitoring of citizens increased dramatically after the onset of the Covid-19 pandemic, though most of the findings echo those of Pavone and Esposti and other earlier scholars. Because the Covid-19 pandemic resulted in a wide range of new tracking technologies, scholars have focused directly on how users and respondents felt regarding government monitoring (for a sampling of the vast literature, see [@abramova2022; @garrett2021; @ioannou2021; @ong; @wnuk2020]). To highlight one example of this Covid-era research, Ioannou and Tussyadiah highlights the linkage between state trust, surveillance acceptance, and perceived necessity in explaining the variation in willingness to use contact tracing apps in the U.S.
+
+How these findings translate to the Chinese context is somewhat less clear. While recent research has begun to develop a picture of Chinese attitudes toward government monitoring, there are still some important unanswered questions. Several studies have found that Chinese respondents are generally more willing to use or accept government surveillance technologies across several different technology types [@habich-sobiegalla2023; @kostka2021; @kostka2024]. Steinhardt et al. find that users in China tend to trust the government with their data more than they do with private corporations @steinhardt2022. Liu and Kostka, in separate papers, both find that trust in the state is correlated with increased acceptance of the social credit system (Liu) and surveillance more broadly (Kostka) [@kostka2023; @liu2022].
+
+### Contribution
+
+This work aims to make two contributions to the literature on government surveillance. First, it seeks to help clarify which demographic and attitudinal factors are important in predicting privacy concerns. Previous findings of support for respondent attributes that predict acceptance of government surveillance do not find support here may suggest features of the Chinese context that lead to this variation in results. This variation may also apply to other non-democratic or non-Western countries.
+
+Second, there have been very few studies of privacy atttitudes that are not purely cross-sectional. The survey used in this paper was conducted in two waves, before the strict Covid controls were enacted in China, and another wave conducted just after the controls were relaxed. During this time, as You et al. have found, the Chinese response to the pandemic engendered significant criticism and resulted in a decline in trust of government @you2024. This study can help understand if these events, and the intense government monitoring that was used to control the pandemic, lead to any significant changes in the relationship between state trust and acceptance of government surveillance.
+
 ### Hypotheses
+
+The existing literature and the specific features of this survey generates a set of testable hypotheses, including:
+
+$H_1$: Demographic variables such as education and income predict acceptance of government monitoring
+
+A finding here that certain demographic factors are or are not relevant in China may suggest some contextual factors that create differences from China to the other areas studied.
+
+$H_{2a}$ Technical know-how and privacy consciousness predicts acceptance of government monitoring
+
+$H_{2b}$: Technical know-how and privacy consciousness does not predict acceptance of government monitoring
+
+The Chinese online information environment is highly controlled, particularly with respect to any information critical of the government. Privacy knowledge and technical skill may therefore be uncorrelated or positively correlated with support for government monitoring, contra the existing literature that has been developed in the West.
+
+$H_3$: Trust in government should predict acceptance of government monitoring
+
+Both existing studies of Chinese users and those outside of China have all found this relationship to be a relatively robust one.
+
+$H_4$: The pandemic experience has altered the relationship between institutional trust and acceptance of tracking
+
+Given the apparent decline in institutional trust as a result of the pandemic, and the expectation derived from $H_3$, this research expects to find some change in the relationship between these variables.
+
+$H_5$: Factors that drive concern regarding government tracking should differ from concerns regarding private tracking
+
+This hypothesis is a somewhat speculative one, but, given that previous research has found significant differences in the level of acceptance of tracking between public and private sources in China, and, that trust in government is likely not a factor for accepting private tracking, there may be some differences in the factors that predict these two variables.
 
 ## Data and summary statistics {#sec-datasummary}
 
-The data for this project was collected via a commercial survey firm in two waves, February of 2021 and March of 2023. In both the first and second waves, Wuhan was oversampled, with residents of the city set to be 10% of respondents. The 2021 survey had an n=1500 and the second had an n=2000. Questions on the two surveys were identical other than a minor change to a question that referenced a specific date. The timing of the two surveys came at two very different points in time of China's Covid-19 experience. The first survey was conducted approximately seven months after the last round of restrictions were lifted on the city of Wuhan. China, at the time, was essentially closed to foreign travel but otherwise had little in the way of day to day public health restrictions. Nationwide, daily Covid cases hovered around the single digits [@wuhanlo2021]. China was at a very different point in its journey in March of 2023. The year of 2022 saw widespread, intrusive digital monitoring introduced. Many major cities, such as Shanghai, Xi'an, and Shenzhen, underwent long and painful city-wide lockdown procedures. At the end of 2023, under the weight of a spiraling number of cases and widespread protests (termed the White Paper Revolution), China finally abandoned its zero Covid policy [@mao2022]. The two waves of these surveys aim to compare attitudes before and after this widespread and highly visible change in digital monitoring strategies.
+The data for this project was collected via a commercial survey firm in two waves, February of 2021 and March of 2023. The 2021 survey had an n=1500 and the second had an n=2000. Questions on the two surveys were identical other than a minor change to a question that referenced a specific date. The timing of the two surveys came at two very different points in time of China's Covid-19 experience. The first survey was conducted approximately seven months after the last round of restrictions were lifted on the city of Wuhan. China, at the time, was essentially closed to foreign travel but otherwise had little in the way of day to day public health restrictions. Nationwide, daily Covid cases hovered around the single digits [@wuhanlo2021]. China was at a very different point in its journey in March of 2023. The year of 2022 saw widespread, intrusive digital monitoring introduced. Many major cities, such as Shanghai, Xi'an, and Shenzhen, underwent long and painful city-wide lockdown procedures. At the end of 2023, under the weight of a spiraling number of cases and widespread protests (termed the White Paper Revolution), China finally abandoned its zero Covid policy [@mao2022]. The two waves of these surveys aim to compare attitudes before and after this widespread and highly visible change in digital monitoring strategies.
 
 The demographics of the 2021 and 2023 surveys are presented in @tbl-demographics.
 
@@ -106,9 +147,9 @@ datasummary_balance( ~ 1, data=demo.qs,
   kable_styling(c("repeat_header"))
 ```
 
-As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban *hukou*. 
+As is typical of online surveys in China, the sample respondents skew somewhat younger and more educated. Comparing the two waves, there are some modest demographic differences (notably education and marriage) differences between the two samples. As will be shown in @sec-analysis, these minor differences do not appear to change any of the substantive results. Focusing on the 2023 survey, the modal respondent is someone from a small city, male, married, working in a white collar job at a small enterprise, who earns about 10,000 RMB a month and has an urban *hukou*.
 
-To simplify the analysis that follows, the variables are recoded such that income is divided into three categories (low, middle, and high) and education is divided into two categories, those with college education and those without. The regressions in the following sections were tested with alternate specifications of these categorical variables (code for these regressions available at the author's webite) and the key results were unaffected. 
+To simplify the analysis that follows, the variables are recoded such that income is divided into three categories (low, middle, and high) and education is divided into two categories, those with college education and those without. The regressions in the following sections were tested with alternate specifications of these categorical variables (code for these regressions available at the author's website) and the key results were unaffected.
 
 ```{r}
 #| label: tbl-respvarindex
@@ -132,10 +173,9 @@ kbl(track.text, col.names = NULL, escape=F, align="l") %>%
   column_spec(2, width="5in", bold=FALSE)
 ```
 
+The key response variable for the following analysis is an index variable created by combining the results of the four questions in @tbl-respvarindex, rescaled to be between zero and one. It is true that previous research has found that Chinese respondents place lower levels of trust in local governments as compared to central governments [@chen2017; @zhong2014]. However, the correlation between `GM1` and `GM2` is `r round(cor(as.numeric(privacy$gm1), as.numeric(privacy$gm2)), digits=2)` and the correlation between `TRACK1` and `TRACK2` is `r round(cor(as.numeric(privacy$track4), as.numeric(privacy$track5)), digits=2)`. Additionally, as shown in the online appendices, each of the major regression results in @sec-analysis do not demonstrate major changes if the same variables are regressed on each of the survey question items individually. Indicating their close relationship, the variables taken together have a Cronbach's $\alpha$ of `r round(ca.tt$alpha, digits=2)`. Intuitively, this high level of relatedness makes sense as while respondents have some background attitudes about the difference between central and local governments, they may not easily be able to identify at which level government tracking occurs.
 
-The key response variable for the following analysis is an index variable created by combining the results of the four questions in @tbl-respvarindex, rescaled to be between zero and one. It is true that previous research has found that Chinese respondents place lower levels of trust in local governments as compared to central governments (CITE). However, the correlation between `GM1` and `GM2` is `r round(cor(as.numeric(privacy$gm1), as.numeric(privacy$gm2)), digits=2)` and the correlation between `TRACK1` and `TRACK2` is `r round(cor(as.numeric(privacy$track4), as.numeric(privacy$track5)), digits=2)`. Additionally, as shown in the online appendices, each of the major regression results in @sec-analysis do not demonstrate major changes if the same variables are regressed on each of the survey question items individually. Indicating their close relationship, the variables taken together have a Cronbach's $\alpha$ of `r round(ca.tt$alpha, digits=2)`. Intuitively, this high level of relatedness makes sense as while respondents have some background attitudes about the difference between central and local governments, they may not easily be able to identify at which level government tracking occurs.
-
-Finally, there has been some debate as to the extent of preference falsification on online surveys in China. To test for preference falsification, the surveys also contained several list experiment questions. List experiments have been used in a number of surveys (CITE) to allow residents a confidential method to express their true attitudes about topics such as racial views, sexual assault experience, and political views. While (CITE) points out that list experiments should not be seen as silver bullet to the problem of preference falsification, the results of the list experiments (also available in the online appendices) roughly match the answers to the component questions that comprise the response variable index. 
+Finally, there has been some debate as to the extent of preference falsification on online surveys in China. To test for preference falsification, the surveys also contained several list experiment questions. List experiments have been used in a number of surveys to allow residents a confidential method to express their true attitudes about topics such as racial views, sexual assault experience, and political views [@redlawsk2010; @moseson2017]. While Glynn (@glynn2013) points out that list experiments should not be seen as silver bullet to the problem of preference falsification, the results of the list experiments (also available in the online appendices) roughly match the answers to the component questions that comprise the response variable index.
 
 Overall, the survey data should provide a robust test to arbitrate between the hypotheses posed in @sec-litreview.
 
@@ -143,9 +183,7 @@ Overall, the survey data should provide a robust test to arbitrate between the h
 
 ### Predicting citizen attitudes about government monitoring
 
-The first set of models considers the question of which demographic variables predict variation in attitudes toward being tracked by the government. (stuff related to lit review)
-
-The key predictor variables included in @tbl-citizenatt are the tech savvy index (TSI) and the knowledge index (KI). The items used to construct each are listed in @sec-appendix. The Cronbach's $\alpha$ for each set of variables is `r round(ca.ts$alpha, digits=2)` and `r round(ca.k$alpha, digits=2)` respectively, indicating that the questions are suitable for use in an index. 
+The first set of models considers the question of which demographic variables predict variation in attitudes toward being tracked by the government. Overall, the central finding is that the demographic variables are relatively weak predictors of acceptance of government monitoring. The key predictor variables included in @tbl-citizenatt are the standard suite of demographic variables, the tech savvy index (TSI), and the knowledge index (KI). The items used to construct the two indicies variables are listed in @sec-appendix. The Cronbach's $\alpha$ for each of the two variables are `r round(ca.ts$alpha, digits=2)` and `r round(ca.k$alpha, digits=2)` respectively, indicating that the questions are suitable for use in an index.
 
 ```{r}
 #| label: tbl-citizenatt
@@ -214,11 +252,11 @@ The coefficients generally indicate effects in the direction expected. Older res
 
 However, with respect to the magnitude of the coefficients, the response variable is scaled between zero and one with a standard deviation of `r round(sd(privacy$total.track.gov.index), digits=2)`. Given this scaling, the coefficients of the categorical variables all have rather small effect sizes - being in year 2023 instead of year 2021 produces a shift in the response variable of about a third of a standard deviation. For the other categorical variables, while some reach significance, they have even smaller effect sizes. The tech savvy index has a standard deviation of `r round(sd(privacy$ts.index), digits=2)`. The coefficient of `TSI` indicates the impact of a one unit change in the index (going from its minimum to its maximum) on the response variable. However, a more typical shift in `TSI` produces an effect only one fifth as large, or about a fifth to a tenth of a standard deviation change in the response variable. Similarly, for `KI`, a typical shift in the predictor variable leads to a nearly negligible change in the response variable.
 
-As can be inferred from the results in this table, the model fit is relatively poor. The poor model fit can also be seen in the very low $R^2$ values and in the extremely poor model residuals (available in the online appendices). Taken together, these results indicate that the available demographic factors do a poor job explaining variation in attitudes towards government tracking. 
+As can be inferred from the results in this table, the model fit is relatively poor. The poor model fit can also be seen in the very low $R^2$ values and in the extremely poor model residuals (available in the online appendices). Taken together, these results indicate that the available demographic factors do a poor job explaining variation in attitudes towards government tracking, suggesting that the Chinese context may have other factors that are more important and relevant to predicting support for government tracking.
 
 ### Does government trust affect attitudes?
 
-Another plausible relationship is that generalized trust in government is a strong predictor of attitudes toward government monitoring. Similar to the key variables in the preceding section, the measure of both local government and central government performance are combined into an index (`GPI`). As noted in @sec-datasummary, while there has been an observed gap in measurement of the two concepts in previous literature (and in these surveys), the responses to the two questions are nevertheless highly correlated ($\rho=`r round(cor(as.numeric(privacy$gp1), as.numeric(privacy$gp2)), digits=2)`$). To the extent that they measure disjoint opinions, models 1b and 1c take central government performance alone and local government performance alone, as the response variables.
+Another plausible relationship is that generalized trust in government is a strong predictor of attitudes toward government monitoring. Similar to the key variables in the preceding section, the measure of both local government and central government performance are combined into an index (`GPI`). As noted in @sec-datasummary, while there has been an observed gap in measurement of the two concepts in previous literature (and in these surveys), the responses to the two questions are nevertheless highly correlated ($\rho=`r round(cor(as.numeric(privacy$gp1), as.numeric(privacy$gp2)), digits=2)`$). To the extent that they measure disjoint opinions, models `1b` and `1c` take central government performance alone and local government performance alone, as the response variables.
 
 ```{r}
 #| label: tbl-governmentatt
@@ -288,7 +326,7 @@ modelsummary(models,
                              "gp2.rescale" = "LG performance"))
 ```
 
-The coefficients on in @tbl-governmentatt indicate that government performance is a much stronger predictor of attitudes towards government tracking than the index demographic variables. In model 1, a one standard deviation increase in the government performance index (`r round(sd(privacy$gp.index), digits=2)`) predicts about a one third of a standard deviation change in attitudes towards government tracking, a relatively significant effect for an attitudinal survey. Additionally, the two interaction terms are also both significant. The effect of these interaction terms can be viewed in @fig-marginplotperform. Education lessens the impact of government performance on acceptance of government tracking while year 2023 increases the impact. Finally, the model fit diagnostics have improved, indicating a better model fit.
+The coefficients on in @tbl-governmentatt indicate that government performance is a much stronger predictor of attitudes towards government tracking than the index demographic variables. In model `1`, a one standard deviation increase in the government performance index (`r round(sd(privacy$gp.index), digits=2)`) predicts about a one third of a standard deviation change in attitudes towards government tracking, a relatively significant effect for an attitudinal survey. Additionally, the two interaction terms are also both significant. The effect of these interaction terms can be viewed in @fig-marginplotperform. Education lessens the impact of government performance on acceptance of government tracking while year 2023 increases the impact. Finally, the model fit diagnostics have improved, indicating a better model fit.
 
 ```{r}
 #| label: fig-marginplotperform
@@ -305,7 +343,7 @@ plot_model(mod6, type = "pred",
            ci.lvl = NA)
 ```
 
-As expected, government performance, controlling for demographic factors, is a relatively strong predictor of acceptance of government performance. According to the model, a positive view of government performance is associated with an increased acceptance of government monitoring. However, the relationship is likely more complex than this story, particularly given the tumultuous events of the 2022 Covid-19 lockdowns in China. To further explore how these factors interact with each other, the next section develops a mediation model to better understand the causal factors at play.
+As expected, government performance, controlling for demographic factors, is a relatively strong predictor of acceptance of government performance. According to the model, a positive view of government performance is associated with an increased acceptance of government monitoring. However, the relationship is likely more complex than this story, particularly given the tumultuous events of the 2022 Covid-19 lockdowns in China. To further explore how these factors interact with each other, the next section develops a mediation model to better understand how this relationship may have changed due to the events of 2022.
 
 ### Changing attitudes since the pandemic
 
@@ -331,7 +369,7 @@ ggdag(dag, layout="circle") +
   theme_dag()
 ```
 
-To operationalize this model, the first step is to create a latent demographics variable with the demographic factors previously used in regressions in the earlier sections loading onto this variable. `COVID` is operationalized by the `year` variable. Admittedly, this is not a precise mapping. The `year` variable actually measures all changes between survey waves not accounted for by other variables. With respect to government tracking acceptance attitudes, however, this assumption can be justified by the fact that the Covid-19 experience was both a daily and often traumatic one for the Chinese public; it was a time period that involved constant and invasive technological monitoring. If the model does indicate that the `year` variable predicts significant change in the response variable over the two year difference between survey waves, it would be hard to imagine any other plausible cause. Nevertheless, it is important to keep in mind that it is only a proxy measurement. These variables (`year` for `COVID`, `GP`, `TA`, and `DEMO`) are entered into a structural equation model with paths constrained to that described by the DAG in @fig-dag and then the parameters are estimated using the `lavaan` library in `R`.
+To operationalize this model, the first step is to create a latent demographics construct with the demographic variables previously used in regressions in the earlier sections loading onto this construct. `COVID` is operationalized by the `year` variable. Admittedly, this is not a precise mapping. The `year` variable actually measures all changes between survey waves not accounted for by other variables. With respect to government tracking acceptance attitudes, however, this assumption can be justified by the fact that the Covid-19 experience was both a daily and often traumatic one for the Chinese public; it was a time period that involved constant and invasive technological monitoring. If the model does indicate that the `year` variable predicts significant change in the response variable over the two year difference between survey waves, it would be hard to imagine any other plausible cause. Nevertheless, it is important to keep in mind that it is only a proxy measurement. These variables (`year` for `COVID`, `GP`, `TA`, and `DEMO`) are entered into a structural equation model with paths constrained to that described by the DAG in @fig-dag and then the parameters are estimated using the `lavaan` library in `R`.
 
 ```{r}
 #| label: tbl-mediationmodel
@@ -382,9 +420,7 @@ modelsummary(fitmod,
               notes = list("Demographic factor variable loadings omitted"))
 ```
 
-The results from this analysis in @tbl-mediationmodel confirm some of the previous findings and also reveal some interesting new features of the data. As before, government performance plays an important role in determining tracking acceptance. Similarly, demographic questions do help predict tracking acceptance, but only by a little bit. Demographics do not help predict views on government performance, and therefore, it is not surprising that demographics does not have an indirect effect on tracking acceptance through government performance either. However, the Covid-19 experience, as operationalized by the year variable, does 1) positively increase tracking acceptance (direct path) 2) negatively decreases government performance evaluations (direct path) and 3) negatively decreases tracking acceptance through government performance evaluations (indirect path). The size of the coefficients indicates that the sum of the effects is still positive on tracking acceptance. 
-
-
+The results from this analysis in @tbl-mediationmodel confirm some of the previous findings and also reveal some interesting new features of the data. As before, government performance plays an important role in determining tracking acceptance. Similarly, demographic questions do help predict tracking acceptance, but only by a little bit. Demographics do not help predict views on government performance, and therefore, it is not surprising that demographics does not have an indirect effect on tracking acceptance through government performance either. However, the Covid-19 experience, as operationalized by the year variable, does 1) positively increase tracking acceptance (direct path) 2) negatively decreases government performance evaluations (direct path) and 3) negatively decreases tracking acceptance through government performance evaluations (indirect path). The size of the coefficients indicates that the sum of the effects is still positive on tracking acceptance. These results indicate that the Covid-19 experience in China did have the effect identified by @you2024, which did result in the hypothesized decrease in acceptance of government tracking. However, this decrease in support was cancelled out by the direct effect of Covid-19 on acceptance of tracking. However, this decrease in support was cancelled out by the direct effect of Covid-19 on acceptance of tracking. A plausible interpretation of this is that, as @kostka2024 has found, respondents agree that the tracking during Covid-19 lockdowns was necessary, but, because of the government incompetence in responding to the spread of the virus, they were a little less likely to positively agree than they might otherwise have been.
 
 ### Comparing attitudes to private monitoring
 
@@ -459,7 +495,9 @@ tab %>%
   add_header_above(c(" " = 1, "Public TA" = 3, "Private TA" = 3))
 ```
 
-The results here suggest that the determinants of attitudes towards private company tracking are somewhat different than those that determine attitudes towards public tracking. The `year` variable is not significant for the private tracking models, while the tech savvy coefficient has roughly doubled. Unsurprisingly, government performance is also not related to private tracking acceptance. Finally, the intercept is generally lower for private tracking acceptance, indicating that respondents are less willing to accept private tracking, all things being equal. 
+The results here suggest that the determinants of attitudes towards private company tracking are somewhat different than those that determine attitudes towards public tracking. The `year` variable is not significant for the private tracking models, while the tech savvy coefficient has roughly doubled. Unsurprisingly, government performance is also not related to private tracking acceptance. Finally, the intercept is generally lower for private tracking acceptance, indicating that respondents are less willing to accept private tracking, all things being equal.
+
+These results lend support to the hypothesis that acceptance of public tracking has different determinants than those for private tracking and also supports previous research that finds a significant difference between acceptance of these two types of monitoring. The `year` variable being insignificant for the private tracking indicates that the pandemic-era tracking was not perceived as being fundamentally related to commercial monitoring.
 
 ## Conclusion {#sec-conclusion}
 
@@ -477,8 +515,12 @@ The results here suggest that the determinants of attitudes towards private comp
 ### Index variable definitions
 
 ```{r}
-#| label: tbl-ts.q.text
-#| tbl-cap: Tech savvy index questions
+#| label: tbl-indexvars
+#| tbl-cap: Index variable component questions
+#| tbl-subcap: 
+#|     - "Tech savvy questions"
+#|     - "Privacy knowledge questions"
+#|     - "Governmet performance questions"
 
 table.text <- list()
 
@@ -494,11 +536,6 @@ for(line in table.text) {
 
 kbl(ts.text, col.names = NULL) %>% 
   kable_styling()
-```
-
-```{r}
-#| label: tbl-kw.q.text
-#| tbl-cap: Knowledge index questions
 
 table.text <- list()
 
@@ -516,11 +553,6 @@ for(line in table.text) {
 
 kbl(kw.text, col.names = NULL) %>% 
   kable_styling()
-```
-
-```{r}
-#| label: tbl-gp.q.text
-#| tbl-cap: Government performance index questions
 
 table.text <- list()
 
