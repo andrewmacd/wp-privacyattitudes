@@ -1,5 +1,5 @@
 ---
-title: "Learning to love big brother: Chinese attitudes toward online privacy after the pandemic"
+title: "(No) Privacy Please!: How China Obtains Citizen Consent for Online Monitoring"
 author: "Andrew MacDonald"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 format: pdf
