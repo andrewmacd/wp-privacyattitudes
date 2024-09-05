@@ -194,120 +194,27 @@ selectInput(
   selected = "Demographics"
 )
 
-uiOutput("privacymenu")
+uiOutput("theory")
 ```
 
-```{r theorymenudef, context="server"}
+```{r theorydef, context="server"}
 output$pubprivatemenu <- renderUI({
   
-  if(input$theory=="Tech savvy") {
-    model1 <- mod_list_soc_update_t[[1]]
-    model2 <- mod_list_soc_update_t[[2]]
-    
-    ts.models <- list(
-        "Government TA"    = model1,
-        "Private TA"       = model2
-    )
-    
-    modelsummary(ts.models, 
-                 notes = list("Reference values: no college education, low income, female, party member, countryside",
-                          sd.text1,
-                          sd.text2),
-                 coef_rename = c("age" = "Age",
-                             "education.binaryCollege" = "College education",
-                             "income.simpleMiddle income" = "Middle income",
-                             "income.simpleHigh income" = "High income",
-                             "sexMale" = "Male",
-                             "party.member.statusNo" = "Not a party member",
-                             "locationSmall city" = "Location: small city",
-                             "locationMid-sized city" = "Location: mid city",
-                             "locationBig city" = "Location: big city",
-                             "year2023" = "Year 2023",
-                             "ts.index" = "TSI",
-                             "k.index" = "KI",
-                             "gp.index" = "GPI"),
-             statistic = NULL,
-             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
-             output="gt") %>% 
-      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
-                       "▲, ▼ indicates p>0.05")) %>% 
-      text_transform(locations = cells_body(), 
-                 fn = function(x) {
-                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
-                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
-                 })
-  } else if(input$model1=="Knowledge"){
-         model1 <- mod_list_soc_update_t[[3]]
-    model2 <- mod_list_soc_update_t[[4]]
-    
-    k.models <- list(
-        "Government TA"    = model1,
-        "Private TA"       = model2
-    )
-    
-    modelsummary(k.models, 
-                 notes = list("Reference values: no college education, low income, female, party member, countryside",
-                          sd.text1,
-                          sd.text2),
-                 coef_rename = c("age" = "Age",
-                             "education.binaryCollege" = "College education",
-                             "income.simpleMiddle income" = "Middle income",
-                             "income.simpleHigh income" = "High income",
-                             "sexMale" = "Male",
-                             "party.member.statusNo" = "Not a party member",
-                             "locationSmall city" = "Location: small city",
-                             "locationMid-sized city" = "Location: mid city",
-                             "locationBig city" = "Location: big city",
-                             "year2023" = "Year 2023",
-                             "ts.index" = "TSI",
-                             "k.index" = "KI",
-                             "gp.index" = "GPI"),
-             statistic = NULL,
-             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
-             output="gt") %>% 
-      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
-                       "▲, ▼ indicates p>0.05")) %>% 
-      text_transform(locations = cells_body(), 
-                 fn = function(x) {
-                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
-                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
-                 })
-  } else if(input$model1=="Government performance"){
-                model1 <- mod_list_soc_update_t[[5]]
-    model2 <- mod_list_soc_update_t[[6]]
-    
-    gp.models <- list(
-        "Government TA"    = model1,
-        "Private TA"       = model2
-    )
-    
-    modelsummary(gp.models, 
-                 notes = list("Reference values: no college education, low income, female, party member, countryside",
-                          sd.text1,
-                          sd.text2),
-                 coef_rename = c("age" = "Age",
-                             "education.binaryCollege" = "College education",
-                             "income.simpleMiddle income" = "Middle income",
-                             "income.simpleHigh income" = "High income",
-                             "sexMale" = "Male",
-                             "party.member.statusNo" = "Not a party member",
-                             "locationSmall city" = "Location: small city",
-                             "locationMid-sized city" = "Location: mid city",
-                             "locationBig city" = "Location: big city",
-                             "year2023" = "Year 2023",
-                             "ts.index" = "TSI",
-                             "k.index" = "KI",
-                             "gp.index" = "GPI"),
-             statistic = NULL,
-             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
-             output="gt") %>% 
-      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
-                       "▲, ▼ indicates p>0.05")) %>% 
-      text_transform(locations = cells_body(), 
-                 fn = function(x) {
-                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
-                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
-                 })
+  if(input$theory=="Demographics") {
+ dag <- dagitty("dag {
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+DEMO -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+  } else if(input$theory=="Government performance"){
+
+  } else if(input$theory=="Government performance"){
+
+  } else if(input$theory=="Government performance"){
+
   } 
 })
 ```
