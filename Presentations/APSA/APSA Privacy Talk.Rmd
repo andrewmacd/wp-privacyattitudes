@@ -194,21 +194,26 @@ selectInput(
   selected = "Demographics"
 )
 
-uiOutput("theory")
+uiOutput("theorymenu")
 ```
 
-```{r theorydef, context="server"}
-output$pubprivatemenu <- renderUI({
+```{r theorymenudef, context="server"}
+output$theorymenu <- renderUI({
   
-  if(input$theory=="Demographics") {
- dag <- dagitty("dag {
+dag.simple <- dagitty("dag {
 DEMO [exposure,pos=\"-1.699,-0.231\"]
 TA [outcome,pos=\"-0.188,-0.236\"]
 DEMO -> TA
-}")
+}")  
 
-ggdag(dag, layout="circle") +
-  theme_dag()
+g.dag.simple <- ggdag(dag.simple) + 
+      theme_dag()
+
+library(ggdag)
+library(dagitty)
+  
+  if(input$theory=="Demographics") {
+    g.dag.simple
   } else if(input$theory=="Government performance"){
 
   } else if(input$theory=="Government performance"){
