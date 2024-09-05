@@ -1,0 +1,12 @@
+name: apsa2024
+title: apsa2024
+username: andrewm
+account: andrewm
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12618293
+bundleId: 9066873
+url: https://andrewm.shinyapps.io/apsa2024/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

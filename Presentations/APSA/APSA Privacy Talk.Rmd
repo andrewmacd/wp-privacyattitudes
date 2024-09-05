@@ -1,0 +1,639 @@
+---
+title: "(No) privacy please!"
+subtitle: "How China obtains citizen consent for online monitoring"
+author: "Andrew W. MacDonald"
+date: "September 5, 2024"
+output: 
+  learnr::tutorial:
+    toc_depth: 1
+    theme: readable
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(learnr)
+library(dagitty)
+library(ggdag)
+library(kableExtra)
+library(estimatr)
+library(ggthemes)
+library(modelsummary)
+library(gt)
+library(lavaan)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+# set default chart theme
+theme_set(theme_tufte())
+
+load(file="www/privacy.attitudes.RData")
+
+replace_estimates <- function(mod_list_func) {
+  
+  working <- mod_list_func
+  
+  for(model in 1:length(working)) {
+    for(obs in 1:nrow(working[[model]]$tidy)) {
+      working[[model]]$tidy$estimate[obs] <- case_when(working[[model]]$tidy$p.value[obs] > 0.05 ~ "—",
+                                working[[model]]$tidy$estimate[obs] >= 0 ~"▲",
+                                working[[model]]$tidy$estimate[obs] < 0 ~ "▼")
+    }
+  }
+  
+  return(working)
+}
+
+replace_estimates_single_model <- function(mod_list_func) {
+  
+  working <- mod_list_func
+  
+  for(obs in 1:nrow(working$tidy)) {
+      working$tidy$estimate[obs] <- case_when(working$tidy$p.value[obs] > 0.05 ~ "—",
+                                working$tidy$estimate[obs] >= 0 ~"▲",
+                                working$tidy$estimate[obs] < 0 ~ "▼")
+    }
+
+  
+  return(working)
+}
+```
+
+
+## Where to find this research
+
+```{r qrcode, out.width = "50%", fig.cap="QR code for this presentation"}
+knitr::include_graphics("www/bit.ly_2024apsaprivacy.png")
+```
+
+Presentation website: https://bit.ly/2024apsaprivacy
+
+[Github repository](https://github.com/andrewmacd/wp-privacyattitudes)
+
+[Working paper](https://github.com/andrewmacd/wp-privacyattitudes/blob/main/Working%20paper%20v2/Learning-to-love-big-brother-wp.pdf)
+
+## Why this project?
+
+```{r whyproject, out.width = "100%", fig.cap="CCTV cameras near Tiananmen Square^[Image credit: https://www.cnbc.com/2020/02/25/coronavirus-china-to-boost-mass-surveillance-machine-experts-say.html]"}
+knitr::include_graphics("www/chinasurveillance.jpeg")
+```
+
+## What are the goals of this project?
+
+* What are the determinants of how Chinese feel about government monitoring?
+* Not obvious!
+* How did Covid change things?
+* Also not obvious!
+
+```{r goals, out.width = "100%", fig.cap="Covid-era health code^[Image credit: https://edition.cnn.com/2020/04/15/asia/china-coronavirus-qr-code-intl-hnk/index.html]"}
+knitr::include_graphics("www/healthcode.jpeg")
+```
+
+## What determines acceptance of government monitoring? - literature review
+
+### Demographics matter
+
+### Trust in government
+
+```{r overalltrust, out.width = "50%", fig.cap="US Covid-19 protests", fig.show='hold',fig.align='left'}
+knitr::include_graphics(c("www/covidprotestanti.jpeg", "www/covidprotestpro.jpg"))
+```
+
+### Chinese trust in government
+
+```{r trust, out.width = "100%", fig.cap="Measure of trust in Chinese government^[Image credit: Wu et. al. https://doi.org/10.1080/10670564.2021.1893558]"}
+knitr::include_graphics("www/trust.jpeg")
+```
+
+### Covid was a possible game changer
+
+```{r whitepaper, out.width = "100%", fig.cap="White paper protestors in Beijing^[Image credit: https://www.upi.com/Top_News/World-News/2022/11/28/Xi-Jinping-protests-Beijing-Shanghai-white-paper-lockdowns-COVID-19/8941669623371/]"}
+knitr::include_graphics("www/whitepaper.jpeg")
+```
+
+## Project theory and data
+
+### Hypotheses
+
+- $\mathbf{H1}: Demographics \rightarrow variation\:in\:government\:tracking\:acceptance$
+  + *Reason*: Individual features matter<br><br>
+- $\mathbf{H2}: Goverment\:trust \rightarrow acceptance\:of\:government\:tracking$
+  + *Reason*: Generalized trust flows to specific issue trust<br><br>
+- $\mathbf{H3}: Covid\:experience\rightarrow variation\:in\:government\:tracking\:acceptance$
+  + *Reason*: Traumatic Covid-19 experience<br><br>
+- $\mathbf{H4}: Determinants\:of\:government\:tracking\:acceptance\neq determinants\:of\:private\:tracking\:acceptance$
+  + *Reason*: Government trust not relevant, other factors<br><br>
+
+### Theoretical models
+
+```{r theory1}
+dag <- dagitty("dag {
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+DEMO -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+
+```{r theory2}
+dag <- dagitty("dag {
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+```{r theory3}
+dag <- dagitty("dag {
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+DEMO -> GP
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+```{r theory4}
+dag <- dagitty("dag {
+COVID [pos=\"-0.212,-1.176\"]
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+COVID -> GP
+COVID -> TA
+DEMO -> GP
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+```{r theorymenu, out.width = "100%"}
+selectInput(
+  'theory', label = 'Theory: ',
+  choices = c("Demographics", "Government performance", "Demographics and Government performance", "Covid"), 
+  selected = "Demographics"
+)
+
+uiOutput("privacymenu")
+```
+
+```{r theorymenudef, context="server"}
+output$pubprivatemenu <- renderUI({
+  
+  if(input$theory=="Tech savvy") {
+    model1 <- mod_list_soc_update_t[[1]]
+    model2 <- mod_list_soc_update_t[[2]]
+    
+    ts.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(ts.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Knowledge"){
+         model1 <- mod_list_soc_update_t[[3]]
+    model2 <- mod_list_soc_update_t[[4]]
+    
+    k.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(k.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Government performance"){
+                model1 <- mod_list_soc_update_t[[5]]
+    model2 <- mod_list_soc_update_t[[6]]
+    
+    gp.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(gp.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } 
+})
+```
+
+### Data collection
+
+* Wave 1: March 2021, n=1500
+
+```{r wave1, out.width = "50%", fig.cap="Wuhan before and after the lockdown^[Image credits: https://www.japantimes.co.jp/news/2020/04/06/asia-pacific/china-wuhan-lockdown-coronavirus/, https://mixmag.net/read/thousands-music-festival-wuhan-water-park-news]", fig.show='hold',fig.align='left'}
+knitr::include_graphics(c("www/wuhanlockdown.jpeg", "www/wuhanparty.jpeg"))
+```
+
+* Wave 2: March 2023, n=2000
+
+```{r wave2, out.width = "100%", fig.cap="Shanghai mass Covid testing^[Image credit: https://www.bbc.com/news/world-asia-china-61307148]"}
+knitr::include_graphics("www/shanghailockdown.jpeg")
+```
+
+## Key results
+
+### Structural equation
+
+#### Estimated model
+
+```{r semmodelreview}
+dag <- dagitty("dag {
+COVID [pos=\"-0.212,-1.176\"]
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+COVID -> GP
+COVID -> TA
+DEMO -> GP
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+#### Results
+
+```{r semresults}
+sem.data <- privacy %>% 
+  mutate(education.binary = as.numeric(education.binary),
+         income.simple = as.numeric(income.simple),
+         sex = as.numeric(sex),
+         party.member.status = as.numeric(party.member.status),
+         location = as.numeric(location))
+
+specmod <- "
+### Specify directional paths/relations
+# Demographic features
+demo =~ s*age + t*education.binary + u*income.simple + v*sex + w*party.member.status + x*location
+# Path a
+gp.index ~ a*demo
+# Path b
+total.track.gov.index ~ b*gp.index 
+# Path c 
+total.track.gov.index ~ c*demo
+# Path d
+total.track.gov.index ~ d*year
+# Path e
+gp.index ~ e*year
+
+### Specify indirect effect (a*b)
+ab := a*b
+de := d*e
+"
+
+# Estimate mediation analysis model & assign to fitted model object
+fitmod <- sem(specmod,  # name of specified model object 
+              data=sem.data)  # name of data frame object
+
+models_sem <- list(
+  "Structural model"    = fitmod
+)
+
+mod_list_soc_sem <- modelsummary(models_sem, output = "modelsummary_list")
+mod_list_soc_update_sem <- as.list(mod_list_soc_sem)
+mod_list_soc_update_sem <- replace_estimates_single_model(mod_list_soc_update_sem)
+
+# Print summary of model results
+modelsummary(mod_list_soc_update_sem,
+             stars = TRUE,
+             coef_omit = "demo =~*",
+             coef_rename = c("gp.index ~ demo" = "DEMO to GP",
+                             "total.track.gov.index ~ gp.index" = "GP to TA",
+                             "total.track.gov.index ~ demo" = "DEMO to TA",
+                             "total.track.gov.index ~ year" = "COVID to TA",
+                             "gp.index ~ year" = "COVID to GP",
+                             "ab := a*b" = "DEMO to GP to TA",
+                             "de := d*e" = "COVID to GP to TA"),
+              notes = list("Demographic factor variable loadings omitted"),
+             output="gt") %>% 
+      tab_source_note(c("▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+```
+
+#### Interpretation
+
+```{r finalmodel}
+dag <- dagitty("dag {
+COVID [pos=\"-0.212,-1.176\"]
+DEMO [exposure,pos=\"-1.699,-0.231\"]
+GP [pos=\"-0.964,-0.841\"]
+TA [outcome,pos=\"-0.188,-0.236\"]
+COVID -> GP
+COVID -> TA
+DEMO -> TA
+GP -> TA
+}")
+
+ggdag(dag, layout="circle") +
+  theme_dag()
+```
+
+
+### Public vs. private monitoring
+
+```{r pubprivatemenu, out.width = "100%"}
+selectInput(
+  'model1', label = 'Model: ',
+  choices = c("Tech savvy", "Knowledge", "Government performance"), 
+  selected = "All"
+)
+
+uiOutput("pubprivatemenu")
+```
+
+```{r pubprivatemenudef, context="server"}
+comp.att <- privacy 
+
+g.ts.mod <- lm(data=comp.att, total.track.gov.index ~ age + 
+               education.binary +
+               income.simple + sex + 
+               party.member.status + location + year + ts.index)
+p.ts.mod <- lm(data=comp.att, pm.index ~ age + 
+               education.binary +
+               income.simple + sex + 
+               party.member.status + location + year + ts.index)
+g.k.mod <- lm(data=comp.att, total.track.gov.index ~ age + 
+              education.binary +
+              income.simple + sex + 
+              party.member.status + location + year + k.index)
+p.k.mod <- lm(data=comp.att, pm.index ~ age + 
+              education.binary +
+              income.simple + sex + 
+              party.member.status + location + year + k.index)
+g.gp.mod <- lm(data=comp.att, total.track.gov.index ~ age + 
+               education.binary +
+               income.simple + sex + 
+               party.member.status + location + year + gp.index)
+p.gp.mod <- lm(data=comp.att, pm.index ~ age + 
+               education.binary +
+               income.simple + sex + 
+               party.member.status + location + year + gp.index)
+
+models_t <- list(
+  "Government Tech Savvy"    = g.ts.mod,
+  "Private Tech Savvy"       = p.ts.mod,
+  "Government Knowledge"     = g.k.mod,
+  "Private Knowledge"        = p.k.mod,
+  "Government Performance"   = g.gp.mod,
+  "Private Performance"      = p.gp.mod 
+)
+
+mod_list_soc_t <- modelsummary(models_t, output = "modelsummary_list")
+mod_list_soc_update_t <- as.list(mod_list_soc_t)
+mod_list_soc_update_t <- replace_estimates(mod_list_soc_update_t)
+
+sd.text1 <- paste("Standard deviation of Public TA is: ",
+                                round(sd(privacy$total.track.gov.index), digits=2))
+sd.text2 <- paste("Standard deviation of Private TA is: ",
+                                round(sd(privacy$pm.index), digits=2))
+
+output$pubprivatemenu <- renderUI({
+  
+  if(input$model1=="Tech savvy") {
+    model1 <- mod_list_soc_update_t[[1]]
+    model2 <- mod_list_soc_update_t[[2]]
+    
+    ts.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(ts.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Knowledge"){
+         model1 <- mod_list_soc_update_t[[3]]
+    model2 <- mod_list_soc_update_t[[4]]
+    
+    k.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(k.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } else if(input$model1=="Government performance"){
+                model1 <- mod_list_soc_update_t[[5]]
+    model2 <- mod_list_soc_update_t[[6]]
+    
+    gp.models <- list(
+        "Government TA"    = model1,
+        "Private TA"       = model2
+    )
+    
+    modelsummary(gp.models, 
+                 notes = list("Reference values: no college education, low income, female, party member, countryside",
+                          sd.text1,
+                          sd.text2),
+                 coef_rename = c("age" = "Age",
+                             "education.binaryCollege" = "College education",
+                             "income.simpleMiddle income" = "Middle income",
+                             "income.simpleHigh income" = "High income",
+                             "sexMale" = "Male",
+                             "party.member.statusNo" = "Not a party member",
+                             "locationSmall city" = "Location: small city",
+                             "locationMid-sized city" = "Location: mid city",
+                             "locationBig city" = "Location: big city",
+                             "year2023" = "Year 2023",
+                             "ts.index" = "TSI",
+                             "k.index" = "KI",
+                             "gp.index" = "GPI"),
+             statistic = NULL,
+             gof_omit = 'AIC|BIC|RMSE|Log.Lik.|R2 Adj.',
+             output="gt") %>% 
+      tab_source_note(c("Reference categories are Less than middle, Income 0-2999, Female, Party member, Countryside",
+                       "▲, ▼ indicates p>0.05")) %>% 
+      text_transform(locations = cells_body(), 
+                 fn = function(x) {
+                   x <- gsub("▲", "<span style=\"color: green; font-size: 16pt;\",>▲</span>", x)
+                   x <- gsub("▼", "<span style=\"color: red; font-size: 16pt;\">▼</span>", x)
+                 })
+  } 
+})
+```
+
+## Implications and concluding thoughts
+
+### Hypotheses revisited
+
+- $\mathbf{H1}: Demographics \rightarrow variation\:in\:government\:tracking\:acceptance$
+  + **Reason**: Individual features matter
+  + **Result**: ![](www/no.png){width=20px}
+  + **Evidence**: Not presented here
+- $\mathbf{H2}: Goverment\:trust \rightarrow acceptance\:of\:government\:tracking$
+  + *Reason*: Generalized trust flows to specific issue trust
+  + **Result**: ![](www/yes.png){width=20px}
+  + **Evidence**: Both direct and indirect effects indicate that trust matters
+- $\mathbf{H3}: Covid\:experience\rightarrow variation\:in\:government\:tracking\:acceptance$
+  + **Reason**: Traumatic Covid-19 experience
+  + **Result**: ![](www/yes.png){width=20px}
+  + **Evidence**: Indirect effect lowers acceptance, direct effect increases acceptance
+- $\mathbf{H4}: Determinants\:of\:government\:tracking\:acceptance\neq determinants\:of\:private\:tracking\:acceptance$
+  + **Reason**: Government trust not relevant, other factors
+  + **Result**: ![](www/yes.png){width=20px}
+  + **Evidence**: Regression results across three different sets of predictors show significant differences
+
+### Final thoughts
+
+* Demographics don't seem to matter much
+* Trust is important, but what causes trust? Demographics do not seem to offer any clues
+* Covid-19 had a bifurcated impact, both positive and negative on acceptance of monitoring
+  + Positive maybe because respondents accepted the necessity of monitoring
+  + Negative because of the impact on government trust
+* Private monitoring has different determinants than government monitoring
+* Others?? Help me out!
+
+```{r qrcodeend, out.width = "50%", fig.cap="QR code for this presentation"}
+knitr::include_graphics("www/bit.ly_2024apsaprivacy.png")
+```
