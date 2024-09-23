@@ -185,8 +185,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={(No) Privacy Please!: How China Obtains Citizen Consent for Online Monitoring},
-  pdfauthor={Andrew MacDonald},
+  pdftitle={(No) Privacy Please!: What Determines Chinese Attitudes Toward Online Government Monitoring},
+  pdfauthor={Andrew W. MacDonald},
   pdfkeywords={Digital Privacy, Covid-19, Authoriatrian
 Regimes, Government Trust, China},
   colorlinks=true,
@@ -196,15 +196,84 @@ Regimes, Government Trust, China},
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{(No) Privacy Please!: How China Obtains Citizen Consent for
-Online Monitoring}
-\author{Andrew MacDonald}
-\date{2024-09-22}
+\title{(No) Privacy Please!: What Determines Chinese Attitudes Toward
+Online Government Monitoring}
+\author{Andrew W. MacDonald}
+\date{2024-09-23}
 
 \begin{document}
 \maketitle
+\begin{abstract}
+This study investigates what are the determinants of public opinion
+toward government monitoring in China. Existing literature on acceptance
+of government monitoring has several open questions, including to what
+extent demographic variables influence the relationship, how government
+trust is related to acceptance of government monitoring, and whether
+acceptance of public vs.~private monitoring has the same determinants.
+Using a two-wave survey of before and after the Covid-19 lockdowns in
+China, this survey finds that: 1) demographic factors do not appear to
+be related to acceptance of government monitoring; 2) government trust
+does predict attitudes, but the Covid-19 experience significantly
+modified this relationship, and 3) private monitoring acceptance does
+appear to have different determinants. The study concludes with
+consideration of some implications of these findings.
+\end{abstract}
 
 \section{Introduction}\label{sec-introduction}
+
+The dramatic events of the Covid-19 era brought to the foreground
+citizens' relationship toward government tracking technologies. Users
+were often required to install apps that monitored their location,
+stores they entered, and even whether or not they purchased cold
+medicines (McMorrow and Leng, 2022). Nowhere was this tracking more
+invasive than in China, a place in which the government mobilized
+technological tools to deeply peer into the daily lives of its citizens.
+The impact of these events on users' attitudes toward technological
+monitoring has still not been fully described. Using a unique dataset,
+this study resolves several open questions in the literature regarding
+how citizens view government monitoring.
+
+Citizen attitudes toward government intrusions on their online privacy
+is an understudied area with a number of open questions in the
+literature (Gómez-Barroso, 2018), particularly as how citizens view this
+topic in authoritarian and non-Western contexts. One open question is
+the extent to which demographic or privacy knowledge variables predict
+attitudes. Literature on generalized privacy have a number of
+suggestions as to which variables may be important in shaping attitudes,
+but little has been done to see if these findings apply to attitudes
+towards government monitoring. To the extent there is an agreement in
+the literature, it is that government trust should be strongly related
+government tracking attitudes, but this literature has not come to an
+agreement about how an event like Covid-19 lockdowns alter the
+relationship or provided direct causal tests of the relationship.
+Finally, the literature is not clear as to whether the variables that
+predict government tracking attitudes should also predict private
+tracking or not.
+
+To resolve these gaps in the literature, this study utilizes two waves
+of a survey conducted before and after the 2022 Covid-19 lockdowns in
+China to develop models of respondent attitudes. The first model
+examines a set of demographic and technology knowledge variables as
+predictors for government tracking acceptance and finds the models to be
+poor fits and few variables obtain statistical or substantive
+significance. The second set of models adds government trust as a
+predictor variable and finds, as expected, that government trust is an
+important predictor of attitudes. Next, a mediation model is developed
+that separates the direct effect of Covid-19 on government tracking
+attitudes from the indirect effect of Covid-19 influencing government
+trust, which then flows through to impacting attitudes on government
+monitoring. The mediation model finds that the overall effect of
+Covid-19 is positive but complex, with the direct and indirect effects
+operating in different directions. Finally, a model that tests whether
+any of the predictor variables for public tracking can predict attitudes
+toward private tracking; the model results suggest that they cannot.
+
+Taken together, these results suggest that government trust matters but
+what may be equally important is the public perception of the rationale
+for government tracking, and that these two factors have an independent
+impact on attitudes. The conclusion discusses these results with respect
+to the literature and draws out some important implications and areas
+for future research.
 
 \section{Literature review}\label{sec-litreview}
 
@@ -223,24 +292,26 @@ and data collection activities.
 
 From the pre-Covid privacy literature, two important findings stand out.
 The first is that demographic variables are important predictors of
-attitudes toward online privacy. In an important early study of early
-Internet users, Sheehan has found that education and age are two
-important determinants of online privacy attitudes Sheehan (2002).
+attitudes toward generalized online privacy. In an important early study
+of early Internet users, Sheehan has found that education and age are
+two important determinants of online privacy attitudes (Sheehan, 2002).
 Others have replicated this result and found that characteristics such
 as gender, social setting, and income also play a role in forming
 privacy expectations (Anwar et al., 2017; Büchi et al., 2021; Lee et
 al., 2019). The second finding is that respondent personal experience
-with privacy and technology is also an important factor. Malandrino et
-al.~finds that users who work in ICT fields are actually less concerned
-with their online privacy Malandrino et al. (2013). Dupree et
-al.~suggest that there are several possible types of online user
-typologies, with user experience being a variable that matters but can
-potentially shift respondents to an extreme view in either direction
-Dupree et al. (2016). Gerber et al., as part of a meta-analysis of
-privacy, notes that young people may be more conscious of their online
-privacy context and therefore are more active in policing their privacy
-boundaries Gerber and Green (2012), a result replicated by (Blank et
-al., n.d.). These findings all suggest that personal characteristics and
+with privacy and technology is also an important factor in predicting
+privacy attitudes. Baskaran and Mathew find that users who have
+significant knowledge and interest in privacy have a greater fear of
+losing their privacy and this fear motivates them to change their online
+behavior (Baskaran and Mathew, 2024). Dupree et al.~suggest that there
+are several possible types of online user typologies, with user
+experience being a variable that matters but can potentially shift
+respondents to an extreme view in either direction (Dupree et al.,
+2016). Kokolakis, as part of a meta-analysis of privacy, notes that
+young people may be more conscious of their online privacy context and
+therefore are more active in policing their privacy boundaries
+(Kokolakis, 2017), a result replicated by Blank et al.(Blank et al.,
+n.d.). These findings all suggest that personal characteristics and
 background are important determinants of privacy attitudes, though it is
 not clear how these findings relate to government monitoring
 specifically.
@@ -250,20 +321,20 @@ correlate to whether respondents feel anxious about government
 monitoring of their online behavior. Davis and Silver find that
 Americans who have lower levels of trust in the government were less
 willing to accept government surveillance programs after the 9/11
-terrorist attacks Davis and Silver (2004). Pavone and Esposti found that
-users either trusted the government and therefore did not find proposed
-monitoring concerning, or did not trust the government and therefore
-believed any monitoring to be threatening Pavone and Esposti (2012).
-Trüdinger and Steckermeier find that acceptance of government
+terrorist attacks (Davis and Silver, 2004). Pavone and Esposti found
+that users either trusted the government and therefore did not find
+proposed monitoring concerning, or did not trust the government and
+therefore believed any monitoring to be threatening (Pavone and Esposti,
+2012). Trüdinger and Steckermeier find that acceptance of government
 surveillance in Germany depends on how much respondents trust the state
-Trüdinger and Steckermeier (2017). However, this literature has, so far,
-not been able to causally link the two concepts. It is possible that
-acceptance of government monitoring is downstream of government trust,
-but it could also be the case that government trust and monitoring are
-both the result of personality or demographic attributes. It is also
-unclear from these studies how rapidly or what types of events might
-change government trust and then whether that change in trust would then
-alter attitudes for acceptance of government tracking.
+(Trüdinger and Steckermeier, 2017). However, this literature has, so
+far, not been able to causally link the two concepts. It is possible
+that acceptance of government monitoring is downstream of government
+trust, but it could also be the case that government trust and
+monitoring are both the result of personality or demographic attributes.
+It is also unclear from these studies how rapidly or what types of
+events might change government trust and then whether that change in
+trust would then alter attitudes for acceptance of government tracking.
 
 The literature on government monitoring of citizens increased
 dramatically after the onset of the Covid-19 pandemic, though most of
@@ -276,11 +347,12 @@ Ioannou and Tussyadiah, 2021; Ong and Loo, n.d.; Wnuk et al., 2020)). To
 highlight one example of this Covid-era research, Ioannou and Tussyadiah
 highlights the linkage between state trust, surveillance acceptance, and
 perceived necessity in explaining the variation in willingness to use
-contact tracing apps in the U.S. Most of this research tests acceptance
-of specific monitoring technologies (such as vaccine passports) or
-examine attitudes only in close temporal proximity to the technology use
-and therefore offer limited information about the durability of these
-attitudes.
+contact tracing apps in the U.S. Generally this research finds Covid-19
+is an important factor in shaping views of tracking. However, most of
+this research tests acceptance of specific monitoring technologies (such
+as vaccine passports) or examine attitudes only in close temporal
+proximity to the technology use and therefore offer limited information
+about the durability of these attitudes.
 
 How these findings translate to the Chinese context is not clear. While
 recent research has begun to develop a picture of Chinese attitudes
@@ -333,7 +405,7 @@ waves, before the strict Covid controls were enacted in China, and
 another wave conducted just after the controls were relaxed. During this
 time, as You et al.~have found, the Chinese response to the pandemic
 engendered significant criticism and resulted in a decline in trust of
-government You et al. (2024). This study can help understand if these
+government (You et al., 2024). This study can help understand if these
 events, and the intense government monitoring that was used to control
 the pandemic, lead to any significant changes in the relationship
 between state trust and acceptance of government surveillance.
@@ -355,8 +427,11 @@ generates a set of testable hypotheses, including:
 \(H_1\): Demographic variables such as age, education, and income
 predict acceptance of government monitoring
 
-A finding here that certain demographic factors are or are not relevant
-in China may suggest
+A finding here that certain demographic factors are predictors of
+attitudes toward government monitoring can help clarify whether the
+demographic linkages found in research on generalized privacy attitudes
+or attitudes toward private monitoring are similar for attitudes toward
+government monitoring.
 
 \(H_{2a}\) Technical know-how and privacy consciousness predicts
 acceptance of government monitoring
@@ -364,33 +439,45 @@ acceptance of government monitoring
 \(H_{2b}\): Technical know-how and privacy consciousness does not
 predict acceptance of government monitoring
 
-The Chinese online information environment is highly controlled,
-particularly with respect to any information critical of the government.
-Privacy knowledge and technical skill may therefore be uncorrelated or
-positively correlated with support for government monitoring, contra the
-existing literature that has been developed in the West.
+Existing literature finds that those with significant experience or
+knowledge of information and communication technologies (ICTs) are more
+careful with their online privacy. However, it is also the caset that he
+Chinese online information environment is highly controlled,
+particularly with respect to any information critical of the government
+(Han, 2018) so such knowledge may have less of an impact on attitudes.
+Government propaganda extolling the benevolence of the state with
+regards to ICT policy (Gainous et al., 2023) may even counteract or
+reverse the fear effect of greater knowledge. Therefore, privacy
+knowledge and technical skill may also be uncorrelated or positively
+correlated with support for government monitoring.
 
 \(H_3\): Trust in government should predict acceptance of government
 monitoring
 
 Both existing studies of Chinese users and those outside of China have
-all found this relationship to be a relatively robust one.
+all found this relationship to be a relatively robust one. Research on
+China has also found that government trust is an important predictor of
+many other social and attitudinal variables (Chen, 2017; Qiu et al.,
+2012; Zhou and Jin, 2018).
 
-\(H_4\): The pandemic experience has altered the relationship between
-institutional trust and acceptance of tracking
+\(H_4\): The pandemic should alter the acceptance of government
+monitoring
 
-Given the apparent decline in institutional trust as a result of the
-pandemic, and the expectation derived from \(H_3\), this research
-expects to find some change in the relationship between these variables.
+This hypothesis could be true in two different ways. The first way is
+via a direct effect - the experience of intrusive and long-lasting
+surveillance could lower support for government monitoring. The second
+way is via an indirect effect - the experience of the pandemic could
+decrease government trust and then this decrease in trust leads to lower
+support for government surveillance.
 
 \(H_5\): Factors that drive concern regarding government tracking should
 differ from concerns regarding private tracking
 
-This hypothesis is a somewhat speculative one, but, given that previous
-research has found significant differences in the level of acceptance of
-tracking between public and private sources in China, and, that trust in
-government is likely not a factor for accepting private tracking, there
-may be some differences in the factors that predict these two variables.
+Given that previous research has found significant differences in the
+level of acceptance of tracking between public and private sources in
+China, and, that trust in government is likely not a factor for
+accepting private tracking, there should be differences in the factors
+that predict these two variables.
 
 \section{Data and summary statistics}\label{sec-datasummary}
 
@@ -417,7 +504,9 @@ March 2023 is far enough from the end of the zero Covid policies that
 any temporary effects of the lockdowns and monitoring should have faded
 but close enough to the end that differences in attitudes can plausibly
 be attributed to the Covid-19 experience. These two surveys therefore
-serve as excellent evidence to examine hypotheses 1-5.
+serve as excellent evidence to examine hypotheses 1-5.\footnote{All code
+  and data to replicate these results available at the author's GitHub
+  repository.}
 
 The demographics of the 2021 and 2023 surveys are presented in
 Table~\ref{tbl-demographics}.
@@ -475,7 +564,7 @@ these minor differences do not appear to change any of the substantive
 results. Focusing on the 2023 survey, the modal respondent is someone
 from a small city, male, married, working in a white collar job at a
 small enterprise, who earns about 10,000 RMB a month and has an urban
-\emph{hukou} (Chinese term for residence permit).
+residence permit (\emph{hukou}).
 
 To simplify the analysis that follows, the variables are recoded such
 that income is divided into three categories (low, middle, and high) and
@@ -528,17 +617,24 @@ governments, they may not easily be able to identify at which level
 government tracking occurs.
 
 Finally, there has been some debate as to the extent of preference
-falsification on online surveys in China . To test for preference
-falsification, the surveys also contained several list experiment
-questions. List experiments have been used in a number of surveys to
+falsification of political attitudes on online surveys in China (Carter
+et al., 2024; Jiang and Yang, 2016; Ratigan and Rabin, 2020). If the
+respondents are afraid of revealing their true attitudes toward the
+government, it may potentially bias the results. To test for preference
+falsification, the survey instrument also contained several list
+experiment questions in which respondents did not have to directly
+reveal their preferences but instead their attitudes can be inferred
+indirectly. List experiments have been used in a number of surveys to
 allow residents a confidential method to express their true attitudes
 about topics such as racial views, sexual assault experience, and
 political views (Moseson et al., 2017; Redlawsk et al., 2010). While
-Glynn (Glynn (2013)) points out that list experiments should not be seen
-as silver bullet to the problem of preference falsification, the results
-of the list experiments (also available in the online appendices)
-roughly match the answers to the component questions that comprise the
-response variable index.
+Glynn (2013) points out that list experiments should not be seen as
+silver bullet to the problem of preference falsification, the results of
+the list experiments (available in the online appendices) roughly match
+the answers to the component questions that comprise the response
+variable index. Additionally, the topic of the survey is less sensitive
+than other, directly political, research and should therefore be less
+likely to engender significant fear of punishment from respondents.
 
 Overall, the survey data should provide a robust test to arbitrate
 between the hypotheses posed in Section~\ref{sec-litreview}.
@@ -873,14 +969,12 @@ tracking acceptance. These results indicate that the Covid-19 experience
 in China did have the effect identified by You et al. (2024), which did
 result in the hypothesized decrease in acceptance of government
 tracking. However, this decrease in support was cancelled out by the
-direct effect of Covid-19 on acceptance of tracking. However, this
-decrease in support was cancelled out by the direct effect of Covid-19
-on acceptance of tracking. A plausible interpretation of this is that,
-as Kostka and Habich-Sobiegalla (2024) has found, respondents agree that
-the tracking during Covid-19 lockdowns was necessary, but, because of
-the government incompetence in responding to the spread of the virus,
-they were less likely to positively agree than they might otherwise have
-been.
+direct effect of Covid-19 on acceptance of tracking. A plausible
+interpretation of this is that, as Kostka and Habich-Sobiegalla (2024)
+has found, respondents agree that the tracking during Covid-19 lockdowns
+was necessary, but, because of the government incompetence in responding
+to the spread of the virus, they were less likely to positively agree
+than they might otherwise have been.
 
 \subsection{Comparing attitudes to private
 monitoring}\label{comparing-attitudes-to-private-monitoring}
@@ -969,6 +1063,60 @@ to commercial monitoring.
 
 \section{Conclusion}\label{sec-conclusion}
 
+China's experience with Covid-19 significantly altered attitudes towards
+government tracking - even though trust in the state decreased, overall
+support for tracking increased. Demographic variables and informational
+variables do not serve as strong predictor variables for attitudes
+towards government tracking. Factors that predict government tracking
+acceptance do not show a meaningful relationship with private tracking
+acceptance.
+
+These results have important implications for the current literature.
+Contrary to the literature on demographic characteristics and privacy,
+this study found very little predictive power in demographic variables,
+either with personal variables or measures of knowledge of technology.
+This finding suggests that generalized privacy attitudes have different
+determinants than attitudes toward government monitoring in China, a
+finding that is in line with the research of Nam and Steinfeld on
+American attitudes towards privacy (Nam, 2019; Steinfeld, 2017).
+Additionally, while a finding that government trust is a strong
+predictor of attitudes is in accordance with much of the existing
+literature, a finding that public events may play a significant role in
+changing attitudes is a novel finding. (Davis and Silver, 2004)
+suggested 9/11 may have created an important context that shaped whether
+respondents judged the surveillance necessary and acceptable, a finding
+compatible with the results here. Finally, while the determinants of
+acceptance of private tracking in China need further exploration than
+what is presented here, they do seem to differ substantially from that
+of government tracking, suggesting .
+
+One caveat to this research is that it only asked about generalized
+acceptance of tracking. Kostka et al. (2021) is one of the few studies
+to focus on specific technological applications (facial recognition
+technology). More research on what specific technological modes and
+aspects of privacy elicit variation in acceptance would be welcome.
+Additionally, this research only focused on a crisis in which trust in
+government fell but the public nevertheless accepted the general social
+need for the technology. Other permutations of increased / decreased
+trust in government and variation in public acceptance of the role of
+technological monitoring could strengthen the findings presented here.
+
+This study suggests that context and acceptance of the rationale for
+tracking independently affect attitudes toward online privacy, a finding
+governments would do well to internalize as AI and big data continue to
+increase the interactions between citizens and their governments.
+
+\newpage{}
+
+\section{Biography}\label{biography}
+
+Andrew W. MacDonald is assistant professor in the Division of Social
+Sciences at Duke Kunshan University (China).His research interests lie
+primarily in Chinese public opinion and their behavior online. He would
+like to thank Yuchen (Nathan) Cao for his invaluable assistance in
+organizing the surveys and the Duke Kunshan Petal Lab for helping to
+test the survey instrument.
+
 \newpage{}
 
 \section{References}\label{references}
@@ -988,6 +1136,13 @@ Anwar M, He W, Ash I, et al. (2017)
 employees' cybersecurity behaviors}. \emph{Computers in Human Behavior}
 69: 437--443.
 
+\bibitem[\citeproctext]{ref-baskaran2024}
+Baskaran K and Mathew SK (2024)
+\href{https://doi.org/10.1080/10447318.2022.2124358}{Understanding
+coping intentions of fitness tracker users: An empirical investigation
+using fear appeals}. \emph{International Journal of
+Human{\textendash}Computer Interaction} 40(3): 795--807.
+
 \bibitem[\citeproctext]{ref-wuhanlo2021}
 \emph{BBC News} (2021)
 \href{https://www.bbc.com/news/world-asia-china-55628488}{Wuhan
@@ -1003,6 +1158,12 @@ People and Privacy on Social Network Sites. DOI:
 Büchi M, Festic N, Just N, et al. (2021) Digital inequalities in online
 privacy protection: Effects of age, education and gender. Edward Elgar
 Publishing, p. 296310.
+
+\bibitem[\citeproctext]{ref-carter2024}
+Carter EB, Carter BL and Schick S (2024)
+\href{https://doi.org/10.1017/S0305741023001819}{Do Chinese Citizens
+Conceal Opposition to the CCP in Surveys? Evidence from Two
+Experiments}. \emph{The China Quarterly}: 1--10.
 
 \bibitem[\citeproctext]{ref-chen2017}
 Chen D (2017) \href{https://doi.org/10.1177/1065912917691360}{Local
@@ -1022,15 +1183,16 @@ In: New York, NY, USA, 7 May 2016, p. 52285239. CHI '16. Association for
 Computing Machinery. Available at:
 \url{https://dl.acm.org/doi/10.1145/2858036.2858214}.
 
+\bibitem[\citeproctext]{ref-gainous2023}
+Gainous J, Han R, MacDonald AW, et al. (2023) \emph{Directed Digital
+Dissidence in Autocracies: How China Wins Online}. Oxford University
+Press. Available at: \url{https://academic.oup.com/book/55291}.
+
 \bibitem[\citeproctext]{ref-garrett2021}
 Garrett PM, White JP, Lewandowsky S, et al. (2021)
 \href{https://doi.org/10.1371/journal.pone.0244827}{The acceptability
 and uptake of smartphone tracking for COVID-19 in Australia}. \emph{PLOS
 ONE} 16(1): e0244827.
-
-\bibitem[\citeproctext]{ref-gerber2012}
-Gerber AS and Green DP (2012) \emph{Field Experiments: Design, Analysis,
-and Interpretation}. New York: WW Norton.
 
 \bibitem[\citeproctext]{ref-glynn2013}
 Glynn AN (2013) \href{https://doi.org/10.1093/poq/nfs070}{What can we
@@ -1050,12 +1212,29 @@ Willingness to share personal data through contact tracing apps in
 china, germany, and the US}. \emph{Information, Communication \&
 Society} 26(14): 2797--2824.
 
+\bibitem[\citeproctext]{ref-han2018}
+Han R (2018) \emph{Contesting Cyberspace in China: Online Expression and
+Authoritarian Resilience}. Columbia University Press. Available at:
+\url{https://www.degruyter.com/document/doi/10.7312/han-18474/html}.
+
 \bibitem[\citeproctext]{ref-ioannou2021}
 Ioannou A and Tussyadiah I (2021)
 \href{https://doi.org/10.1016/j.techsoc.2021.101774}{Privacy and
 surveillance attitudes during health crises: Acceptance of surveillance
 and privacy protection behaviours}. \emph{Technology in Society} 67:
 101774.
+
+\bibitem[\citeproctext]{ref-jiang2016}
+Jiang J and Yang DL (2016)
+\href{https://doi.org/10.1177/0010414015626450}{Lying or Believing?
+Measuring Preference Falsification From a Political Purge in China}.
+\emph{Comparative Political Studies} 49(5): 600--634.
+
+\bibitem[\citeproctext]{ref-kokolakis2017}
+Kokolakis S (2017)
+\href{https://doi.org/10.1016/j.cose.2015.07.002}{Privacy attitudes and
+privacy behaviour: A review of current research on the privacy paradox
+phenomenon}. \emph{Computers \& Security} 64: 122--134.
 
 \bibitem[\citeproctext]{ref-kostka2023}
 Kostka G (2023) \href{https://doi.org/10.1017/dap.2023.25}{Digital
@@ -1088,17 +1267,17 @@ Liu C (2022) \href{https://doi.org/10.1177/02685809221084446}{Who
 supports expanding surveillance? Exploring public opinion of Chinese
 social credit systems}. \emph{International Sociology} 37(3): 391--412.
 
-\bibitem[\citeproctext]{ref-malandrino2013}
-Malandrino D, Scarano V and Spinelli R (2013) 2013 international
-conference on social computing. In: September 2013, pp. 57--62.
-Available at:
-\url{https://ieeexplore.ieee.org/abstract/document/6693312}.
-
 \bibitem[\citeproctext]{ref-mao2022}
 Mao (2022)
 \href{https://www.bbc.com/news/world-asia-china-63855508}{China abandons
 key parts of zero-covid strategy after protests}. \emph{BBC News}. Epub
 ahead of print 7 December 2022.
+
+\bibitem[\citeproctext]{ref-mcmorrow2022}
+McMorrow R and Leng C (2022)
+\href{https://www.ft.com/content/dee6bcc6-3fc5-4edc-814d-46dc73e67c7e}{{`}Digital
+handcuffs{'}: China{'}s covid health apps govern life but are ripe for
+abuse}. \emph{Financial Times}. Epub ahead of print 28 June 2022.
 
 \bibitem[\citeproctext]{ref-moseson2017}
 Moseson H, Treleaven E, Gerdts C, et al. (2017)
@@ -1124,6 +1303,19 @@ Pavone V and Esposti SD (2012)
 surveillance-oriented security technologies: Beyond the trade-off
 between privacy and security}. \emph{Public Understanding of Science}
 21(5): 556--572.
+
+\bibitem[\citeproctext]{ref-qiu2012}
+Qiu H, Huang J, Pray C, et al. (2012)
+\href{https://doi.org/10.1080/14765284.2012.638471}{Consumers{'} trust
+in government and their attitudes towards genetically modified food:
+Empirical evidence from china}. \emph{Journal of Chinese Economic and
+Business Studies} 10(1): 67--87.
+
+\bibitem[\citeproctext]{ref-ratigan2020}
+Ratigan K and Rabin L (2020)
+\href{https://doi.org/10.1017/S0305741019001231}{Re-evaluating Political
+Trust: The Impact of Survey Nonresponse in Rural China}. \emph{The China
+Quarterly} 243: 823--838.
 
 \bibitem[\citeproctext]{ref-reddick2015}
 Reddick CG, Chatfield AT and Jaramillo PA (2015)
@@ -1180,6 +1372,12 @@ on Institutional Trust}. \emph{Journal of Chinese Political Science}
 Zhong Y (2014) Do Chinese People Trust Their Local Government, and Why?
 \emph{Problems of Post-Communism}. Epub ahead of print 1 May 2014. DOI:
 \href{https://doi.org/10.2753/PPC1075-8216610303}{10.2753/PPC1075-8216610303}.
+
+\bibitem[\citeproctext]{ref-zhou2018}
+Zhou YJ and Jin S (2018)
+\href{https://doi.org/10.1017/S0305741018001297}{Inequality and
+Political Trust in China: The Social Volcano Thesis Re-examined}.
+\emph{The China Quarterly} 236: 1033--1062.
 
 \end{CSLReferences}
 
