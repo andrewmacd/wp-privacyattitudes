@@ -1,0 +1,14 @@
+---
+title: "Highlights for: (No) Privacy Please!: What Determines Chinese Attitudes Toward Online Government Monitoring"
+format: latex
+---
+
+-   Demographic factors do not seem to be related to the acceptance of government technological monitoring in China
+
+-   Government trust positively predicts acceptance of government monitoring in China
+
+-   The direct pathway of Covid-19 substantially increased support for government monitoring
+
+-   The indirect pathway of Covid-19 lowering support for government trust then lead to a small decrease in acceptance of government monitoring
+
+-   None of the relevant variables for public monitoring predict acceptance of private monitoring, suggesting they have different determinants

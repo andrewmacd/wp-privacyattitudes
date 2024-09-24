@@ -1,0 +1,19 @@
+---
+title: "Cover letter"
+format: latex
+editor: visual
+---
+
+Dear editor,
+
+I am writing to submit our manuscript entitled "(No) Privacy Please!: What Determines Chinese Attitudes Toward Online Government Monitoring" for consideration in Telematics and Informatics. This paper presents a comprehensive analysis of public opinion towards government surveillance before and after the COVID-19 pandemic in China, a timely and critical subject in light of the growing intersection of technology and governance.
+
+Our study dissects the complex relationship between government trust, public events, and the acceptance of both government and private tracking technologies. Uniquely pivotal is our finding that, contrary to prevailing assumptions, demographic and informational variables hold minimal sway over attitudes relating to government surveillance. This discovery, alongside the that public events can have multiple pathways to alter these attitudes, addresses some key open questions in the literature. The data for this study comes from a unique two-wave survey conducted before and after the Covid-19 lockdowns in China, giving the results unique leverage to assess these causal questions.
+
+I believe that the findings presented in our manuscript will resonate with the readership of Telematics and Informatics due the timeliness of the data, the careful survey design and methodological approach, and the general increased interest in the subject area among scholars of privacy. I have adhered to all of the Journal's submission guidelines, and the manuscript is not under consideration at any other publication.
+
+I appreciate your consideration of our work and would welcome the opportunity to discuss the findings in further detail. Thank you for your time and for considering this submission.
+
+Sincerely,
+
+Andrew W. MacDonald

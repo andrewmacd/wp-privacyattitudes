@@ -1,0 +1,218 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{mcmorrow2022}
+R.~McMorrow, C.~Leng, \href{https://www.ft.com/content/dee6bcc6-3fc5-4edc-814d-46dc73e67c7e}{{\textquoteleft}digital handcuffs{\textquoteright}: China{\textquoteright}s covid health apps govern life but are ripe for abuse}, Financial Times (06 2022).
+\newline\urlprefix\url{https://www.ft.com/content/dee6bcc6-3fc5-4edc-814d-46dc73e67c7e}
+
+\bibitem{gómez-barroso2018}
+J.~{Gómez-Barroso}, \href{https://www.sciencedirect.com/science/article/pii/S0736585318302107}{Experiments on personal information disclosure: Past and future avenues}, Telematics and Informatics 35~(5) (2018) 1473--1490.
+\newblock \href {https://doi.org/10.1016/j.tele.2018.03.017} {\path{doi:10.1016/j.tele.2018.03.017}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0736585318302107}
+
+\bibitem{reddick2015}
+C.~G. Reddick, A.~T. Chatfield, P.~A. Jaramillo, \href{https://www.sciencedirect.com/science/article/pii/S0740624X15000246}{Public opinion on national security agency surveillance programs: A multi-method approach}, Government Information Quarterly 32~(2) (2015) 129--141.
+\newblock \href {https://doi.org/10.1016/j.giq.2015.01.003} {\path{doi:10.1016/j.giq.2015.01.003}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0740624X15000246}
+
+\bibitem{sheehan2002}
+K.~B. Sheehan, \href{https://doi.org/10.1080/01972240252818207}{Toward a typology of internet users and online privacy concerns}, The Information Society 18~(1) (2002) 21--32, publisher: Routledge {\_}eprint: https://doi.org/10.1080/01972240252818207.
+\newblock \href {https://doi.org/10.1080/01972240252818207} {\path{doi:10.1080/01972240252818207}}.
+\newline\urlprefix\url{https://doi.org/10.1080/01972240252818207}
+
+\bibitem{anwar2017}
+M.~Anwar, W.~He, I.~Ash, X.~Yuan, L.~Li, L.~Xu, \href{https://www.sciencedirect.com/science/article/pii/S0747563216308688}{Gender difference and employees' cybersecurity behaviors}, Computers in Human Behavior 69 (2017) 437--443.
+\newblock \href {https://doi.org/10.1016/j.chb.2016.12.040} {\path{doi:10.1016/j.chb.2016.12.040}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0747563216308688}
+
+\bibitem{büchi2021}
+M.~{Büchi}, N.~Festic, N.~Just, M.~Latzer, Digital inequalities in online privacy protection: effects of age, education and gender, Edward Elgar Publishing, 2021, p. 296{\textendash}310.
+
+\bibitem{lee2019}
+H.~Lee, S.~F. Wong, J.~Oh, Y.~Chang, \href{https://www.sciencedirect.com/science/article/pii/S0740624X18303265}{Information privacy concerns and demographic characteristics: Data from a korean media panel survey}, Government Information Quarterly 36~(2) (2019) 294--303.
+\newblock \href {https://doi.org/10.1016/j.giq.2019.01.002} {\path{doi:10.1016/j.giq.2019.01.002}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0740624X18303265}
+
+\bibitem{baskaran2024}
+K.~Baskaran, S.~K. Mathew, \href{https://doi.org/10.1080/10447318.2022.2124358}{Understanding coping intentions of fitness tracker users: An empirical investigation using fear appeals}, International Journal of Human{\textendash}Computer Interaction 40~(3) (2024) 795--807, publisher: Taylor \& Francis {\_}eprint: https://doi.org/10.1080/10447318.2022.2124358.
+\newblock \href {https://doi.org/10.1080/10447318.2022.2124358} {\path{doi:10.1080/10447318.2022.2124358}}.
+\newline\urlprefix\url{https://doi.org/10.1080/10447318.2022.2124358}
+
+\bibitem{dupree2016}
+J.~L. Dupree, R.~Devries, D.~M. Berry, E.~Lank, \href{https://dl.acm.org/doi/10.1145/2858036.2858214}{Privacy personas: Clustering users via attitudes and behaviors toward security practices}, CHI '16, Association for Computing Machinery, New York, NY, USA, 2016, p. 5228{\textendash}5239.
+\newblock \href {https://doi.org/10.1145/2858036.2858214} {\path{doi:10.1145/2858036.2858214}}.
+\newline\urlprefix\url{https://dl.acm.org/doi/10.1145/2858036.2858214}
+
+\bibitem{kokolakis2017}
+S.~Kokolakis, \href{https://www.sciencedirect.com/science/article/pii/S0167404815001017}{Privacy attitudes and privacy behaviour: A review of current research on the privacy paradox phenomenon}, Computers \& Security 64 (2017) 122--134.
+\newblock \href {https://doi.org/10.1016/j.cose.2015.07.002} {\path{doi:10.1016/j.cose.2015.07.002}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0167404815001017}
+
+\bibitem{blank}
+G.~Blank, G.~Bolsover, E.~Dubois, A new privacy paradox: Young people and privacy on social network sites\href {https://doi.org/10.2139/ssrn.2479938} {\path{doi:10.2139/ssrn.2479938}}.
+
+\bibitem{davis2004}
+D.~W. Davis, B.~D. Silver, \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.0092-5853.2004.00054.x}{Civil liberties vs. security: Public opinion in the context of the terrorist attacks on america}, American Journal of Political Science 48~(1) (2004) 28--46, {\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.0092-5853.2004.00054.x.
+\newblock \href {https://doi.org/10.1111/j.0092-5853.2004.00054.x} {\path{doi:10.1111/j.0092-5853.2004.00054.x}}.
+\newline\urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.0092-5853.2004.00054.x}
+
+\bibitem{pavone2012}
+V.~Pavone, S.~D. Esposti, \href{https://doi.org/10.1177/0963662510376886}{Public assessment of new surveillance-oriented security technologies: Beyond the trade-off between privacy and security}, Public Understanding of Science 21~(5) (2012) 556--572, publisher: SAGE Publications Ltd.
+\newblock \href {https://doi.org/10.1177/0963662510376886} {\path{doi:10.1177/0963662510376886}}.
+\newline\urlprefix\url{https://doi.org/10.1177/0963662510376886}
+
+\bibitem{trüdinger2017}
+E.-M. {Trüdinger}, L.~C. Steckermeier, \href{https://www.sciencedirect.com/science/article/pii/S0740624X16303173}{Trusting and controlling? political trust, information and acceptance of surveillance policies: The case of germany}, Government Information Quarterly 34~(3) (2017) 421--433.
+\newblock \href {https://doi.org/10.1016/j.giq.2017.07.003} {\path{doi:10.1016/j.giq.2017.07.003}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0740624X16303173}
+
+\bibitem{abramova2022}
+O.~Abramova, A.~Wagner, C.~M. Olt, P.~Buxmann, \href{https://www.sciencedirect.com/science/article/pii/S0268401222000044}{One for all, all for one: Social considerations in user acceptance of contact tracing apps using longitudinal evidence from germany and switzerland}, International Journal of Information Management 64 (2022) 102473.
+\newblock \href {https://doi.org/10.1016/j.ijinfomgt.2022.102473} {\path{doi:10.1016/j.ijinfomgt.2022.102473}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0268401222000044}
+
+\bibitem{garrett2021}
+P.~M. Garrett, J.~P. White, S.~Lewandowsky, Y.~Kashima, A.~Perfors, D.~R. Little, N.~Geard, L.~Mitchell, M.~Tomko, S.~Dennis, \href{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0244827}{The acceptability and uptake of smartphone tracking for covid-19 in australia}, PLOS ONE 16~(1) (2021) e0244827, publisher: Public Library of Science.
+\newblock \href {https://doi.org/10.1371/journal.pone.0244827} {\path{doi:10.1371/journal.pone.0244827}}.
+\newline\urlprefix\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0244827}
+
+\bibitem{ioannou2021}
+A.~Ioannou, I.~Tussyadiah, \href{https://www.sciencedirect.com/science/article/pii/S0160791X21002499}{Privacy and surveillance attitudes during health crises: Acceptance of surveillance and privacy protection behaviours}, Technology in Society 67 (2021) 101774.
+\newblock \href {https://doi.org/10.1016/j.techsoc.2021.101774} {\path{doi:10.1016/j.techsoc.2021.101774}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0160791X21002499}
+
+\bibitem{ong}
+E.-I. Ong, W.~L. Loo, Gauging the acceptance of contact tracing technology: An empirical study of singapore residents' concerns and trust in information sharing\href {https://doi.org/10.2139/ssrn.3817972} {\path{doi:10.2139/ssrn.3817972}}.
+
+\bibitem{wnuk2020}
+A.~Wnuk, T.~Oleksy, D.~Maison, \href{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238973}{The acceptance of covid-19 tracking technologies: The role of perceived threat, lack of control, and ideological beliefs}, PLOS ONE 15~(9) (2020) e0238973, publisher: Public Library of Science.
+\newblock \href {https://doi.org/10.1371/journal.pone.0238973} {\path{doi:10.1371/journal.pone.0238973}}.
+\newline\urlprefix\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238973}
+
+\bibitem{habich-sobiegalla2023}
+S.~Habich-Sobiegalla, G.~Kostka, \href{https://doi.org/10.1080/1369118X.2022.2113421}{Sharing is caring: willingness to share personal data through contact tracing apps in china, germany, and the us}, Information, Communication \& Society 26~(14) (2023) 2797--2824, publisher: Routledge {\_}eprint: https://doi.org/10.1080/1369118X.2022.2113421.
+\newblock \href {https://doi.org/10.1080/1369118X.2022.2113421} {\path{doi:10.1080/1369118X.2022.2113421}}.
+\newline\urlprefix\url{https://doi.org/10.1080/1369118X.2022.2113421}
+
+\bibitem{kostka2021}
+G.~Kostka, L.~Steinacker, M.~Meckel, \href{https://doi.org/10.1177/09636625211001555}{Between security and convenience: Facial recognition technology in the eyes of citizens in china, germany, the united kingdom, and the united states}, Public Understanding of Science 30~(6) (2021) 671--690, publisher: SAGE Publications Ltd.
+\newblock \href {https://doi.org/10.1177/09636625211001555} {\path{doi:10.1177/09636625211001555}}.
+\newline\urlprefix\url{https://doi.org/10.1177/09636625211001555}
+
+\bibitem{kostka2024}
+G.~Kostka, S.~Habich-Sobiegalla, \href{https://doi.org/10.1177/14614448221083285}{In times of crisis: Public perceptions toward covid-19 contact tracing apps in china, germany, and the united states}, New Media \& Society 26~(4) (2024) 2256--2294, publisher: SAGE Publications.
+\newblock \href {https://doi.org/10.1177/14614448221083285} {\path{doi:10.1177/14614448221083285}}.
+\newline\urlprefix\url{https://doi.org/10.1177/14614448221083285}
+
+\bibitem{kostka2023}
+G.~Kostka, \href{https://www.cambridge.org/core/journals/data-and-policy/article/digital-doubters-in-different-political-and-cultural-contexts-comparing-citizen-attitudes-across-three-major-digital-technologies/EF171C5121F6E1175554D32D23CD297E}{Digital doubters in different political and cultural contexts: Comparing citizen attitudes across three major digital technologies}, Data \& Policy 5 (2023) e27, publisher: Cambridge University Press.
+\newblock \href {https://doi.org/10.1017/dap.2023.25} {\path{doi:10.1017/dap.2023.25}}.
+\newline\urlprefix\url{https://www.cambridge.org/core/journals/data-and-policy/article/digital-doubters-in-different-political-and-cultural-contexts-comparing-citizen-attitudes-across-three-major-digital-technologies/EF171C5121F6E1175554D32D23CD297E}
+
+\bibitem{liu2022}
+C.~Liu, \href{https://doi.org/10.1177/02685809221084446}{Who supports expanding surveillance? exploring public opinion of chinese social credit systems}, International Sociology 37~(3) (2022) 391--412, publisher: SAGE Publications Ltd.
+\newblock \href {https://doi.org/10.1177/02685809221084446} {\path{doi:10.1177/02685809221084446}}.
+\newline\urlprefix\url{https://doi.org/10.1177/02685809221084446}
+
+\bibitem{steinfeld2017}
+N.~Steinfeld, \href{https://www.sciencedirect.com/science/article/pii/S0736585317303349}{Track me, track me not: Support and consent to state and private sector surveillance}, Telematics and Informatics 34~(8) (2017) 1663--1672.
+\newblock \href {https://doi.org/10.1016/j.tele.2017.07.012} {\path{doi:10.1016/j.tele.2017.07.012}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0736585317303349}
+
+\bibitem{nam2019}
+T.~Nam, \href{https://www.sciencedirect.com/science/article/pii/S0362331918301423}{What determines the acceptance of government surveillance? examining the influence of information privacy correlates}, The Social Science Journal 56~(4) (2019) 530--544.
+\newblock \href {https://doi.org/10.1016/j.soscij.2018.10.001} {\path{doi:10.1016/j.soscij.2018.10.001}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0362331918301423}
+
+\bibitem{steinhardt2022}
+H.~C. Steinhardt, L.~Holzschuh, A.~W. MacDonald, \href{https://firstmonday.org/ojs/index.php/fm/article/view/12679}{Dreading big brother or dreading big profit? privacy concerns toward the state and companies in china}, First Monday (12 2022).
+\newblock \href {https://doi.org/10.5210/fm.v27i12.12679} {\path{doi:10.5210/fm.v27i12.12679}}.
+\newline\urlprefix\url{https://firstmonday.org/ojs/index.php/fm/article/view/12679}
+
+\bibitem{you2024}
+Y.~You, D.~Ma, C.~Chen, \href{https://doi.org/10.1007/s11366-023-09874-y}{Public trust during a public health crisis: Evaluating the immediate effects of the pandemic on institutional trust}, Journal of Chinese Political Science 29~(1) (2024) 1--29.
+\newblock \href {https://doi.org/10.1007/s11366-023-09874-y} {\path{doi:10.1007/s11366-023-09874-y}}.
+\newline\urlprefix\url{https://doi.org/10.1007/s11366-023-09874-y}
+
+\bibitem{han2018}
+R.~Han, \href{https://www.degruyter.com/document/doi/10.7312/han-18474/html}{Contesting Cyberspace in China: Online Expression and Authoritarian Resilience}, Columbia University Press, 2018, dOI: 10.7312/han-18474.
+\newblock \href {https://doi.org/10.7312/han-18474} {\path{doi:10.7312/han-18474}}.
+\newline\urlprefix\url{https://www.degruyter.com/document/doi/10.7312/han-18474/html}
+
+\bibitem{gainous2023}
+J.~Gainous, R.~Han, A.~W. MacDonald, K.~M. Wagner, \href{https://academic.oup.com/book/55291}{Directed Digital Dissidence in Autocracies: How China Wins Online}, Oxford University Press, 2023, dOI: 10.1093/oso/9780197680384.001.0001.
+\newblock \href {https://doi.org/10.1093/oso/9780197680384.001.0001} {\path{doi:10.1093/oso/9780197680384.001.0001}}.
+\newline\urlprefix\url{https://academic.oup.com/book/55291}
+
+\bibitem{chen2017}
+D.~Chen, \href{https://doi.org/10.1177/1065912917691360}{Local distrust and regime support: Sources and effects of political trust in china}, Political Research Quarterly 70~(2) (2017) 314--326, publisher: SAGE Publications Inc.
+\newblock \href {https://doi.org/10.1177/1065912917691360} {\path{doi:10.1177/1065912917691360}}.
+\newline\urlprefix\url{https://doi.org/10.1177/1065912917691360}
+
+\bibitem{qiu2012}
+H.~Qiu, J.~Huang, C.~Pray, S.~Rozelle, \href{https://doi.org/10.1080/14765284.2012.638471}{Consumers{\textquoteright} trust in government and their attitudes towards genetically modified food: empirical evidence from china}, Journal of Chinese Economic and Business Studies 10~(1) (2012) 67--87, publisher: Routledge {\_}eprint: https://doi.org/10.1080/14765284.2012.638471.
+\newblock \href {https://doi.org/10.1080/14765284.2012.638471} {\path{doi:10.1080/14765284.2012.638471}}.
+\newline\urlprefix\url{https://doi.org/10.1080/14765284.2012.638471}
+
+\bibitem{zhou2018}
+Y.~J. Zhou, S.~Jin, \href{https://www.cambridge.org/core/journals/china-quarterly/article/inequality-and-political-trust-in-china-the-social-volcano-thesis-reexamined/27E249A41FF2A5A70EBB37F15AB6709C}{Inequality and political trust in china: The social volcano thesis re-examined}, The China Quarterly 236 (2018) 1033--1062.
+\newblock \href {https://doi.org/10.1017/S0305741018001297} {\path{doi:10.1017/S0305741018001297}}.
+\newline\urlprefix\url{https://www.cambridge.org/core/journals/china-quarterly/article/inequality-and-political-trust-in-china-the-social-volcano-thesis-reexamined/27E249A41FF2A5A70EBB37F15AB6709C}
+
+\bibitem{wuhanlo2021}
+\href{https://www.bbc.com/news/world-asia-china-55628488}{Wuhan lockdown: A year of china's fight against the covid pandemic}, BBC News (01 2021).
+\newline\urlprefix\url{https://www.bbc.com/news/world-asia-china-55628488}
+
+\bibitem{mao2022}
+F.~Mao, \href{https://www.bbc.com/news/world-asia-china-63855508}{China abandons key parts of zero-covid strategy after protests}, BBC News (12 2022).
+\newline\urlprefix\url{https://www.bbc.com/news/world-asia-china-63855508}
+
+\bibitem{zhong2014}
+Y.~Zhong, \href{https://www.tandfonline.com/doi/abs/10.2753/PPC1075-8216610303}{Do chinese people trust their local government, and why?}, Problems of Post-CommunismPublisher: Routledge (05 2014).
+\newblock \href {https://doi.org/10.2753/PPC1075-8216610303} {\path{doi:10.2753/PPC1075-8216610303}}.
+\newline\urlprefix\url{https://www.tandfonline.com/doi/abs/10.2753/PPC1075-8216610303}
+
+\bibitem{carter2024}
+E.~B. Carter, B.~L. Carter, S.~Schick, \href{https://www.cambridge.org/core/journals/china-quarterly/article/do-chinese-citizens-conceal-opposition-to-the-ccp-in-surveys-evidence-from-two-experiments/12A2440F948D016E8D845C492F7D0CFE}{Do chinese citizens conceal opposition to the ccp in surveys? evidence from two experiments}, The China Quarterly (2024) 1--10\href {https://doi.org/10.1017/S0305741023001819} {\path{doi:10.1017/S0305741023001819}}.
+\newline\urlprefix\url{https://www.cambridge.org/core/journals/china-quarterly/article/do-chinese-citizens-conceal-opposition-to-the-ccp-in-surveys-evidence-from-two-experiments/12A2440F948D016E8D845C492F7D0CFE}
+
+\bibitem{jiang2016}
+J.~Jiang, D.~L. Yang, \href{https://doi.org/10.1177/0010414015626450}{Lying or believing? measuring preference falsification from a political purge in china}, Comparative Political Studies 49~(5) (2016) 600--634, publisher: SAGE Publications Inc.
+\newblock \href {https://doi.org/10.1177/0010414015626450} {\path{doi:10.1177/0010414015626450}}.
+\newline\urlprefix\url{https://doi.org/10.1177/0010414015626450}
+
+\bibitem{ratigan2020}
+K.~Ratigan, L.~Rabin, \href{https://www.cambridge.org/core/journals/china-quarterly/article/reevaluating-political-trust-the-impact-of-survey-nonresponse-in-rural-china/05403CA9F41979BD624055E03D9F6FA9}{Re-evaluating political trust: The impact of survey nonresponse in rural china}, The China Quarterly 243 (2020) 823--838.
+\newblock \href {https://doi.org/10.1017/S0305741019001231} {\path{doi:10.1017/S0305741019001231}}.
+\newline\urlprefix\url{https://www.cambridge.org/core/journals/china-quarterly/article/reevaluating-political-trust-the-impact-of-survey-nonresponse-in-rural-china/05403CA9F41979BD624055E03D9F6FA9}
+
+\bibitem{redlawsk2010}
+D.~P. Redlawsk, C.~J. Tolbert, W.~Franko, \href{https://doi.org/10.1177/1065912910373554}{Voters, emotions, and race in 2008: Obama as the first black president}, Political Research Quarterly 63~(4) (2010) 875--889, publisher: SAGE Publications Inc.
+\newblock \href {https://doi.org/10.1177/1065912910373554} {\path{doi:10.1177/1065912910373554}}.
+\newline\urlprefix\url{https://doi.org/10.1177/1065912910373554}
+
+\bibitem{moseson2017}
+H.~Moseson, E.~Treleaven, C.~Gerdts, N.~Diamond-Smith, \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/sifp.12042}{The list experiment for measuring abortion: What we know and what we need}, Studies in Family Planning 48~(4) (2017) 397--405, {\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/sifp.12042.
+\newblock \href {https://doi.org/10.1111/sifp.12042} {\path{doi:10.1111/sifp.12042}}.
+\newline\urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/sifp.12042}
+
+\bibitem{glynn2013}
+A.~N. Glynn, \href{https://academic.oup.com/poq/article/77/S1/159/1878470/What-Can-We-Learn-with-Statistical-Truth-Serum}{What can we learn with statistical truth serum?design and analysis of the list experiment}, Public Opinion Quarterly 77~(S1) (2013) 159--172.
+\newblock \href {https://doi.org/10.1093/poq/nfs070} {\path{doi:10.1093/poq/nfs070}}.
+\newline\urlprefix\url{https://academic.oup.com/poq/article/77/S1/159/1878470/What-Can-We-Learn-with-Statistical-Truth-Serum}
+
+\bibitem{harmel2019}
+R.~Harmel, Y.-Y. Yeh, X.~Liu, \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/ssqu.12681}{Age versus socialization in understanding attitudes toward economic reforms in china}, Social Science Quarterly 100~(5) (2019) 1755--1767, {\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/ssqu.12681.
+\newblock \href {https://doi.org/10.1111/ssqu.12681} {\path{doi:10.1111/ssqu.12681}}.
+\newline\urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/ssqu.12681}
+
+\bibitem{steinhardt2020}
+H.~C. Steinhardt, J.~Delhey, \href{https://doi.org/10.1007/s11205-020-02466-w}{Socio-economic modernization and the {\textquotedblleft}crisis of trust{\textquotedblright} in china: A multi-level analysis of general and particular trust}, Social Indicators Research 152~(3) (2020) 923--949.
+\newblock \href {https://doi.org/10.1007/s11205-020-02466-w} {\path{doi:10.1007/s11205-020-02466-w}}.
+\newline\urlprefix\url{https://doi.org/10.1007/s11205-020-02466-w}
+
+\end{thebibliography}

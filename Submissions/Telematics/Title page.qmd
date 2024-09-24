@@ -1,0 +1,30 @@
+---
+title: "(No) Privacy Please!: What Determines Chinese Attitudes Toward Online Government Monitoring"
+author:
+  name: Andrew W. MacDonald
+  orcid: 0000-0002-4695-1560
+  email: andrew.macdonald@dukekunshan.edu.cn
+  affiliation: 
+    name: Duke Kunshan University
+    city: Kunshan
+    country: China
+    address: No. 8 Duke Avenue
+    url: https://www.andrewmacdonald.org/
+format:
+  pdf: default
+  elsevier-pdf:
+    keep-tex: true  
+abstract: > 
+  This study investigates the determinants of public opinion toward government monitoring in China. The existing literature on the acceptance of government monitoring raises several open questions, including the extent to which demographic variables influence the relationship, how government trust relates to the acceptance of government monitoring, and whether the acceptance of public versus private monitoring shares the same determinants. Using a two-wave survey conducted before and after the Covid-19 lockdowns in China, the study finds that: 1) demographic factors do not seem to be related to the acceptance of government monitoring; 2) government trust does predict attitudes, although the Covid-19 experience has significantly modified this relationship; and 3) the acceptance of private monitoring appears to have different determinants. The study concludes by considering some implications of these findings.
+keywords: 
+  - Digital Privacy
+  - Covid-19
+  - Authoriatrian Regimes
+  - Government Trust
+  - China
+execute: 
+  echo: false
+  warning: false
+number-sections: true
+csl: telematics-and-informatics
+---
